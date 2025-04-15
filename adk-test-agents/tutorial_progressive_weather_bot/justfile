@@ -6,3 +6,5 @@ test-gpt:
     python gpt_agent.py
 test-claude:
     python claude_agent.py
+test-toolz:
+    python toolz.py

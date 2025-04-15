@@ -1,4 +1,5 @@
 from google.adk.tools.tool_context import ToolContext
+from lib_colors import *
 
 # @title Define the get_weather Tool
 def get_weather(city: str) -> dict:
@@ -13,7 +14,7 @@ def get_weather(city: str) -> dict:
               If 'success', includes a 'report' key with weather details.
               If 'error', includes an 'error_message' key.
     """
-    print(f"--- Tool: get_weather called for city: {city} ---") # Log tool execution
+    print(f"--- Tool: {cyan('get_weather')} called for city: {yellow(city)} ---") # Log tool execution
     city_normalized = city.lower().replace(" ", "") # Basic normalization
 
     # Mock weather data
@@ -35,7 +36,7 @@ print("✅ Simple 'get_weather' tool defined.")
 
 def get_weather_stateful(city: str, tool_context: ToolContext) -> dict:
     """Retrieves weather, converts temp unit based on session state."""
-    print(f"--- Tool: get_weather_stateful called for {city} ---")
+    print(f"--- Tool: {cyan('get_weather_stateful')} called for {yellow(city)} ---")
 
     # --- Read preference from state ---
     preferred_unit = tool_context.state.get("user_preference_temperature_unit", "Celsius") # Default to Celsius
@@ -82,7 +83,31 @@ print("✅ State-aware 'get_weather_stateful' tool defined.")
 
 
 
+# @title Define Tools for Greeting and Farewell Agents
 
+# Ensure 'get_weather' from Step 1 is available if running this step independently.
+# def get_weather(city: str) -> dict: ... (from Step 1)
+
+def say_hello(name: str = "there") -> str:
+    """Provides a simple greeting, optionally addressing the user by name.
+
+    Args:
+        name (str, optional): The name of the person to greet. Defaults to "there".
+
+    Returns:
+        str: A friendly greeting message.
+    """
+#    print(f"--- Tool: say_hello called with name: {name} ---")
+    print(f"--- Tool: {cyan('say_hello')} called  with name: {yellow(name)} ---")
+
+    return f"Hello, {name}!"
+
+def say_goodbye() -> str:
+    """Provides a simple farewell message to conclude the conversation."""
+    print(f"--- Tool: {cyan('say_goodbye')} called ---")
+    return "Goodbye! Have a great day."
+
+print("Greeting and Farewell tools defined.")
 
 
 
@@ -91,7 +116,12 @@ print("✅ State-aware 'get_weather_stateful' tool defined.")
 
 # Test functionality
 if __name__ == "__main__":
+    print("Testing TOOLS functionality..")
     # Example tool usage (optional test)
     print(get_weather("New York"))
-    print(get_weather("Paris"))
     print(get_weather("Zurich"))
+    print(get_weather("London"))
+    # Optional self-test
+    print(say_hello("Alice"))
+    print(say_goodbye())
+
