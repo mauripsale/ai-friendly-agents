@@ -87,3 +87,75 @@ else:
     if not greeting_agent: print(" - Greeting Agent is missing.")
     if not farewell_agent: print(" - Farewell Agent is missing.")
     if 'get_weather' not in globals(): print(" - get_weather function is missing.")
+
+
+
+
+
+# @title Interact with the Agent Team
+
+# Ensure the root agent (e.g., 'weather_agent_team' or 'root_agent' from the previous cell) is defined.
+# Ensure the call_agent_async function is defined.
+
+# Check if the root agent variable exists before defining the conversation function
+root_agent_var_name = 'root_agent' # Default name from Step 3 guide
+if 'weather_agent_team' in globals(): # Check if user used this name instead
+    root_agent_var_name = 'weather_agent_team'
+elif 'root_agent' not in globals():
+    print("⚠️ Root agent ('root_agent' or 'weather_agent_team') not found. Cannot define run_team_conversation.")
+    # Assign a dummy value to prevent NameError later if the code block runs anyway
+    root_agent = None
+
+if root_agent_var_name in globals() and globals()[root_agent_var_name]:
+    async def run_team_conversation():
+        print("\n--- Testing Agent Team Delegation ---")
+        # InMemorySessionService is simple, non-persistent storage for this tutorial.
+        session_service = InMemorySessionService()
+
+        # Define constants for identifying the interaction context
+        APP_NAME = "weather_tutorial_agent_team"
+        USER_ID = "user_1_agent_team"
+        SESSION_ID = "session_001_agent_team" # Using a fixed ID for simplicity
+
+        # Create the specific session where the conversation will happen
+        session = session_service.create_session(
+            app_name=APP_NAME,
+            user_id=USER_ID,
+            session_id=SESSION_ID
+        )
+        print(f"Session created: App='{APP_NAME}', User='{USER_ID}', Session='{SESSION_ID}'")
+
+        # --- Get the actual root agent object ---
+        # Use the determined variable name
+        actual_root_agent = globals()[root_agent_var_name]
+
+        # Create a runner specific to this agent team test
+        runner_agent_team = Runner(
+            agent=actual_root_agent, # Use the root agent object
+            app_name=APP_NAME,       # Use the specific app name
+            session_service=session_service # Use the specific session service
+            )
+        # Corrected print statement to show the actual root agent's name
+        print(f"Runner created for agent '{actual_root_agent.name}'.")
+
+        # Always interact via the root agent's runner, passing the correct IDs
+        await call_agent_async(query = "Hello there!",
+                               runner=runner_agent_team,
+                               user_id=USER_ID,
+                               session_id=SESSION_ID)
+        await call_agent_async(query = "What is the weather in New York?",
+                               runner=runner_agent_team,
+                               user_id=USER_ID,
+                               session_id=SESSION_ID)
+        await call_agent_async(query = "Thanks, bye!",
+                               runner=runner_agent_team,
+                               user_id=USER_ID,
+                               session_id=SESSION_ID)
+
+    # Execute the conversation
+    # Note: This may require API keys for the models used by root and sub-agents!
+    if __name__ == "__main__":
+        asyncio.run(run_team_conversation())
+        #await run_team_conversation()
+else:
+    print("\n⚠️ Skipping agent team conversation as the root agent was not successfully defined in the previous step.")

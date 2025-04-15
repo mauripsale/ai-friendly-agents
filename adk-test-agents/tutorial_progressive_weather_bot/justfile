@@ -1,4 +1,7 @@
 
+list:
+    just -l
+
 run:
     python main.py
 
@@ -8,3 +11,7 @@ test-claude:
     python claude_agent.py
 test-toolz:
     python toolz.py
+
+# Interact with the Agent Team
+test-agent-interaction:
+    python sub_agents.py
