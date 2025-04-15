@@ -1,14 +1,21 @@
 
+# This list
 list:
     just -l
 
+# S1.2 -- First weather agent
 run:
     python main.py
 
+# S2.2 -- Tests ChatGPT from "Open"AI
 test-gpt:
     python gpt_agent.py
+
+# S2.2 -- Tests Claude from Anthropic
 test-claude:
     python claude_agent.py
+
+# S3.1 -- Simply tests get_weather() and say_hello() and goodbye() defined in 3.1 and 3.2
 test-toolz:
     python toolz.py
 
@@ -16,19 +23,19 @@ test-toolz:
 test-agent-interaction:
     python sub_agents.py
 
-#  S4.3 -- Redefine Sub-Agents and Update Root Agent with output_key
+#  S4.3 -- Redefine Sub-Agents and Update Root Agent with output_key. Uses `s4_session_demo.py`
 test-4-3:
     python sub_agents_v2.py
 
-# S4.4 Interact to Test State Flow and output_key
+# S4.4 -- Interact to Test State Flow and output_key
 test-4-4:
     python s4_4_interactive_session.py
 
 
-# Update Root Agent with before_model_callback (useless, just constructors)
+# S5.2 -- Update Root Agent with before_model_callback (useless, just constructors)
 test-5-2:
     python s5_2_block_guardrail.py
 
-# Test the Tool Guardrail with both BeforeModel and BeforeTool callbacks.
+# S6.3 -- Test the Tool Guardrail with both BeforeModel and BeforeTool callbacks.
 test-6-3:
     python s6_3_before_tool_callback_guardrail.py

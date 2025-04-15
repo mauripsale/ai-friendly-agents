@@ -16,7 +16,7 @@ from google.adk.agents import Agent
 from toolz import *
 from constants import *
 from call_agent_functions import *
-from step4_session_demo import *
+from s4_session_demo import *
 
 
 # Ensure tools 'say_hello', 'say_goodbye' are defined (from Step 3)
