@@ -28,3 +28,7 @@ test-4-4:
 # Update Root Agent with before_model_callback (useless, just constructors)
 test-5-2:
     python s5_2_block_guardrail.py
+
+# Test the Tool Guardrail with both BeforeModel and BeforeTool callbacks.
+test-6-3:
+    python s6_3_before_tool_callback_guardrail.py

@@ -21,6 +21,9 @@ if runner_root_model_guardrail:
       # 2. Request containing the blocked keyword
       await interaction_func("What about Paris?")
 
+      # 2. Request containing the blocked keyword
+      await interaction_func("And Zurich?")
+
       # 3. Normal greeting (Callback allows root agent, delegation happens)
       await interaction_func("Hello again")
 
