@@ -14,10 +14,6 @@ I've tried my best to keep:
 1. all the common/immutable code in single, testable files.
 2. I've tried to keep all "e2e tests" in form of mains which import those lib files.
 
-## TODOs
-1. TODO(ricc): when it works, move all the (1) to `lib/` so all testable endpoints become obvious (in `.`).
-2. Create an alternative agent to OpenAI and Claude for people who dont have that account.
-
 In `justfile` I tried to keep a mapping between file invokation and title in python notebook. Look at this beauty:
 
 ```bash
@@ -34,6 +30,10 @@ Available recipes:
     test-gpt               # S2.2 -- Tests ChatGPT from "Open"AI
     test-toolz             # S3.1 -- Simply tests get_weather() and say_hello() and goodbye() defined in 3.1 and 3.2
 ```
+
+## TODOs
+1. TODO(ricc): when it works, move all the (1) to `lib/` so all testable endpoints become obvious (in `.`).
+2. Create an alternative agent to OpenAI and Claude for people who dont have that account.
 
 ## Example
 ![alt text](image.png)
