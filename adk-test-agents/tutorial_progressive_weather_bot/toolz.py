@@ -22,12 +22,24 @@ def get_weather(city: str) -> dict:
         "newyork": {"status": "success", "report": "The weather in New York is sunny with a temperature of 25°C."},
         "london": {"status": "success", "report": "It's cloudy and miserable in London with a temperature of 15°C."},
         "tokyo": {"status": "success", "report": "Tokyo is experiencing light rain and a temperature of 18°C."},
+        "paris": {"status": "success", "report": "Paris is sunny with a temperature of 22°C."},
+        "berlin": {"status": "success", "report": "It's cloudy and a temperature of 18°C."},
+        "zurich": {"status": "success", "report": "Zurich is sunny with a temperature of 21°C; the lake temperature is 18°C."},
+        "new delhi": {"status": "success", "report": "New Delhi is sunny with a temperature of 25°C."},
+        "istanbul": {"status": "success", "report": "Istanbul is sunny with a temperature of 25°C."},
+        "rome": {"status": "success", "report": "Rome is sunny with a temperature of 25°C."},
+        "madrid": {"status": "success", "report": "Madrid is sunny with a temperature of 25°C."},
+        "moscow": {"status": "success", "report": "Moscow is sunny with a temperature of 25°C."},
+        "singapore": {"status": "success", "report": "Singapore is sunny with a temperature of 25°C."},
+        "dubai": {"status": "success", "report": "experiencing light rain and a temperature of 18°C."},
     }
 
     if city_normalized in mock_weather_db:
-        return mock_weather_db[city_normalized]
+        ret = mock_weather_db[city_normalized]
     else:
-        return {"status": "error", "error_message": f"Sorry, I don't have weather information for '{city}'."}
+        ret = {"status": "error", "error_message": f"Sorry, I don't have weather information for '{city}'."}
+    ret['colorful_status'] = green(ret['status']) if ret['status'] == 'success' else red(ret['status'])
+    return ret
 
 print("✅ Simple 'get_weather' tool defined.")
 
@@ -49,6 +61,8 @@ def get_weather_stateful(city: str, tool_context: ToolContext) -> dict:
         "newyork": {"temp_c": 25, "condition": "sunny"},
         "london": {"temp_c": 15, "condition": "cloudy"},
         "tokyo": {"temp_c": 18, "condition": "light rain"},
+        "zurich": {"temp_c": 23, "condition": "miserable rain"},
+        "paris": {"temp_c": 19, "condition": "miserable rain"},
     }
 
     if city_normalized in mock_weather_db:
@@ -160,14 +174,33 @@ def get_weather_stateful(city: str, tool_context: ToolContext) -> dict:
 print("✅ State-aware 'get_weather_stateful' tool defined.")
 
 
+def print_fancy_weather(weather_data: dict):
+    """Prints weather information in a fancy format.
+
+    Args:
+        weather_data (dict): A dictionary containing weather information.
+    """
+    #print(f"--- [{weather_data['colorful_status']}] Weather Report: {weather_data['report']} ---")
+    if weather_data["status"] == "success":
+        print(f"--- [{weather_data['colorful_status']}] Weather Report: {weather_data['report']} ---")
+    else:
+        print(f"--- [{weather_data['colorful_status']}] ErrMsg: {red(weather_data['error_message'])} ---")
+        #print(f"--- Error: {weather_data['error_message']} ---")
+        #print(f"--- Status: {weather_data['status']} ---")
+        #print(f"--- Colorful Status: {weather_data['colorful_status']} ---")
+        #print(f"--- Error Message: {weather_data['error_message']} ---")
+        #print(f"--- Colorful Error Message: {weather_data['colorful_error_message']} ---")
+
 
 # Test functionality
 if __name__ == "__main__":
     print("Testing TOOLS functionality..")
     # Example tool usage (optional test)
-    print(get_weather("New York"))
-    print(get_weather("Zurich"))
-    print(get_weather("London"))
+    print_fancy_weather(get_weather("New York"))
+    print_fancy_weather(get_weather("Zurich"))
+    print_fancy_weather(get_weather("London"))
+    print_fancy_weather(get_weather("Paris"))
+    print_fancy_weather(get_weather("Argenta"))
     # Optional self-test
     print(say_hello("Alice"))
     print(say_goodbye())

@@ -22,3 +22,9 @@ test-4-3:
 
 # S4.4 Interact to Test State Flow and output_key
 test-4-4:
+    python s4_4_interactive_session.py
+
+
+# Update Root Agent with before_model_callback (useless, just constructors)
+test-5-2:
+    python s5_2_block_guardrail.py
