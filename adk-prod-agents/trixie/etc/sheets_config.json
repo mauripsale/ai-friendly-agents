@@ -1,0 +1,13 @@
+[
+    {
+      "sheet_id": "1e2wW40dnFkWN2KX2q5sIavV0vujPWZgSvEq09qdHqQ8",
+      "tab": "Ricc Pubblico",
+      "description": "riccardo countries visited as of 15 apr 2025 (public)",
+      "access": "read-only",
+      "relevant_columns": [
+        "country", "name", "RiccardoC",  "Note Ric"
+      ],
+      "context": "These are the countries visited by Riccardo (the code writer). Note that row 2 has the totals so you can ignore it when fetching data. You probably want to always fetch the whole 247 rows to respond to any trivia.",
+      "skip_first_n_lines": 0
+    }
+]

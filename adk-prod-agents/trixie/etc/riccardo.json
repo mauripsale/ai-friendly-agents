@@ -1,0 +1,46 @@
+[
+    {
+      "sheet_id": "1uZ5W8ByjRt_RdvuUrBV-pOEvN3pg0gsgg9ArXS2dOlU",
+      "tab": "TimesheetMerVen v1.2",
+      "description": "Silvana TimeSheet hours since 2024-08 to today",
+      "access": "read-only",
+      "relevant_columns": [
+        "DateHuman", "Date", "From", "To", "Notes", "Delta Hours", "Type", "Quitt Hours", "Confirmed"
+      ],
+      "context": "This is a very verbose table with a lot of formulas hence repeated valus in multiple columns. Make sure to filter on relevant_columns. If possible, provide aggregated hours by month (eg Total hours for April), for both NORMAL babysitting and for Quitt hours (Quitt is a swiss website which we use to pay my nanny Silvana Termini ~10h a week, and the Sheet allows us to track any hours she might do more or less than 10 to adjust her salary)",
+      "skip_first_n_lines": 0
+    },
+    {
+      "sheet_id": "1ffG2vI1wIIUllRbC5UpRvttykIIUZvE6O8TjtNDmWg4",
+      "tab": "ProjectIds",
+      "description": "ProjectIds for Riccardo personal and work projects",
+      "access": "read-only",
+      "relevant_columns": [
+        "project_id", "project_number", "Org", "BAID"
+      ],
+      "context": "This is a sheet with my favourite projects. It contains project id, project number and Billing Account ID (BAID). Note many values are sparse - filter them out if you can. Many BAIDs are wrong. Validate BAIDs by following this 'regex': BAID =~ /XXXXXX-XXXXXX-XXXXXX/g where x is hex alphanum (0-9 or A-F) in any case. If a BAID is invalid, just dont show it unless explicitly required.",
+      "skip_first_n_lines": 0
+    },
+    {
+      "sheet_id": "1XPqXUXTCVGZQg_kbV6Ydw0kKQE1wNREIRdZRVdtoDHA",
+      "tab": "Ric Andrea",
+      "description": "Countries visited by Riccardo and Andrea",
+      "access": "read-only",
+      "relevant_columns": [
+        "country", "name", "RiccardoC", "AndreaP", "Note Ric", "Note andrea"
+      ],
+      "context": "These are the countries visited by Riccardo (the user) and his friend Andrea. Note that row 2 has the totals so you can ignore it when fetching data. You probably want to always fetch the whole 247 rows to respond to any trivia.",
+      "skip_first_n_lines": 1
+    },
+    {
+      "sheet_id": "1r90HfsQjpHT_b3R1WIZY8rOg1hff68nRvgxmWo6N7Ag",
+      "tab": "Ricc Conf v1.4",
+      "description": "Riccardo's Conference/Travel Plans",
+      "access": "read-write",
+      "relevant_columns": [
+        "Event name", "City", "Status", "Sheetless URL", "Cohort", "CfP", "TaskFlow", "Event Date Start", "Notes Next Steps", "ldap", "trip_id", "ose_accepted?", "Family approval"
+      ],
+      "context": "This my working trix where I put my travel plans. The only relevant ones are the ones in the future, you can ignore the ones before today unless we have a reporting question, eg \"tell me all the events we did in past 2024\". Future events are lower, so try to get say ~100 rows and filter the ones where start date is before today, or where cohort is NOT the latest (currently, cohort is 2025).",
+      "skip_first_n_lines": 0
+    }
+  ]

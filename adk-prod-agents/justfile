@@ -6,3 +6,6 @@ list:
 
 run-web:
     adk web
+
+run-trixie:
+    adk run trixie/
