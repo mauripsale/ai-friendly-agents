@@ -26,3 +26,19 @@ MODEL_CLAUDE_SONNET = "anthropic/claude-3-sonnet-20240229"
 
 print("\nEnvironment configured.")
 # @title Setup Session Service and Runner
+
+############################
+# MAIN Session info:
+############################
+
+# Define constants for identifying the interaction context
+APP_NAME = "weather_tutorial_app"
+USER_ID = "user_1"
+SESSION_ID = "session_001" # Using a fixed ID for simplicity
+
+############################
+# STEP4 Session info:
+############################
+# Define a NEW session ID for this part of the tutorial
+SESSION_ID_STATEFUL = "session_state_demo_001"
+USER_ID_STATEFUL = "user_state_demo"

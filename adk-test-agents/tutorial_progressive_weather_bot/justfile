@@ -12,6 +12,13 @@ test-claude:
 test-toolz:
     python toolz.py
 
-# Interact with the Agent Team
+# S3.4 -- Interact with the Agent Team
 test-agent-interaction:
     python sub_agents.py
+
+#  S4.3 -- Redefine Sub-Agents and Update Root Agent with output_key
+test-4-3:
+    python sub_agents_v2.py
+
+# S4.4 Interact to Test State Flow and output_key
+test-4-4:

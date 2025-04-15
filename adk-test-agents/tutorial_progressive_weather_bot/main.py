@@ -46,10 +46,6 @@ print(f"Agent '{weather_agent.name}' created using model '{AGENT_MODEL}'.")
 # InMemorySessionService is simple, non-persistent storage for this tutorial.
 session_service = InMemorySessionService()
 
-# Define constants for identifying the interaction context
-APP_NAME = "weather_tutorial_app"
-USER_ID = "user_1"
-SESSION_ID = "session_001" # Using a fixed ID for simplicity
 
 # Create the specific session where the conversation will happen
 session = session_service.create_session(

@@ -1,12 +1,12 @@
 
 from google.genai import types # For creating message Content/Parts
 from google.adk.runners import Runner
-
+from lib_colors import *
 
 
 async def call_agent_async(query: str, runner: Runner, user_id, session_id):
   """Sends a query to the agent and prints the final response."""
-  print(f"\n>>> User Query: {query}")
+  print(f"\n>>> User Query: {white(query)}")
 
   # Prepare the user's message in ADK format
   content = types.Content(role='user', parts=[types.Part(text=query)])
@@ -29,4 +29,4 @@ async def call_agent_async(query: str, runner: Runner, user_id, session_id):
           # Add more checks here if needed (e.g., specific error codes)
           break # Stop processing events once the final response is found
 
-  print(f"<<< Agent Response: {final_response_text}")
+  print(f"<<< Agent Response: {purple(final_response_text)}")
