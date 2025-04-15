@@ -9,3 +9,12 @@ Dir structure:
 * `samples/`: end-to-end samples by the author.
 
 Better samples can be found here: https://github.com/google/adk-samples
+
+# Install
+
+```bash
+git clone https://github.com/palladius/ai-friendly-agents/
+cp .env.dist .env
+# edit away
+```
+
