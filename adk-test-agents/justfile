@@ -1,0 +1,11 @@
+
+
+list:
+    just -l
+
+# Executes agents on web. Pretty sweet if you ask me.
+web:
+    adk web
+
+run-weather:
+    adk run quickstart_multi_tool_agent/

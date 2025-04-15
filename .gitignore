@@ -172,5 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Carlessian nonsense BEGIN
 .ondir.was.here.touch
 .env
+.echodo_history
+# Carlessian nonsense END

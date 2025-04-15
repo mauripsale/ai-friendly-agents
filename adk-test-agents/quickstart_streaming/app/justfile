@@ -1,0 +1,6 @@
+
+list:
+    just -l
+
+web:
+    adk web
