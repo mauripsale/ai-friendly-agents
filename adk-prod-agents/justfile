@@ -1,0 +1,8 @@
+
+# cd larry/ && touch __init__.py agent.py
+list:
+    just -l
+
+
+run-web:
+    adk web
