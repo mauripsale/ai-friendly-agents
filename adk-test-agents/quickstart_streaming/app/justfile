@@ -2,5 +2,11 @@
 list:
     just -l
 
+# Opens adk Web
 web:
     adk web
+
+
+# opens unicorn
+unicorn:
+    uvicorn main:app --reload

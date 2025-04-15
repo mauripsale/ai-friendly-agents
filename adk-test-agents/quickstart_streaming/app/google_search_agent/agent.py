@@ -7,8 +7,8 @@ root_agent = Agent(
    # The Large Language Model (LLM) that agent will use.
 #   model="gemini-2.0-flash-live-001", # Google AI Studio
    #model="gemini-2.0-flash-live", # Google AI Studio
-   model="gemini-2.0-flash", # Google AI Studio
-   #model="gemini-2.0-flash-live-preview-04-09", # Vertex AI Studio
+   #model="gemini-2.0-flash", # Riccardo patch.
+   model="gemini-2.0-flash-live-preview-04-09", # Vertex AI Studio
    # A short description of the agent's purpose.
    description="Agent to answer questions using Google Search.",
    # Instructions to set the agent's behavior.
