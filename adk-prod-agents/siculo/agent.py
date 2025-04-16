@@ -1,12 +1,14 @@
 
-# 1. global improts
+# 1. global imports
 from google.adk.agents import Agent
 import logging
 import dotenv
 import os
 from typing import List, Dict, Any, Tuple, Optional, Type
+import datetime
+import platform
 
-# 2. local improts
+# 2. local imports
 from .lib.sqlite_agent import * # SQLiteAgent, print_database_schema
 from .lib.colors import Color
 
@@ -76,6 +78,21 @@ def tool_get_colorful_database_schema_markdown():
     #return { "status": "success", "log": "Database schema printed to console. Sorry Gemini you cant see it but it was beautiful" }
 # --- Agent ---
 
+def tool_simple_context():
+    '''Returns info on the machine where the agent is running: date, path, some ENV vars too.'''
+    return {
+        'date_today': datetime.datetime.today().strftime('%Y-%m-%d'),
+        'time_now': datetime.datetime.now().strftime('%H:%M:%S'),
+        'user_name': 'Salvatore Siculo',
+        'ENV[FOO]': os.getenv('FOO', 'FOO not set'),
+        'ENV[BAR]': os.getenv('BAR', 'BAR not set'),
+        'ENV[DB_FILE]': os.getenv('DB_FILE', 'DB_FILE not set'),
+        'ENV[ALLOW_WRITES]': os.getenv('ALLOW_WRITES', 'ALLOW_WRITES not set'),
+        'ENV[DEBUG]': os.getenv('DEBUG', 'DEBUG not set'),
+        'cwd': os.getcwd(),
+        'os_name': platform.system(),
+    }
+
 
 root_agent = Agent(
    name="salvatore_siculo__sql_agent", # Salvatore "SQL" Siculo
@@ -84,7 +101,13 @@ root_agent = Agent(
    # Instructions to set the agent's behavior.
    instruction="You are a SQL expert. You'll be able to look at DB structure and answer questions about it."
             "You will use tools to access schema, tables, and rows. You'll be able to execute generic SQL for one given multi-DB file."
-            "Currently just supports sqlite3.",
+            "Currently just supports sqlite3."
+            ""
+            "Whenever asked about date, time or context, feel free to call the `tool_simple_context`."
+
+
+            ,
+
    tools=[
        tool_get_database_details,
        tool_execute_sql,
@@ -93,10 +116,13 @@ root_agent = Agent(
        tool_get_full_schema,
        #tool_print_database_schema,
        tool_get_colorful_database_schema_markdown,
+       tool_simple_context,
        ],
 )
 
 
-# if __name__ == "__main__":
-#     print("-- rough testing of agent tool calling --")
+if __name__ == "__main__":
+    print("-- rough testing of agent tool calling --")
 #     print(tool_print_database_schema())
+    print(tool_simple_context())
+
