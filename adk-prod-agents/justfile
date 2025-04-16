@@ -14,3 +14,7 @@ run-trixie:
     GOOGLE_APPLICATION_CREDENTIALS="trixie/private/my-service-account-key.json" \
     JSON_SHEET_FILE="trixie/etc/sheets_config.json" \
     adk run trixie/
+
+
+run-sql-agent:
+    adk run siculo/
