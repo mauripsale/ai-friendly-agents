@@ -3,6 +3,7 @@ import sqlite3
 from typing import List, Dict, Any, Tuple, Optional, Type
 import re
 import logging
+import html # Import html for escaping
 
 from .colors import Color # Assuming it's in the same lib folder
 
@@ -460,3 +461,58 @@ def print_database_schema(db_details: Dict[str, Any], color_lib: Type[Color]):
             print(f"    {col_name:<{max_name_len}}  {colored_type}") # Let terminal handle alignment of colored text - usually works ok
 
     print(f"{color_lib.magenta('------------------------')}\n")
+
+
+
+def database_schema_to_colorful_markdown(db_details: Dict[str, Any]) -> str:
+    """
+    Takes the enhanced database details and returns a colorful Markdown string.
+    Uses embedded HTML spans for coloring.
+    """
+    output_lines: List[str] = []
+    db_filename = db_details.get('db_filename', 'N/A')
+    table_details = db_details.get('table_details', {})
+
+    # --- Main Header ---
+    output_lines.append(f"## {Color.html_magenta(Color.html_bold('Database Details'))} 🏛️")
+    output_lines.append(f"**{Color.html_yellow('File:')}** {Color.html_green(db_filename)}")
+    output_lines.append("---") # Horizontal rule
+
+    if not table_details:
+        output_lines.append(f"{Color.html_yellow('No tables found or schema could not be retrieved.')}")
+        return "\n".join(output_lines)
+
+    # --- Iterate Through Tables ---
+    for i, (table_name, details) in enumerate(table_details.items()):
+        schema = details.get('schema', {})
+        rows = details.get('rows', -1)
+        row_text = f"{rows} rows" if rows >= 0 else "? rows"
+
+        if i > 0:
+             output_lines.append("\n---\n") # Add more space and separator between tables
+
+        # --- Table Header ---
+        # Use HTML bold within the header for potentially better rendering control
+        output_lines.append(f"### {Color.html_blue(Color.html_bold(f'Table: {table_name}'))} ({Color.html_grey(row_text)})")
+
+        if not schema:
+            output_lines.append(f"_{Color.html_grey('(No columns found or schema error for this table)')}_")
+            continue
+
+        # --- Markdown Table ---
+        # Headers
+        output_lines.append(f"| {Color.html_bold('Column Name')} | {Color.html_bold('Type')} |")
+        # Separator - alignment hints (optional, but good practice)
+        output_lines.append("|:---|:---|") # Left-aligned
+
+        # Rows
+        for col_name, col_type in schema.items():
+             # Escape pipe characters within names/types if they occur, although unlikely for standard identifiers
+             safe_col_name = html.escape(col_name).replace("|", "\\|")
+             safe_col_type = html.escape(col_type).replace("|", "\\|")
+             # Apply color to type
+             colored_type = Color.html_cyan(safe_col_type)
+             output_lines.append(f"| {safe_col_name} | {colored_type} |")
+
+
+    return "\n".join(output_lines)

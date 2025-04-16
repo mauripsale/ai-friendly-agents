@@ -7,7 +7,7 @@ import os
 from typing import List, Dict, Any, Tuple, Optional, Type
 
 # 2. local improts
-from .lib.sqlite_agent import SQLiteAgent, print_database_schema
+from .lib.sqlite_agent import * # SQLiteAgent, print_database_schema
 from .lib.colors import Color
 
 ########################################
@@ -60,11 +60,17 @@ def tool_get_full_schema()-> Dict[str, Dict[str, str]]:
     '''Retrieves the schema for all tables in the database.'''
     return SingletonAgent.get_full_schema()
 
-def tool_print_database_schema():
+def tool_get_colorful_database_schema_markdown():
     '''Takes the enhanced database details and prints a colorful representation.'''
     database_details = SingletonAgent.get_database_details()
-    print_database_schema(database_details, color_lib)
-    return { "status": "success", "log": "Database schema printed to console. Sorry Gemini you cant see it but it was beautiful" }
+    # TODO wrap with try..
+    ret = database_schema_to_colorful_markdown(database_details)
+    return {
+        "status": "success",
+        "result": ret,
+    }
+
+    #return { "status": "success", "log": "Database schema printed to console. Sorry Gemini you cant see it but it was beautiful" }
 # --- Agent ---
 
 
@@ -82,6 +88,12 @@ root_agent = Agent(
        tool_list_tables,
        tool_get_table_schema,
        tool_get_full_schema,
-       tool_print_database_schema,
+       #tool_print_database_schema,
+       tool_get_colorful_database_schema_markdown,
        ],
 )
+
+
+# if __name__ == "__main__":
+#     print("-- rough testing of agent tool calling --")
+#     print(tool_print_database_schema())
