@@ -4,9 +4,11 @@ from google.adk.agents import Agent
 import logging
 import dotenv
 import os
+from typing import List, Dict, Any, Tuple, Optional, Type
 
 # 2. local improts
-from .lib.sqlite_agent import SQLiteAgent
+from .lib.sqlite_agent import SQLiteAgent, print_database_schema
+from .lib.colors import Color
 
 ########################################
 # ENV part - with dotenv of course.
@@ -42,6 +44,27 @@ def tool_execute_sql(sql_query: str):
     print(f"Executing query.. ```{sql_query}```") # todo color blue
     return SingletonAgent.execute_sql(sql_query)
 
+# def tool_execute_natural_language_query(nl_query: str):
+#     '''Executes a natural language query on the DB.'''
+#     return SingletonAgent.execute_natural_language_query(nl_query)
+
+def tool_list_tables():
+    '''Lists all user-defined tables in the database.'''
+    return SingletonAgent.list_tables()
+
+def tool_get_table_schema(table_name: str):
+    '''Retrieves the schema (column names and types) for a given table.'''
+    return SingletonAgent.get_table_schema(table_name)
+
+def tool_get_full_schema()-> Dict[str, Dict[str, str]]:
+    '''Retrieves the schema for all tables in the database.'''
+    return SingletonAgent.get_full_schema()
+
+def tool_print_database_schema():
+    '''Takes the enhanced database details and prints a colorful representation.'''
+    database_details = SingletonAgent.get_database_details()
+    print_database_schema(database_details, color_lib)
+    return { "status": "success", "log": "Database schema printed to console. Sorry Gemini you cant see it but it was beautiful" }
 # --- Agent ---
 
 
@@ -56,5 +79,9 @@ root_agent = Agent(
    tools=[
        tool_get_database_details,
        tool_execute_sql,
+       tool_list_tables,
+       tool_get_table_schema,
+       tool_get_full_schema,
+       tool_print_database_schema,
        ],
 )
