@@ -10,7 +10,7 @@ ricc-only-test-project-ids:
 #     GOOGLE_APPLICATION_CREDENTIALS="private/trix-populator-key.json" python main.py  "1uZ5W8ByjRt_RdvuUrBV-pOEvN3pg0gsgg9ArXS2dOlU"   "TimesheetMerVen v1.2" --limit 20
 
 test-public:
-    GOOGLE_APPLICATION_CREDENTIALS="private/trix-populator-key.json" python main.py  "1e2wW40dnFkWN2KX2q5sIavV0vujPWZgSvEq09qdHqQ8"  "Pubblico" --limit 50
+    GOOGLE_APPLICATION_CREDENTIALS="private/trix-populator-key.json" python main.py  "1e2wW40dnFkWN2KX2q5sIavV0vujPWZgSvEq09qdHqQ8"  "Pubblico" --limit 10 | egrep "name|RiccardoC"
 
 
 auth:

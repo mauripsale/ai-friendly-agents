@@ -39,16 +39,17 @@ class SheetConfig(BaseModel):
 # --- Environment Variable Handling ---
 # Get the JSON file path from ENV, with a default
 JSON_SHEET_FILE_PATH_STR = os.getenv('JSON_SHEET_FILE', DEFAULT_SHEET_CONFIG_FILE)
-JSON_SHEET_FILE_PATH = Path(f"trixie/{JSON_SHEET_FILE_PATH_STR}" ) # locally to this code.
+#JSON_SHEET_FILE_PATH = Path(f"trixie/{JSON_SHEET_FILE_PATH_STR}" ) # locally to this code.
+JSON_SHEET_FILE_PATH = Path(JSON_SHEET_FILE_PATH_STR) # locally to this code.
 
 print(f"⚙️ JSON_SHEET_FILE_PATH_STR: {JSON_SHEET_FILE_PATH_STR}")
 print(f"⚙️ JSON_SHEET_FILE_PATH:     {JSON_SHEET_FILE_PATH}")
 print(f"⚙️ is it a file?!?:          {JSON_SHEET_FILE_PATH.is_file()}")
 print(f"⚙️ CWD:                      {os.getcwd()}")
-print(f"⚙️ GOOGLE_APPLICATION_CREDENTIALS: {os.getenv('GOOGLE_APPLICATION_CREDENTIALS')}")
+print(f"⚙️ GOOGLE_APPLICATION_CREDENTIALS: {os.getenv('GOOGLE_APPLICATION_CREDENTIALS')} # not necessary but useful..")
 
 if not JSON_SHEET_FILE_PATH.is_file():
-    print("config not found, my existence is futile.")
+    print("⛔ ⚙️ config not found, my existence is futile.")
     exit(-1)
 # You could add other ENV vars here if needed, e.g., for Service Accounts if you re-introduce write access logic
 # READ_ONLY_SERVICE_ACCOUNT_EMAIL = os.getenv("READ_ONLY_SERVICE_ACCOUNT_EMAIL", "<NOT PROVIDED! Fix your ENV>")
@@ -147,7 +148,7 @@ def get_sheets() -> Dict[str, Any]:
 
 
 #TODO: def get_sheets(json_file_path: Path = None ) -> List[Dict[str, Any]]:
-def get_sheets_vecchio() -> List[Dict[str, Any]]:
+def get_sheets_old_returning_an_array() -> List[Dict[str, Any]]:
     """
     Reads sheet configurations from a JSON file specified by JSON_SHEET_FILE env var,
     validates them using Pydantic, and returns a list of valid configurations as dictionaries.
@@ -408,12 +409,12 @@ if __name__ == '__main__':
 
     # Set the environment variable for testing if not set externally
     if 'JSON_SHEET_FILE' not in os.environ:
-        os.environ['JSON_SHEET_FILE'] = 'riccardo.json' # Make sure this file exists
+        os.environ['JSON_SHEET_FILE'] = DEFAULT_SHEET_CONFIG_FILE # 'riccardo.json' # Make sure this file exists
         logging.info(f"Temporarily set JSON_SHEET_FILE to '{os.environ['JSON_SHEET_FILE']}'")
 
     # Test get_sheets
     print("\n--- Testing get_sheets() ---")
-    sheets_config = get_sheets()
+    sheets_config = get_sheets_old_returning_an_array() # get_sheets()
     print(f"Found {len(sheets_config)} valid sheet configurations:")
     # Print descriptions for verification
     for config in sheets_config:

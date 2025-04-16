@@ -9,6 +9,8 @@ run-web:
 web:
     adk web
 
-# With Riccardo key
+# With generic key. Note I have to move the JSON_SHEET_FILE back one folder.
 run-trixie:
-    GOOGLE_APPLICATION_CREDENTIALS="trixie/private/trix-populator-key.json" adk run trixie/
+    GOOGLE_APPLICATION_CREDENTIALS="trixie/private/my-service-account-key.json" \
+    JSON_SHEET_FILE="trixie/etc/sheets_config.json" \
+    adk run trixie/

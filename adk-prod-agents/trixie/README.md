@@ -18,4 +18,4 @@ Instructions to set up service account:
 * Python quickstart: https://developers.google.com/workspace/sheets/api/quickstart/python
 * Video on how to create a SA: https://www.youtube.com/watch?v=asrCdWFrF0A&t=1s
 
-Don't forget to give access to your sheet to the SA. Or, you can start with a PUBLIC sheet.
+Don't forget to give access to your sheet to the SA. Or, you can start with a PUBLIC sheet (eg [Riccardo's countries visited](https://docs.google.com/spreadsheets/d/1e2wW40dnFkWN2KX2q5sIavV0vujPWZgSvEq09qdHqQ8/edit?gid=0#gid=0)).
