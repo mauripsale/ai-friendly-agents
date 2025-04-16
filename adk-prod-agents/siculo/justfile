@@ -19,3 +19,7 @@ run:
 # Runs a lot of test. For the lazy :)
 test:
     bin/test.sh
+
+
+test-agent:
+    cd ../ && adk run siculo/
