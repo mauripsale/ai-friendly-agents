@@ -1,3 +1,4 @@
+20250416 v1.0 The agent officially works!
 20250416 v0.3 Adding markdown coloring.
 20250416 v0.3 Agent finally works! Everything except the silly print :)
 20250416 v0.2 Added goodies to visualizer and to full-schema obj: `get_database_details`

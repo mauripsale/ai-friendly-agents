@@ -17,7 +17,10 @@ dotenv.load_dotenv()
 # --- Configuration ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-DEFAULT_DB_FILE = 'siculo/my_test_db.sqlite'
+#DEFAULT_DB_FILE = 'siculo/my_test_db.sqlite'
+DEFAULT_DB_FILE = 'siculo/google_events.sqlite'
+
+
 # ENV -> vars
 DB_FILE = os.getenv("DB_FILE", DEFAULT_DB_FILE)
 ALLOW_WRITES = os.getenv("ALLOW_WRITES", False)

@@ -6,15 +6,20 @@ list:
 
 # Remove test stuff
 clean:
-    rm my_test_db.sqlite
+    rm my_test_db.sqlite google_events.sqlite
 
-# Create a sample DB: my_test_db.sqlite
+# Create two sample DBs: my_test_db.sqlite and google_events.sqlite
 create-db:
     bin/create_sample_db.sh my_test_db.sqlite
+    bin/sbrodola-google-events.sh
+
+db: create-db
 
 # this runs MAIN, not the agent. For the agent, go ../ and execute there.
 run:
-    python main.py my_test_db.sqlite show-full-schema
+    #    python main.py my_test_db.sqlite show-full-schema
+    python main.py google_events.sqlite show-full-schema
+
 
 # Runs a lot of test. For the lazy :)
 test:

@@ -16,10 +16,12 @@ Nothing to do, really :)
 
 ## TODOs
 
-Still missing:
+Basic functionality is there. Some nice touch I could add:
 
-* agent working (yup, Im not neglecting that, but I need a working MVP first).
-* SQL magic (get SQL from cli).
+* Intercept the SQL queries, and if there are, print them
+* Memorize the filename in memory, and allow user to change context
+* Ability to cache schema and force a refresh upon EXPLICIT user request.
+* Show in memory/context the readonly vs not.
 
 ## Markdown output from agent.
 
