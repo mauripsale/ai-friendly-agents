@@ -1,3 +1,4 @@
+20250416 v1.5 Not much, just better docs.
 20250415 v1.4 copied from private and added public functions. I need to remove my personal stuff and districate it from the public stuff
               to be able to publish this.
 20250410 v1.3 added TODAY()

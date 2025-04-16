@@ -45,6 +45,8 @@ print(f"⚙️ JSON_SHEET_FILE_PATH_STR: {JSON_SHEET_FILE_PATH_STR}")
 print(f"⚙️ JSON_SHEET_FILE_PATH:     {JSON_SHEET_FILE_PATH}")
 print(f"⚙️ is it a file?!?:          {JSON_SHEET_FILE_PATH.is_file()}")
 print(f"⚙️ CWD:                      {os.getcwd()}")
+print(f"⚙️ GOOGLE_APPLICATION_CREDENTIALS: {os.getenv('GOOGLE_APPLICATION_CREDENTIALS')}")
+
 if not JSON_SHEET_FILE_PATH.is_file():
     print("config not found, my existence is futile.")
     exit(-1)

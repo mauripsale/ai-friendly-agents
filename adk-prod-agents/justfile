@@ -3,9 +3,12 @@
 list:
     just -l
 
-
+# Web
 run-web:
     adk web
+web:
+    adk web
 
+# With Riccardo key
 run-trixie:
-    adk run trixie/
+    GOOGLE_APPLICATION_CREDENTIALS="trixie/private/trix-populator-key.json" adk run trixie/
