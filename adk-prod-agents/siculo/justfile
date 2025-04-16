@@ -1,0 +1,17 @@
+
+
+# This list :)
+list:
+    just -l
+
+# Remove test stuff
+clean:
+    rm my_test_db.sqlite
+
+# Create a sample DB: my_test_db.sqlite
+create-db:
+    bin/create_sample_db.sh my_test_db.sqlite
+
+# this runs MAIN, not the agent. For the agent, go ../ and execute there.
+run:
+    python main.py
