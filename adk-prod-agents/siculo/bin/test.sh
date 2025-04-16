@@ -19,3 +19,6 @@ python main.py my_test_db.sqlite --allow-writes exec-sql "INSERT INTO users (nam
 # Try the (simulated) natural language query
 python main.py my_test_db.sqlite exec-nl "Show me the first few users"
 python main.py my_test_db.sqlite exec-nl "count the products"
+
+# test full schema
+python main.py my_test_db.sqlite show-full-schema
