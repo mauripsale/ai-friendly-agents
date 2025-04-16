@@ -160,10 +160,13 @@ def main():
 
   # --- Handle New Command ---
         elif args.command == "show-full-schema":
-            full_schema_data = agent.get_full_schema()
-            print(full_schema_data)
+            #full_schema_data = agent.get_full_schema()
+            #print(full_schema_data)
             # Pass the Color class itself to the function
-            print_database_schema(full_schema_data, Color)
+            #print_database_schema(full_schema_data, Color)
+            database_details = agent.get_database_details()
+            # Pass the new structure and the Color class to the updated print function
+            print_database_schema(database_details, Color)
 
         elif args.command == "exec-sql":
             print(f"{Color.yellow('Executing SQL:')} {args.sql_query}")

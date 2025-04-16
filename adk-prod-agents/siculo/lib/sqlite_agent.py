@@ -321,3 +321,79 @@ class SQLiteAgent:
         except Exception as e:
              logging.error(f"Unexpected error during NL query execution: {e}")
              return f"An unexpected error occurred: {e}"
+
+
+
+    def get_database_details(self) -> Dict[str, Any]:
+        """
+        Retrieves enhanced details for all tables, including schema and row counts.
+
+        Returns:
+            Dict[str, Any]: A dictionary containing 'db_filename' and 'table_details'.
+                            'table_details' is a dict mapping table names to their
+                            schema and row count ({'schema': {...}, 'rows': int}).
+                            Row count is -1 if it cannot be determined.
+        """
+        logging.info("Attempting to retrieve full database details (schema and row counts).")
+        db_details: Dict[str, Any] = {
+            'db_filename': self.db_filename,
+            'table_details': {}
+        }
+        table_details_dict: Dict[str, Dict[str, Any]] = {}
+
+        try:
+            table_names = self.list_tables()
+            if not table_names:
+                logging.warning("No tables found in the database.")
+                db_details['table_details'] = {}
+                return db_details
+
+            logging.debug(f"Found tables: {table_names}. Fetching details for each.")
+            for table_name in table_names:
+                table_schema = self.get_table_schema(table_name)
+                row_count = -1 # Default to -1 (unknown)
+
+                # --- Get Row Count ---
+                # Basic quoting for table names to handle spaces/keywords, escape quotes within
+                # NOTE: This is basic quoting, might not cover all edge cases.
+                # More robust parsing/quoting might be needed for complex names.
+                quoted_table_name = f'"{table_name.replace("\"", "\"\"")}"'
+                count_sql = f"SELECT COUNT(*) FROM {quoted_table_name};"
+                try:
+                    # Use execute_sql as it handles connection and cursor
+                    # We expect a result like [{'COUNT(*)': 42}]
+                    count_result = self.execute_sql(count_sql)
+                    if isinstance(count_result, list) and count_result:
+                         # The key might vary slightly depending on DB/driver nuances,
+                         # but 'COUNT(*)' is standard for SQLite's default row factory.
+                         # Accessing the first (and only) key of the first row's dict is safer.
+                        first_row = count_result[0]
+                        if first_row:
+                            count_key = list(first_row.keys())[0] # Get the actual key name ('COUNT(*)')
+                            row_count = first_row[count_key]
+                            logging.debug(f"Row count for {table_name}: {row_count}")
+                        else:
+                             logging.warning(f"Could not determine row count for table '{table_name}' - empty row returned.")
+                    else:
+                         logging.warning(f"Could not determine row count for table '{table_name}' - unexpected result from count query: {count_result}")
+
+                except sqlite3.Error as e:
+                    logging.error(f"Error counting rows for table '{table_name}': {e}")
+                except Exception as e:
+                    logging.error(f"Unexpected error counting rows for table '{table_name}': {e}")
+                # --- End Row Count ---
+
+                table_details_dict[table_name] = {
+                    'schema': table_schema,
+                    'rows': row_count
+                }
+
+            db_details['table_details'] = table_details_dict
+            logging.info(f"Successfully retrieved details for {len(table_details_dict)} table(s).")
+            return db_details
+
+        except Exception as e:
+            logging.error(f"An unexpected error occurred while retrieving database details: {e}")
+            # Return partial results if available
+            db_details['table_details'] = table_details_dict
+            return db_details
