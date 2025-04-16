@@ -14,4 +14,8 @@ create-db:
 
 # this runs MAIN, not the agent. For the agent, go ../ and execute there.
 run:
-    python main.py
+    python main.py my_test_db.sqlite show-full-schema
+
+# Runs a lot of test. For the lazy :)
+test:
+    bin/test.sh
