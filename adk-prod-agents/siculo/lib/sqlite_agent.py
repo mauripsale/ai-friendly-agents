@@ -4,6 +4,9 @@ from typing import List, Dict, Any, Tuple, Optional
 import re
 import logging
 
+from .colors import Color # Assuming it's in the same lib folder
+
+
 # Configure basic logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -174,8 +177,44 @@ class SQLiteAgent:
             # Re-raise the exception so the caller knows something went wrong
             raise
 
+
+    def get_full_schema(self) -> Dict[str, Dict[str, str]]:
+        """
+        Retrieves the schema for all tables in the database.
+
+        Returns:
+            Dict[str, Dict[str, str]]: A dictionary where keys are table names
+                                      and values are dictionaries representing
+                                      the schema for that table (column_name -> column_type).
+                                      Returns an empty dict if no tables are found or an error occurs.
+        """
+        logging.info("Attempting to retrieve full database schema.")
+        full_schema: Dict[str, Dict[str, str]] = {}
+        try:
+            table_names = self.list_tables()
+            if not table_names:
+                logging.warning("No tables found in the database.")
+                return {}
+
+            logging.debug(f"Found tables: {table_names}. Fetching schema for each.")
+            for table_name in table_names:
+                # Reuse the existing method to get schema for each table
+                table_schema = self.get_table_schema(table_name)
+                # get_table_schema already handles logging for individual tables
+                full_schema[table_name] = table_schema
+
+            logging.info(f"Successfully retrieved schema for {len(full_schema)} table(s).")
+            return full_schema
+
+        except Exception as e:
+            # Catch potential errors during the process, although underlying methods handle most SQLite errors
+            logging.error(f"An unexpected error occurred while retrieving the full schema: {e}")
+            # Depending on desired behavior, you might return partial schema or empty
+            return full_schema # Return whatever was gathered so far, or {}
+
     def _get_full_schema_description(self) -> str:
-        """Helper to generate a schema description string for the LLM."""
+        """Helper to generate a schema description string for the LLM.
+        """
         schema_parts = []
         try:
             tables = self.list_tables()

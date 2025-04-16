@@ -2,24 +2,48 @@
 import argparse
 import os
 from lib.sqlite_agent import SQLiteAgent
-from lib.colors import Color # Assuming you have your color library :)
+from lib.colors import Color
+from typing import Dict, Type # Added Type for type hinting the Color class
 
-# Let's imagine you have a color library like this:
-# lib/colors.py
-# class Color:
-#     RED = '\033[91m'
-#     GREEN = '\033[92m'
-#     YELLOW = '\033[93m'
-#     BLUE = '\033[94m'
-#     BOLD = '\033[1m'
-#     UNDERLINE = '\033[4m'
-#     END = '\033[0m'
-#
-#     @staticmethod
-#     def red(text: str) -> str: return f"{Color.RED}{text}{Color.END}"
-#     # ... other colors ...
-#     @staticmethod
-#     def bold(text: str) -> str: return f"{Color.BOLD}{text}{Color.END}"
+
+# --- Add the Schema Visualizer Function ---
+def print_database_schema(schema_data: Dict[str, Dict[str, str]], color_lib: Type[Color]):
+    """Takes the full schema data and prints a colorful representation."""
+    print(f"\n{color_lib.bold(color_lib.magenta('---  DATABASE SCHEMA ---'))} 🏛️")
+
+    if not schema_data:
+        print(f"  {color_lib.yellow('No tables found or schema could not be retrieved.')}")
+        print(f"{color_lib.magenta('-------------------------')}\n")
+        return
+
+    for i, (table_name, columns) in enumerate(schema_data.items()):
+        if i > 0:
+            print("") # Add a blank line between tables
+
+        print(f"  {color_lib.bold(color_lib.blue(f'Table: {table_name}'))}")
+
+        if not columns:
+            print(f"    {color_lib.grey('(No columns found or schema error for this table)')}")
+            continue
+
+        # Calculate padding for alignment within this table
+        try:
+            # Added check in case columns dict is empty but wasn't caught above
+            max_name_len = max(len(name) for name in columns.keys()) if columns else 10
+            max_type_len = max(len(ctype) for ctype in columns.values()) if columns else 10
+        except ValueError: # Handles potential issues if column names/types are weird
+             max_name_len = 10
+             max_type_len = 10
+
+
+        header = f"    {color_lib.underline(f'{'Column Name':<{max_name_len}}  {'Type':<{max_type_len}}')}"
+        print(header)
+
+        for col_name, col_type in columns.items():
+            print(f"    {col_name:<{max_name_len}}  {color_lib.cyan(col_type):<{max_type_len + len(color_lib.cyan('')) + len(color_lib.END)}}") # Adjust for color codes length
+
+    print(f"{color_lib.magenta('-------------------------')}\n")
+
 
 def main():
     parser = argparse.ArgumentParser(description="Interact with a SQLite Database using an Agent. 🕵️‍♂️")
@@ -36,6 +60,9 @@ def main():
     # Show Schema
     parser_schema = subparsers.add_parser("show-schema", help="Show the schema for a specific table. 🧬")
     parser_schema.add_argument("table_name", help="The name of the table.")
+
+    # --- Add New Command for Full Schema ---
+    parser_full_schema = subparsers.add_parser("show-full-schema", help="Display the schema for ALL tables. 🏛️")
 
     # Execute SQL
     parser_sql = subparsers.add_parser("exec-sql", help="Execute a raw SQL query. ⚡️")
@@ -74,6 +101,11 @@ def main():
             else:
                 print(f"  {Color.yellow('Could not retrieve schema or table is empty/invalid.')}")
 
+  # --- Handle New Command ---
+        elif args.command == "show-full-schema":
+            full_schema_data = agent.get_full_schema()
+            # Pass the Color class itself to the function
+            print_database_schema(full_schema_data, Color)
 
         elif args.command == "exec-sql":
             print(f"{Color.yellow('Executing SQL:')} {args.sql_query}")
@@ -120,5 +152,5 @@ def main():
             traceback.print_exc() # Show stack trace if in debug mode
 
 if __name__ == "__main__":
-    print(Color.blue("Ciao. Qui color funge."))
+    #print(Color.blue("Ciao. Qui color funge."))
     main()
