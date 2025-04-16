@@ -1,3 +1,10 @@
+## About
+
+Trixie, of course, is a Google Sheet agent. It allows you to see some of your Google Sheets and have a smart prompt on a
+per-trix basis (see `etc/` for an inspiration).
+
+It's a bit hard to set up as you need to create a Service Account, download the key, give it as ENV to the script, and
+share the Sheets with this SA. However, this set up is pretty easy to test locally... until it works.
 
 ## INSTALL (wip)
 

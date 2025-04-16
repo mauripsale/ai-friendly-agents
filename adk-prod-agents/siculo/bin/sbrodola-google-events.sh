@@ -112,8 +112,8 @@ INSERT INTO people (name, email, role) VALUES
 ('Tim O''Reilly', 'tim@oreilly.com', 'OTHER'),
 ('Ada Colau', 'ada.colau@bcn.cat', 'OTHER'),
 ('Riccardo Carlesso', 'ricc@google.com', 'DA'),
-('Dan Aschwanden', 'danpvt@google.com', 'PSO'),
-('Dan Strebel', 'pvtdan@google.com', 'SA'),
+('Daniel Aschwanden', 'ozzypvt@google.com', 'PSO'),
+('Daniel Strebel', 'pvttutch@google.com', 'SA'),
 ('Mystery Guest', 'mystery@example.com', NULL);
 
 -- Populate events table
@@ -137,9 +137,14 @@ INSERT INTO registrations (person_id, event_id, registration_status) VALUES
 (5, 3, 'CONFIRMED'), (5, 6, 'WAITLISTED'),
 (6, 3, 'CONFIRMED'),
 (7, 1, 'CONFIRMED'), (7, 4, 'CONFIRMED'),
+
+(10, 7, 'CONFIRMED'), (12, 7, 'CONFIRMED'), -- Ricc and Dan (the second dan is below)
+(10, 8, 'CONFIRMED'), (11, 8, 'CONFIRMED'), (12, 8, 'CONFIRMED'), -- Ricc and Dan and Dan
+
 (8, 5, 'ATTENDED'),
 (10, 1, 'CONFIRMED'), (10, 2, 'CANCELLED'), (10, 3, 'CONFIRMED'), (10, 4, 'CONFIRMED'), (10, 5, 'WAITLISTED'),
 (11, 7, 'ATTENDED');
+-- Dan Ricc and Dan are 10,11,12 and should go to event GDG Zurich (7) and DevFaecht (8)
 
 -- ========================================================================== --
 -- EXAMPLE UPDATES (to test triggers)

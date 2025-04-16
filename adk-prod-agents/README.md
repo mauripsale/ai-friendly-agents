@@ -5,7 +5,8 @@ My friendly agents:
 * 🟡 **Claudia Gugghelheim** ☁️ (Google Cloud agent). WIP Inspired by Cloud: 🔴🔵🟢🟡
 * 🟢 **Codie Smulders** 🐍  (code agent). For now, just `built_in_code_execution` from ADK.
 * 🟢 **Larry** 🧢  (cURLer / Google). For the moment, just googling is implemented.
-* 🔶 **Trixie** 📗 (Beatrix “Trixie” Tabularasa) WIP
+* 🟢 **Siculo** 🧢  (SQL executor and visualizator). Just launched its **v1.0**. fun, safe, and smart!
+* 🔶 **Trixie** 📗 (Beatrix “Trixie” Tabularasa) WIP. A Google Sheet agent.
 
 More: go/ricc-personal-agents
 

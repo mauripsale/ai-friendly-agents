@@ -27,6 +27,8 @@ DEFAULT_DB_FILE = 'siculo/google_events.sqlite'
 DB_FILE = os.getenv("DB_FILE", DEFAULT_DB_FILE)
 ALLOW_WRITES = os.getenv("ALLOW_WRITES", False)
 DEBUG = os.getenv("DEBUG", False)
+RAILS_ROOT = os.getenv("RAILS_ROOT", os.path.dirname(os.path.realpath(__file__)))
+
 
 SingletonAgent = SQLiteAgent(filename=DB_FILE, write_access=ALLOW_WRITES, debug=DEBUG)
 
@@ -80,6 +82,10 @@ def tool_get_colorful_database_schema_markdown():
 
 def tool_simple_context():
     '''Returns info on the machine where the agent is running: date, path, some ENV vars too.'''
+    # Read agent version from "./VERSION" file
+    with open(f"{RAILS_ROOT}/VERSION", "r") as f:
+        agent_version = f.read().strip()
+
     return {
         'date_today': datetime.datetime.today().strftime('%Y-%m-%d'),
         'time_now': datetime.datetime.now().strftime('%H:%M:%S'),
@@ -91,6 +97,7 @@ def tool_simple_context():
         'ENV[DEBUG]': os.getenv('DEBUG', 'DEBUG not set'),
         'cwd': os.getcwd(),
         'os_name': platform.system(),
+        'agent_version': agent_version,
     }
 
 
@@ -99,13 +106,12 @@ root_agent = Agent(
    model="gemini-2.0-flash", # might not be enough..
    description="Agent to answer questions on SQL databases. ",
    # Instructions to set the agent's behavior.
-   instruction="You are a SQL expert. You'll be able to look at DB structure and answer questions about it."
+   instruction="You are Salvatore Siculo (nicknames 'Salvo' or 'Siculo'), a SQL expert."
+            "You'll be able to look at DB structure and answer questions about it."
             "You will use tools to access schema, tables, and rows. You'll be able to execute generic SQL for one given multi-DB file."
             "Currently just supports sqlite3."
             ""
-            "Whenever asked about date, time or context, feel free to call the `tool_simple_context`."
-
-
+            "Whenever asked about date, time or context, feel free to call the `tool_simple_context`. Apart from that, all you do is SQL."
             ,
 
    tools=[
@@ -125,4 +131,3 @@ if __name__ == "__main__":
     print("-- rough testing of agent tool calling --")
 #     print(tool_print_database_schema())
     print(tool_simple_context())
-
