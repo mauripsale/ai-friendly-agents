@@ -40,6 +40,9 @@ If you have only GCP access and no Claude or ChatGPT, try this:
 * change `MODEL_GPT_4O` in `constants.py` to point to Gemini instead.
 * change `MODEL_CLAUDE_SONNET`  in `constants.py` to point to Gemini instead.
 
+Note the code complains for missing API KEYs, so you just have to have some string in the env variables.
+Leaving `OPENAI_API_KEY='YOUR_OPENAI_API_KEY'` and `ANTHROPIC_API_KEY='YOUR_ANTHROPIC_API_KEY'` will do.
+
 
 ## Example
 ![alt text](image.png)
