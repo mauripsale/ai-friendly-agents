@@ -33,7 +33,13 @@ Available recipes:
 
 ## TODOs
 1. TODO(ricc): when it works, move all the (1) to `lib/` so all testable endpoints become obvious (in `.`).
-2. Create an alternative agent to OpenAI and Claude for people who dont have that account.
+2. Create an alternative agent to OpenAI and Claude for people who dont have that account. Anyway:
+
+If you have only GCP access and no Claude or ChatGPT, try this:
+
+* change `MODEL_GPT_4O` in `constants.py` to point to Gemini instead.
+* change `MODEL_CLAUDE_SONNET`  in `constants.py` to point to Gemini instead.
+
 
 ## Example
 ![alt text](image.png)
