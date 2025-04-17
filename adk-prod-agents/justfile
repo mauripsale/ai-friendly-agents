@@ -1,7 +1,14 @@
 
 # cd larry/ && touch __init__.py agent.py
+
+
+# Shows justfile targets
 list:
     just -l
+
+# Shows justfile code
+cat:
+    cat justfile
 
 # Web
 run-web:
@@ -19,3 +26,6 @@ run-trixie:
 
 run-sql-agent:
     adk run siculo/
+
+run-wikipedia-agent:
+    adk run vicky/

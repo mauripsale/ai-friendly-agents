@@ -7,6 +7,7 @@ My friendly agents:
 * 🟢 **Larry** 🧢  (cURLer / Google). For the moment, just googling is implemented.
 * 🟢 **Siculo** 🧢  (SQL executor and visualizator). Just launched its **v1.0**. fun, safe, and smart!
 * 🔶 **Trixie** 📗 (Beatrix “Trixie” Tabularasa) WIP. A Google Sheet agent.
+* 🔶 **Vicky** 🟡 (Wi “Trixie” Tabularasa) WIP. A Wikipedia curler on steroids.
 
 More: go/ricc-personal-agents
 

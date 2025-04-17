@@ -1,16 +1,13 @@
-from google.adk.agents import Agent
-
-#from .._common.tools.wikipedia_search import fetch_wikipedia_data
-#from .wiki_fetcher2 import fetch_wikipedia_data
-
 import requests
 from bs4 import BeautifulSoup
 import html2text
 from typing import Tuple, Optional
-
+import urllib.parse
+import re # Import regex for more robust image URL cleaning
+import traceback # For printing detailed errors
 
 # Corrected type hint: Tuple[Optional[str], Optional[str]]
-def tool_fetch_wikipedia_data(query_word: str, language: str = 'en') -> Tuple[Optional[str], Optional[str]]:
+def fetch_wikipedia_data(query_word: str, language: str = 'en') -> Tuple[Optional[str], Optional[str]]:
     """
     Fetches a Wikipedia page, converts its main content to Markdown,
     and finds the primary image URL.
@@ -27,11 +24,9 @@ def tool_fetch_wikipedia_data(query_word: str, language: str = 'en') -> Tuple[Op
     if not query_word:
         # Using print for simple logging in this script
         print("Error: Query word cannot be empty.")
-        #return None, None
-        return { "status": "error", "error_message": "Query word cannot be empty."}
+        return None, None
     if language not in ['en', 'de', 'fr', 'es', 'it', 'ja', 'zh']:
-        #language = 'en'
-        return { "status": "error", "error_message": f"Unsupported language: {language}"}
+        language = 'en'
 
     formatted_query = query_word[0].upper() + query_word[1:]
     formatted_query = formatted_query.replace(" ", "_")
@@ -228,26 +223,87 @@ def tool_fetch_wikipedia_data(query_word: str, language: str = 'en') -> Tuple[Op
         # Return None for potentially corrupted data if processing failed midway
 
     # Return the extracted markdown content and image URL (which could be None)
-    #return markdown_content, image_url
-    return { "status": "success",
-             "result": {
-                 "markdown_content": markdown_content,
-                 "image_url": image_url,
-             }}
+    return markdown_content, image_url
 
 
+# --- New Troubleshooting Function ---
+def troubleshoot_wiki_result(query_word: str, test_description: str):
+    """
+    Calls fetch_wikipedia_data and prints formatted results for testing.
 
-root_agent = Agent(
-    name="Vicky__WikipediaSearchAgent",
-    model="gemini-2.0-flash",
-    description=(
-        "Agent to fetch wikipedia pages and answer questions about them."
-    ),
-    instruction=(
-        "You are a helpful agent who can fetch Wikipedia pages, and extract import info from them."
-        " Use this emoji '🇼' when expressing a word, say you searched for Shark, then say '🇼 Shark'."
-        " When asked about the page in another language for a word, understand that the user might want you to translate it to the other language first."
-        # https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Corl0207_%2828225976491%29.jpg/330px-Corl0207_%2828225976491%29.jpg
-    ),
-    tools=[tool_fetch_wikipedia_data],
-)
+    Args:
+        query_word: The word/phrase to fetch from Wikipedia.
+        test_description: A string describing the test case.
+    """
+    print(f"\n\n--- Test Case: {test_description} ('{query_word}') ---")
+    markdown, img_url = fetch_wikipedia_data(query_word)
+
+    print("\n--- Results ---")
+    if img_url:
+        # Using emojis for fun visual cues! ✅
+        print(f"✅ Image URL: {img_url}")
+    else:
+        page_exists_check = markdown is not None
+        if page_exists_check:
+             # Using emojis for fun visual cues! ❓
+             print("❓ Image URL: Not Found on page (or failed extraction)")
+        else:
+             # Using emojis for fun visual cues! ❓
+             print("❓ Image URL: Not Found (Page likely missing, disambiguation, or processing failed)")
+
+    if markdown:
+        # Using emojis for fun visual cues! ✅
+        print(f"✅ Markdown Content (First 500 chars):\n{markdown[:500].strip()}...")
+        # --- Optional File Saving ---
+        # Uncomment the block below to save the full markdown content to a file
+        # try:
+        #     filename_base = query_word.replace(' ','_').replace('/','')
+        #     safe_filename = re.sub(r'[^\w\-_\. ]', '_', filename_base) + "_wiki.md"
+        #     with open(safe_filename, "w", encoding="utf-8") as f:
+        #         f.write(markdown)
+        #     # Using emojis for fun visual cues! 💾
+        #     print(f"💾 Full markdown saved to {safe_filename}")
+        # except IOError as e:
+        #     # Using emojis for fun visual cues! 🚫
+        #     print(f"🚫 Error saving markdown to file {safe_filename}: {e}")
+        # except Exception as e_save:
+        #     # Using emojis for fun visual cues! 🚫
+        #     print(f"🚫 Unexpected error saving file {safe_filename}: {e_save}")
+        # --- End Optional File Saving ---
+    else:
+        # Using emojis for fun visual cues! ❓
+        print("❓ Markdown Content: Not Generated (See logs above for potential reasons)")
+
+    # Print a separator line for better readability between test cases
+    print("-" * (len(f"--- Test Case: {test_description} ('{query_word}') ---") -2 )) # Match separator length
+
+
+# --- Main execution block (Refactored) ---
+if __name__ == "__main__":
+    # Define test cases as a list of tuples (query_word, description)
+    test_cases = [
+        ("shark", "Single simple word"),
+        ("Great white shark", "Multi-word phrase"),
+        #("Python", "Potential disambiguation/redirect"),
+        ("Platypus", "Animal with standard page"),
+        ("Zürich", "Name with non-ASCII character"),
+        #("Sun", "Common noun / celestial body"),
+        #("Mercury (planet)", "Page with parenthetical disambiguation"),
+        ("Albert Einstein", "Person name"),
+        #("Quantum mechanics", "Scientific concept"),
+        #("Wikipedia", "Meta example"),
+        #("This shouldn't exist", "Likely non-existent page (common placeholder)"),
+        ("POLA", "Riccardo knows this to be a 403 redirect."),
+        #("Apple", "Very common word with likely primary topic"),
+        #("Apple Inc.", "Specific company page"),
+        #("HTTP", "Acronym page") # Added acronym test
+    ]
+
+    # Iterate through the test cases and run the troubleshooting function
+    print("Starting Wikipedia Fetcher Troubleshooting...")
+    for word, description in test_cases:
+        troubleshoot_wiki_result(word, description)
+
+    print("\n\nTroubleshooting finished!")
+
+
