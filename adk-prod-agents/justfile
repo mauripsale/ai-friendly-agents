@@ -7,6 +7,7 @@ list:
 run-web:
     adk web
 web:
+    # RAILS_ROOT=`pwd`
     adk web
 
 # With generic key. Note I have to move the JSON_SHEET_FILE back one folder.

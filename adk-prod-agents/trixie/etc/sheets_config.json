@@ -22,5 +22,28 @@
       "relevant_columns": ["English", "German", "Italian"],
       "context": "Only italians will laugh at this",
       "access": "read-write"
+    },
+    {
+      "url": "https://docs.google.com/spreadsheets/d/1qPXrj4s6ojcBIHO8pugtUIhzuNEEbMjnheEbNuzmDC0/edit",
+      "sheet_id": "1qPXrj4s6ojcBIHO8pugtUIhzuNEEbMjnheEbNuzmDC0",
+      "tab": "DevFests",
+      "description": "GDG / DevFest events for 2025, concentrating on Italy ones the most.",
+      "relevant_columns": [
+        "event_name",
+        "city",
+        "country",
+        "date_start",
+        "date_end",
+        "event_year",
+        "cfp_link",
+        "website",
+        "organizers",
+        "expected_size",
+        "dow_start",
+        "dow_end",
+        "duration"
+      ],
+      "context": "These are public events co-sponsored by Google and ran by Communities. You can judge how big the event is from expected_size, and get some maths done for you under [ dow_start,dow_end, duration]. This contains ~30 events.",
+      "access": "read-write"
     }
 ]

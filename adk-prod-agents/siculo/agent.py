@@ -83,8 +83,14 @@ def tool_get_colorful_database_schema_markdown():
 def tool_simple_context():
     '''Returns info on the machine where the agent is running: date, path, some ENV vars too.'''
     # Read agent version from "./VERSION" file
-    with open(f"{RAILS_ROOT}/VERSION", "r") as f:
-        agent_version = f.read().strip()
+    print()
+    path_to_version_file = os.path.join(RAILS_ROOT, "VERSION")
+    if not os.path.exists(path_to_version_file):
+        agent_version = "VERSION file not found"
+    else:
+        with open(path_to_version_file, "r") as f:
+            agent_version = f.read().strip()
+
 
     return {
         'date_today': datetime.datetime.today().strftime('%Y-%m-%d'),
