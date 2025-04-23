@@ -1,3 +1,5 @@
+Self: https://github.com/palladius/ai-friendly-agents/
+
 ## Agents
 
 My friendly agents:
