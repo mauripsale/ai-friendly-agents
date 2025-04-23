@@ -33,7 +33,7 @@ Available recipes:
 
 ## TODOs
 1. TODO(ricc): when it works, move all the (1) to `lib/` so all testable endpoints become obvious (in `.`).
-2. Create an alternative agent to OpenAI and Claude for people who dont have that account. Anyway:
+2. Create an alternative agent to OpenAI and Claude for people who don't have that account. Anyway:
 
 If you have only GCP access and no Claude or ChatGPT, try this:
 
@@ -45,4 +45,5 @@ Leaving `OPENAI_API_KEY='YOUR_OPENAI_API_KEY'` and `ANTHROPIC_API_KEY='YOUR_ANTH
 
 
 ## Example
+
 ![alt text](image.png)

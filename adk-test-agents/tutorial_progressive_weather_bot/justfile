@@ -20,7 +20,7 @@ test-toolz:
     python toolz.py
 
 # S3.4 -- Interact with the Agent Team
-test-agent-interaction:
+test-3-4-agent-interaction:
     python sub_agents.py
 
 #  S4.3 -- Redefine Sub-Agents and Update Root Agent with output_key. Uses `s4_session_demo.py`

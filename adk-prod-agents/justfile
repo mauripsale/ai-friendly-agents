@@ -29,3 +29,9 @@ run-sql-agent:
 
 run-wikipedia-agent:
     adk run vicky/
+
+run-claudia-agent:
+    echo Try: Show me GCE VMs
+    adk run claudia/
+test-claudia-agent:
+    echo Show me GCE VMs | adk run claudia/
