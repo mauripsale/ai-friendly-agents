@@ -12,10 +12,10 @@ cat:
 
 # Web
 run-web:
-    adk web
+    adk web --port 8080
 web:
     # RAILS_ROOT=`pwd`
-    adk web
+    adk web --port 8080
 
 # With generic key. Note I have to move the JSON_SHEET_FILE back one folder.
 run-trixie:

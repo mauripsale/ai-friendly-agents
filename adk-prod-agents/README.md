@@ -4,8 +4,8 @@ Self: https://github.com/palladius/ai-friendly-agents/
 
 My friendly agents:
 
-* 🟡 **Claudia Gugghelheim** ☁️ (Google Cloud agent). WIP Inspired by Cloud: 🔴🔵🟢🟡
-* 🟢 **Codie Smulders** 🐍  (code agent). For now, just `built_in_code_execution` from ADK.
+* 🟢 **Claudia Gugghelheim** ☁️ (Google Cloud agent). Inspired by Cloud: 🔴🔵🟢🟡
+* 🟢 **Codie Smulders** 🐍 (code agent). For now, just `built_in_code_execution` from ADK.
 * 🟢 **Larry** 🧢  (cURLer / Google). For the moment, just googling is implemented.
 * 🟢 **Siculo** 🧢  (SQL executor and visualizator). Just launched its **v1.0**. fun, safe, and smart!
 * 🔶 **Trixie** 📗 (Beatrix “Trixie” Tabularasa) WIP. A Google Sheet agent.

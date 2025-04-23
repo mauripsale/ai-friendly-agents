@@ -4,10 +4,8 @@ import os
 import sys
 import subprocess
 
-#from .._common.tools.code_exec import execute
 DEFAULT_GOOGLE_CLOUD_PROJECT = 'palladius-genai'
 GOOGLE_CLOUD_PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT", DEFAULT_GOOGLE_CLOUD_PROJECT)
-#GOOGLE_APPLICATION_CREDENTIALS = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 AGENT_INSTRUCTIONS = '''
 You are able to invoke generic commands to ascertain current GCP status of the user.
@@ -37,13 +35,18 @@ Otherwise simply:
 * <RESOURCE_EMOJI> <RESOURCE_NAME>
 ```
 
+Refuse to execute blocking activities like `gcloud compute ssh VM` and similar.
+In that case, just explain this to the user, and give them the `quoted command` instead.
+
+If unsure of anything, you can call `google_search` to search the internet for answers, but use it as a last resort,
+for instance to help user troubleshoot their issues.
 '''
 
 if not GOOGLE_CLOUD_PROJECT:
    print("I can't run without a project id. Make sure to set GOOGLE_CLOUD_PROJECT in your .env or ENV vars.")
    exit(-1)
 
-def execute2(cmd: str, cwd: str = None):
+def execute_generic_command(cmd: str, cwd: str = None):
     '''Executes a generic command.'''
     print(f"🧑🏻‍💻🧑🏻‍💻🧑🏻‍💻 == execute(cmd = '{cmd}') == 🧑🏻‍💻🧑🏻‍💻🧑🏻‍💻", file=sys.stderr)
     if cwd:
@@ -65,13 +68,11 @@ def execute2(cmd: str, cwd: str = None):
                "stderr": result.stderr ,
                "returncode": result.returncode ,
                }
-    # else:
-    #    print(f"Executing generic command: {cmd}")
-    #    # TODO: Implement generic command execution here
 
 
 def execute_gcloud_command(gcloud_cmd: str, project_id: str = GOOGLE_CLOUD_PROJECT):
-   '''Executes a gcloud command.
+   '''Executes a gcloud command. the command NEEDS to start with `gcloud ` or it will fail.
+
 
    '''
    #cmd = gcloud_cmd.strip()
@@ -82,11 +83,11 @@ def execute_gcloud_command(gcloud_cmd: str, project_id: str = GOOGLE_CLOUD_PROJE
       # take from "gcloud blah blah" only "blah blah" (the payload) just to make asbolutely sure we dont execute some rm -rf
       gcloud_payload = cmd[len(strip_me):]
       print(f"1. Executing gcloud command with  gcloud_payload={gcloud_payload}", file=sys.stderr)
-      return execute2(f"gcloud --project '{project_id}' {gcloud_payload}")
+      return execute_generic_command(f"gcloud --project '{project_id}' {gcloud_payload}")
    else:
       #return { 'status': 'error', 'message': f'Invalid command: NOT gcloud. gcloud_cmd={gcloud_cmd}', 'original_cmd': gcloud_cmd }
       print(f"2. Maybe the cmd is ALREADY a payload so running anyway. gcloud_cmd={gcloud_cmd}", file=sys.stderr)
-      return execute2(f"gcloud --project '{project_id}' {gcloud_cmd}")
+      return execute_generic_command(f"gcloud --project '{project_id}' {gcloud_cmd}")
 
 
 root_agent = Agent(
@@ -95,17 +96,8 @@ root_agent = Agent(
    description="Agent to answer questions using about local gcloud infrastructure.",
    # Instructions to set the agent's behavior.
    instruction=AGENT_INSTRUCTIONS,
-   # ""
-   #    "You are able to invoke generic commands to ascertain current GCP status of the user."
-   #    "You will use `gcloud config list` to get current configuration an save it to agent's memory."
-   #    "Answer configuration data in backticks (eg, `foobar`) for markdown clarity."
-   #    "Use the following emojis when listing resources:"
-   #    " - 🏃 for Cloud Run services"
-   #    " - 🚀 for AppEngine services"
-   #    " - 🛢 for generic SQL instances (but use a dolphin emoji for MySQL and a elephant for PostgreS)"
-   #    " - 🏗️ for Cloud Build targets"
-   #    " - 👥 for IAM roles"
-   #    ""
-   #    "If user is undecided, propose to get GCE, SQL and Cloud Run instances and present them all together."
-   tools=[execute_gcloud_command]
+   tools=[
+      execute_gcloud_command,
+      google_search
+      ]
 )
