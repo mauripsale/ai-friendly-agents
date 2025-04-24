@@ -63,6 +63,16 @@ push-sql-to-cloud-run:
     # adk deploy cloud_run siculo/ --region europe-west1 --help
     adk deploy cloud_run siculo/ --region europe-west1 --project ricc-genai --service_name siculo --with_ui
     # => https://siculo-794266741446.europe-west1.run.app
+    # Now you need to set ENV variables.
+
+push-larry-to-cloud-run:
+    adk deploy cloud_run larry/ --region europe-west1 --project ricc-genai --service_name adk-larry --with_ui --trace_to_cloud
+    gcloud --project ricc-genai run services add-iam-policy-binding adk-larry \
+        --member="user:ricc@google.com" \
+        --role="roles/run.invoker" --region europe-west1
+    gcloud --project ricc-genai run services add-iam-policy-binding adk-larry \
+        --member="user:strebel@google.com" \
+        --role="roles/run.invoker" --region europe-west1
 
 # [deploy] Deploys SQL Agent to Riccardo Cloud Run project
 iam-give-access-to-ricc:
