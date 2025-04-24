@@ -179,3 +179,4 @@ cython_debug/
 .echodo_history
 # Carlessian nonsense END
 .git-privatize
+.env.mac

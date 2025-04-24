@@ -1,10 +1,19 @@
 
-# cd larry/ && touch __init__.py agent.py
 
+set dotenv-load
+set export
+
+# works because of set export
+#PYTHONPATH := "./_common/lib:${PYTHONPATH}"
+FOO := '4523452345'
+#set list := 'listami'
+a := "hello"
 
 # Shows justfile targets
 list:
     just -l
+    @echo "PYTHONPATH=$PYTHONPATH"
+    @echo "FOO=$FOO"
 
 # Shows justfile code
 cat:
@@ -33,5 +42,26 @@ run-wikipedia-agent:
 run-claudia-agent:
     echo Try: Show me GCE VMs
     adk run claudia/
+
+run-serpeverde-agent:
+    PYTHONPATH="./_common/lib:$PYTHONPATH"
+    echo This is to test _common/ code
+    PYTHONPATH="./_common/lib:$PYTHONPATH" adk run serpeverde/
+
 test-claudia-agent:
     echo Show me GCE VMs | adk run claudia/
+
+find-python-and-env-files:
+    find . -name \*.py -o -name .env
+
+
+
+##############
+# Unit Tests
+##############
+
+test-common-lib-serper-tools:
+    python -m unittest _common.lib.serper_tools_test
+
+test: test-common-lib-serper-tools
+    echo Testing ALL

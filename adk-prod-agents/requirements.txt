@@ -1,0 +1,5 @@
+# Add deps for ADK
+google-adk
+litellm
+# For Serpeverde (Serper API)
+serpapi

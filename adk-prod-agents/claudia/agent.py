@@ -4,6 +4,10 @@ import os
 import sys
 import subprocess
 
+#common_lib_path = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..', '..', '_common', 'lib'))
+# from _common
+#from common_tools import carlessian_google_search
+
 DEFAULT_GOOGLE_CLOUD_PROJECT = 'palladius-genai'
 GOOGLE_CLOUD_PROJECT = os.getenv("GOOGLE_CLOUD_PROJECT", DEFAULT_GOOGLE_CLOUD_PROJECT)
 
@@ -98,6 +102,7 @@ root_agent = Agent(
    instruction=AGENT_INSTRUCTIONS,
    tools=[
       execute_gcloud_command,
-      google_search
+      google_search,
+#      carlessian_google_search,
       ]
 )
