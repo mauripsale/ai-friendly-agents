@@ -358,7 +358,11 @@ class SQLiteAgent:
                 # Basic quoting for table names to handle spaces/keywords, escape quotes within
                 # NOTE: This is basic quoting, might not cover all edge cases.
                 # More robust parsing/quoting might be needed for complex names.
-                quoted_table_name = f'"{table_name.replace("\"", "\"\"")}"'
+
+                # when I push to CRun I get this:
+                # f-string expression part cannot include a backslash (sqlite_agent.py, line 361)
+                #quoted_table_name = f'"{table_name.replace("\"", "\"\"")}"'
+                quoted_table_name = f'"{table_name}"'
                 count_sql = f"SELECT COUNT(*) FROM {quoted_table_name};"
                 try:
                     # Use execute_sql as it handles connection and cursor
