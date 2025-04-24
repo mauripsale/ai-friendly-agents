@@ -16,12 +16,22 @@ There are many agents here, I'm providing some demo ideas
 5. In the UI ask the same, but then ask this:
 6. Ask: `Show me all DB schemas. For each DB table, generate a markdown table with column name and type. If it looks like a primary key, make it bold and underlined. If its a foreign key, make it italic.`
 
+Zurich🇨🇭
+
+* Any event happening this month?
+* Tell me all data around the GDG Cloud Zurich of this month.
+* Add a new GDG Cloud Zurich event for next month on the. 20 of may.
+* Add the 2 Daniels and Riccardo as registrars.
+* any other event in zurich?
+
 ## Larry 8/10 (easy)
 
 this is a very easy, ZERO-dependency agent, it just needs an API KEY or Vertex.
 This is a wrapper around Google Search, so you can ask anything.
 
 1. Ask: `show me weather forecast for mallorca next 7 days, and show me with emoji and day by day in tabular format`.
+
+2. Ask: `where is the GDG Cloud Zurich event of april?`
 
 There's little wow factor. The system just googles.
 

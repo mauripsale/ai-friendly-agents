@@ -3,3 +3,7 @@ google-adk
 litellm
 # For Serpeverde (Serper API)
 serpapi
+# For Vicky / Wikipedia
+requests
+beautifulsoup4
+html2text
