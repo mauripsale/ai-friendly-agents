@@ -41,7 +41,7 @@ CREATE TABLE people (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    role TEXT CHECK( role IN ('SWE', 'SRE', 'PM', 'PSO', 'SA', 'DA', 'RE', 'UX', 'OTHER') ),
+    role TEXT CHECK( role IN ('SWE', 'SRE', 'PM', 'PSO', 'SA', 'DA', 'RE', 'UX', 'GDE', 'OTHER') ),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

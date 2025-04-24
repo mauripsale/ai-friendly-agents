@@ -59,6 +59,7 @@ find-python-and-env-files:
 ##############
 # [deploy] Deploys SQL Agent to Riccardo Cloud Run project
 push-sql-to-cloud-run:
+    siculo/bin/create_sample_db.sh siculo/cloud_run_pushable_db.sqlite
     # adk deploy cloud_run siculo/ --region europe-west1 --help
     adk deploy cloud_run siculo/ --region europe-west1 --project ricc-genai --service_name siculo --with_ui
     # => https://siculo-794266741446.europe-west1.run.app
