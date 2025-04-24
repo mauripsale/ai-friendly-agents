@@ -54,7 +54,11 @@ test-claudia-agent:
 find-python-and-env-files:
     find . -name \*.py -o -name .env
 
-
+##############
+# Deployments
+##############
+push-sql-to-cloud-run:
+    adk deploy cloud_run siculo/ --region europe-west1
 
 ##############
 # Unit Tests

@@ -1,7 +1,10 @@
 
 I want to create a sqlite3 DB inspector. Then once it works, I want to extend to PG/MY and other DBs as well.
 
-note the agent is still TBD.
+Note the agent is still TBD.
+
+Self: https://github.com/palladius/ai-friendly-agents/tree/main/adk-prod-agents/siculo
+
 
 ## INSTALL
 
