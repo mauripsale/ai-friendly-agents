@@ -57,8 +57,32 @@ find-python-and-env-files:
 ##############
 # Deployments
 ##############
+# [deploy] Deploys SQL Agent to Riccardo Cloud Run project
 push-sql-to-cloud-run:
-    adk deploy cloud_run siculo/ --region europe-west1
+    # adk deploy cloud_run siculo/ --region europe-west1 --help
+    adk deploy cloud_run siculo/ --region europe-west1 --project ricc-genai --service_name siculo --with_ui
+    # => https://siculo-794266741446.europe-west1.run.app
+
+# [deploy] Deploys SQL Agent to Riccardo Cloud Run project
+iam-give-access-to-ricc:
+    gcloud --project ricc-genai  run services add-iam-policy-binding siculo \
+        --member="user:ricc@google.com" \
+        --role="roles/run.invoker" --region europe-west1
+    gcloud --project ricc-genai  run services add-iam-policy-binding siculo \
+        --member="user:strebel@google.com" \
+        --role="roles/run.invoker" --region europe-west1
+    # Note to self: This is failing with
+    #    ERROR: (gcloud.run.services.add-iam-policy-binding) FAILED_PRECONDITION: One or more users named in the policy do not belong to a permitted customer,
+    #           perhaps due to an organization policy.
+    # Most likely an internal Org Policy.
+    gcloud --project ricc-genai  run services add-iam-policy-binding siculo \
+        --member="user:palladiusbonton@gmail.com" \
+        --role="roles/run.invoker" --region europe-west1
+    echo We love our GDEs..
+    gcloud --project ricc-genai  run services add-iam-policy-binding siculo \
+        --member="user:maurizio.ipsale@gmail.com" \
+        --role="roles/run.invoker" --region europe-west1
+
 
 ##############
 # Unit Tests
