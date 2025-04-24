@@ -43,7 +43,7 @@
         "dow_end",
         "duration"
       ],
-      "context": "These are public events co-sponsored by Google and ran by Communities. You can judge how big the event is from expected_size, and get some maths done for you under [ dow_start,dow_end, duration]. This contains ~30 events.",
+      "context": "These are public events co-sponsored by Google and ran by Communities. You can judge how big the event is from expected_size, and get some maths done for you under [ dow_start, dow_end, duration]. This contains ~30 events.",
       "access": "read-write"
     }
 ]
