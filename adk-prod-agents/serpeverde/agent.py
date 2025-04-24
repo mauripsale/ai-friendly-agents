@@ -1,7 +1,17 @@
+'''This is a SERP serper.dev agent
+Needs SERP API KEY.
+
+This is also the first Carlessian agent which uses ./_common/lib/ stuff. I want to build a new universe where funCall
+is in a common place.
+PYTHONPATH="./_common/lib:$PYTHONPATH"
+
+'''
+
 from google.adk.agents import Agent
 from google.adk.tools import google_search  # Import the tool
 
 #from common_tools import carlessian_google_search, serp_search_flights
+# from _common.lib - needs
 from serper_tools import serp_google_search
 
 from google.adk.agents import Agent
