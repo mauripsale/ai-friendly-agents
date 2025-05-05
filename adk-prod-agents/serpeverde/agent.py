@@ -47,14 +47,22 @@ If you get inquiries about flights or travel, make sure to call `get_day_today` 
 root_agent = Agent(
    name="serpeverder__serper_client", # Larry
    model="gemini-2.0-flash", # Google AI Studio
-   description="Agent to answer questions using SERP API, mostly on Flights and Hotels and such.",
+   description="""Agent to answer questions using SERP API, mostly on Flights and Hotels and such.
+   Can also leverage Maps API to map Lat/Long to an actual place and address.
+
+   Since these API calls are VERY expensive, please let the user know before each call. If a call triggers multiple calls,
+   for instance "find the address for these 5 hotels", make it clear it costs 5 API calls and confirm with user before executing it.
+
+   """,
    instruction=SERPEVERDE_INSTRUCTIONS,
    # Add google_search tool to perform grounding with Google search.
    tools=[
       #carlessian_google_search,
       serpapi_search_flights,
       serpapi_search_hotels,
-      serpapi_google_search,
+      #serpapi_google_search,
+      # TODO - convert lat,long to address.
+      serpapi_google_maps,
       get_day_today,
       ]
 )

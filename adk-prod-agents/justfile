@@ -26,6 +26,10 @@ web:
     # RAILS_ROOT=`pwd`
     adk web --port 8080
 
+web-serpeverde:
+    @echo This enables Serpeverde common libraries and goes on port 8081.
+    PYTHONPATH="./_common/lib:$PYTHONPATH" adk web --port 8081
+
 # With generic key. Note I have to move the JSON_SHEET_FILE back one folder.
 run-trixie:
     GOOGLE_APPLICATION_CREDENTIALS="trixie/private/my-service-account-key.json" \

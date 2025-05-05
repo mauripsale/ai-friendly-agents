@@ -80,6 +80,38 @@ def serpapi_search_hotels(query_str: str, check_in_date: str, check_out_date: st
 
 
 
-def serpapi_google_search(q: str):
-    logging.warning(f"⚡🧙 serp_google_search for q='{q}'")
-    return f'{q} is so hot right now'
+# def serpapi_google_search(q: str):
+#     logging.warning(f"⚡🧙 serp_google_search for q='{q}'")
+#     return f'{q} is so hot right now'
+
+
+# Maps spec: https://serpapi.com/google-maps-api
+def serpapi_google_maps(query_str: str, latitude: str = '', longitude: str = ''):
+  '''Searches on Google Maps for a generic string.
+
+  Arguments:
+    * `query_str`: generic Google Maps query string. In case you want to know a hotel for which only Name and latitude and longitude is given,
+                   use hotel name for query_str. If no nam,e is given, just use something like "hotel near me". This will find the closest hotel close to the Latitude/Longitude provided.
+                   Same with other things, like "Airport near me" or "Restaurant near me".
+    * `latitude`: latitude (string like "-44.35453"). Defaults to NULL.
+    * `longitude`: longitude (string like "11.1253"). Defaults to NULL.
+  '''
+
+  ll = None
+  if latitude != '' and longitude != '':
+    ll = f"{latitude},{longitude},14z"
+#  else:
+#    ll = None
+
+  params = {
+    "engine": "google_maps",
+    "api_key": api_key,
+    "q": query_str,
+    "ll": ll,
+    #"ll": "@40.7455096,-74.0083012,14z",
+  }
+
+  search = GoogleSearch(params)
+  results = search.get_dict()
+  return results
+

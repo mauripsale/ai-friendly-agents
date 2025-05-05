@@ -5,7 +5,7 @@ There are a number of API out there with a decent free usage to test Google APIs
 
 
 * https://serper.dev/
-* https://serpapi.com/
+* https://serpapi.com/ # Working now.
 *  sth . io
 
 ## INSTALL
@@ -19,8 +19,14 @@ PYTHONPATH="./_common/lib:$PYTHONPATH" adk run serpeverde/
 
 You need to explicitly add the `_common/lib/` to the `PYTHONPATH` for the code to find common API code. This will be fixed in a future release.
 
+## Getting a Key
 
-## serper.dev
+1. Sign up to https://serpapi.com
+2. Get an API Key.
+3. Add it to your `.env` as `SERPAPI_COM_API_KEY=...`
+4. Try running the agent and asking for a flight or hotel.
+
+## serper.dev (not implemented yet)
 
 No python gem needed.
 sample python code: https://serper.dev/playground
@@ -57,7 +63,7 @@ API Docs: https://serpapi.com/search-api
 from serpapi import GoogleSearch
 
 params = {
-  "api_key": "YOUR_KEY_HERE",
+  "api_key": "YOUR_KEY_HERE", # ENV[SERPAPI_COM_API_KEY]
   "engine": "google_flights",
   "hl": "en",
   "gl": "us",
