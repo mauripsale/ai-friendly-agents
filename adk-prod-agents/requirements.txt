@@ -1,9 +1,13 @@
 # Add deps for ADK
 google-adk
 litellm
-# For Serpeverde (Serper API)
-serpapi
 # For Vicky / Wikipedia
 requests
 beautifulsoup4
 html2text
+
+# For Serpeverde (Serper API)
+# 1. New API!
+#serpapi
+# 2. Old API - serpapi.com - "from serpapi import GoogleSearch" needs this (strange but true)
+google-search-results

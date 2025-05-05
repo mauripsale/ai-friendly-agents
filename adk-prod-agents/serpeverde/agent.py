@@ -12,6 +12,8 @@ from google.adk.tools import google_search  # Import the tool
 import os
 import sys
 import logging
+#from serpapi import GoogleSearch
+
 
 # Calculate the path to _common/lib relative to this script
 # sys.argv[0] is the script path
@@ -29,7 +31,7 @@ if common_lib_path not in sys.path:
 #from common_tools import carlessian_google_search, serp_search_flights
 # from _common.lib - needs
 #from serper_tools import serp_google_search
-from common_serp_tools import serp_google_search, serp_search_flights
+from common_serpapi_tools import * # serpapi_google_search, serpapi_search_flights
 from common_time_tools import get_day_today
 
 from google.adk.agents import Agent
@@ -50,8 +52,9 @@ root_agent = Agent(
    # Add google_search tool to perform grounding with Google search.
    tools=[
       #carlessian_google_search,
-      serp_search_flights,
-      serp_google_search,
+      serpapi_search_flights,
+      serpapi_search_hotels,
+      serpapi_google_search,
       get_day_today,
       ]
 )

@@ -44,8 +44,8 @@ run-claudia-agent:
     adk run claudia/
 
 run-serpeverde-agent:
-    PYTHONPATH="./_common/lib:$PYTHONPATH"
-    echo This is to test _common/ code
+    @#PYTHONPATH="./_common/lib:$PYTHONPATH"
+    @#echo This is to test _common/ code
     PYTHONPATH="./_common/lib:$PYTHONPATH" adk run serpeverde/
 
 test-claudia-agent:
