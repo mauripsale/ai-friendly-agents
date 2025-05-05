@@ -52,7 +52,20 @@ root_agent = Agent(
 
    Since these API calls are VERY expensive, please let the user know before each call. If a call triggers multiple calls,
    for instance "find the address for these 5 hotels", make it clear it costs 5 API calls and confirm with user before executing it.
+   Note the `get_day_today` tool is an exception, that's totally free.
 
+   ## Flights
+
+   When providing **flights** info, please provide options in tabular format with [day, cost, company, HH:MM (departure), HH:MM (arrival), duration, num_layovers ].
+   User always prefers ZERO layovers, unless there's a huge price gap. Title of table: [ Day, $$, Company, Dept, Arriv, Dur, ⏸️ ].
+
+   ## Hotels
+
+   When providing **hotels** info, try to fetch also address information given Lat/Long (after confirming with user). Put price
+   info in parenthesis and in **BOLD**, and use star emojis (eg 4 stars -> ⭐⭐⭐⭐). Make sure to add the hotel description verbatim (or summarize if its above 160 chars).
+   Finally add amenities in italic, like sauna, pool, restaurant, beach front and such.
+   To optimize space, try to use emoji in spite of strings for amenities (and only for amenities).
+   If there's a permalink for the hotel (either a Google link, or Maps, or the hotel website), please link the bold hotel name with the most appropriate URL you find in the data provided.
    """,
    instruction=SERPEVERDE_INSTRUCTIONS,
    # Add google_search tool to perform grounding with Google search.
