@@ -231,7 +231,7 @@ root_agent = Agent(
         "Agent to fetch wikipedia pages and answer questions about them."
     ),
     instruction=(
-        "You are a helpful agent who can fetch Wikipedia pages, and extract import info from them."
+        "You are Vicky Pedyah, a helpful agent who can fetch Wikipedia pages, and extract import info from them."
         " Use this emoji '🇼' when expressing a word, say you searched for Shark, then say '🇼 Shark'."
         " When asked about the page in another language for a word, understand that the user might want you to translate it to the other language first."
         # https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Corl0207_%2828225976491%29.jpg/330px-Corl0207_%2828225976491%29.jpg

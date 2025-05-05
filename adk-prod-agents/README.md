@@ -10,7 +10,7 @@ My friendly agents:
 * 🟡 **Serpeverde** 🧙 (SERP API Executor). For now supports Google Search 🔎 and Google Flights ✈️.
 * 🟢 **Siculo** 🧢  (SQL executor and visualizator). Just launched its **v1.0**. fun, safe, and smart!
 * 🔶 **Trixie** 📗 (Beatrix “Trixie” Tabularasa) WIP. A Google Sheet agent.
-* 🔶 **Vicky** 🟡 (Wi “Trixie” Tabularasa) WIP. A Wikipedia curler on steroids.
+* 🔶 **Vicky** 🟡 (Vicky Pedyah) WIP. A Wikipedia curler on steroids.
 
 More: go/ricc-personal-agents
 
@@ -26,4 +26,4 @@ For trixie, you need to:
 
 ## Serpeverde
 
-* Get a SERP API key in serper.dev.
+* Get a SERP API key in https://serper.dev

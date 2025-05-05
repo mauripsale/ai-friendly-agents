@@ -24,12 +24,12 @@ DEFAULT_DB_FILE = 'siculo/google_events.sqlite'
 
 
 # ENV -> vars
-DB_FILE = os.getenv("DB_FILE", DEFAULT_DB_FILE)
-ALLOW_WRITES = os.getenv("ALLOW_WRITES", False)
-DEBUG = os.getenv("DEBUG", False)
+DB_FILE = os.getenv("SICULO_AGENT_DB_FILE", DEFAULT_DB_FILE)
+ALLOW_WRITES = os.getenv("SICULO_AGENT_ALLOW_WRITES", False)
+DEBUG = os.getenv("SICULO_AGENT_DEBUG", False)
 RAILS_ROOT = os.getenv("RAILS_ROOT", os.path.dirname(os.path.realpath(__file__)))
 
-
+print(f">>> DB_FILE={DB_FILE}")
 SingletonAgent = SQLiteAgent(filename=DB_FILE, write_access=ALLOW_WRITES, debug=DEBUG)
 
 # -- Tool part --
