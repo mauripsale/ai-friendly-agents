@@ -92,5 +92,5 @@ Possible answer:
 Yes, there is one DevFest in Switzerland listed:
 DevFest Zurich in Zurich, Switzerland. However, the listed date for this event is 2018-10-20, so it is not an upcoming event.
 
-7. Ask: `Which day of week was it, and whats the URL?`
+7. Ask: `Which day of week was it, and whats the URL of the website?`
 
