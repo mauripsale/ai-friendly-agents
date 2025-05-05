@@ -11,7 +11,7 @@ Self: https://github.com/palladius/ai-friendly-agents/tree/main/adk-prod-agents/
 Nothing to do, really :)
 
 1. Generate fake DB to test script: `just create-db`.
-2. Run tests: `just test`
+2. Run tests: `just test`. It creates a marvellous colorful listing of the DB.
 3. run main script (a swiss army knife to ask questions to a sqlite DB). `python main.py --help`.
     * Or simply `just run` for instant gratification:
 

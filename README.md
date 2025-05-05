@@ -13,8 +13,17 @@ Better samples can be found here: https://github.com/google/adk-samples
 # Install
 
 ```bash
+# 1. Clone and adapt env file
 git clone https://github.com/palladius/ai-friendly-agents/
 cp .env.dist .env
-# edit away
+# edit away .env with your info
+
+# 2. Install virtualenvenv
+python -m venv .venv
+source .venv/bin/activate
+
+# 3.
+cd adk-prod-agents/
+pip install -r requirements.txt
 ```
 
