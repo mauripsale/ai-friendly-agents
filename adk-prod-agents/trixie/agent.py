@@ -397,6 +397,8 @@ root_agent = Agent(
         # Removed the PIN logic as write access isn't implemented/scoped here
     ),
     tools=[
+        # The above code seems to be a comment in a Python script. It is not performing any specific action or
+        # functionality in the code.
         get_day_today,
         get_sheets,
         get_sheet_content_v2,

@@ -51,7 +51,7 @@ def tool_fetch_wikipedia_data(query_word: str, language: str = 'en', cache_local
     formatted_query = formatted_query.replace(" ", "_")
     # Ensure safe URL encoding for the path component
     wiki_url = f"https://{language}.wikipedia.org/wiki/{urllib.parse.quote(formatted_query)}"
-    print(f"Attempting to fetch: {wiki_url} in language '{language}'")
+    print(f"[📑 vicky 🇼] Attempting to fetch: '{wiki_url}' in language '{language}'")
 
     try:
         headers = {'User-Agent': 'MyWikiFetcherScript/1.2 (Python)'} # Incremented version

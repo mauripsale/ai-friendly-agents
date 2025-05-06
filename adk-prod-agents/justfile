@@ -43,6 +43,9 @@ run-sql-agent:
 run-wikipedia-agent:
     adk run vicky/
 
+run-alfred-agent:
+    adk run alfred/
+
 run-claudia-agent:
     echo Try: Show me GCE VMs
     adk run claudia/
@@ -53,6 +56,7 @@ run-serpeverde-agent:
     PYTHONPATH="./_common/lib:$PYTHONPATH" adk run serpeverde/
 
 test-claudia-agent:
+    echo Show me my Project Id | adk run claudia/
     echo Show me GCE VMs | adk run claudia/
 
 find-python-and-env-files:
