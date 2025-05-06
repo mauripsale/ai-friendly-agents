@@ -4,6 +4,7 @@ Self: https://github.com/palladius/ai-friendly-agents/
 
 My friendly agents:
 
+* 🟢 **Alfred Pennyless** 🦇 (Concierge, able to call other agents). Currently supports (and tested with): Claudia, Larry, Serpeverde, Siculo, Trixie, Vicky.
 * 🟢 **Claudia Gugghelheim** ☁️ (Google Cloud agent). Inspired by Cloud: 🔴🔵🟢🟡
 * 🟢 **Codie Smulders** 🐍 (code agent). For now, just `built_in_code_execution` from ADK.
 * 🔴 **Crudo** (Cloud Run agent). Coming soon.

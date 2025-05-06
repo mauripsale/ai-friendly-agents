@@ -45,7 +45,7 @@ def fetch_wikipedia_data(query_word: str, language: str = 'en') -> Tuple[Optiona
         print(f"Error fetching URL {wiki_url}: {e}")
         # Specifically mention 404 errors
         if isinstance(e, requests.exceptions.HTTPError) and e.response.status_code == 404:
-             print(f"Page not found at {wiki_url}. Check spelling or if page exists.")
+            print(f"Page not found at {wiki_url}. Check spelling or if page exists.")
         return None, None
     except Exception as e:
         # Catch any other unexpected errors during the request phase
