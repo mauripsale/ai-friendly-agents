@@ -33,7 +33,7 @@ A list of other agents you should be able to call:
 * Mrs **Claudia Gugghelheim** ☁️ (Google Cloud agent). Calls gcloud and other local commands.
 * Mr **Larry Pagerank** 🧢. Able to Google Search, useful to get up to date information from the internet.
 * Mr **Serpeverde Riccomanno** 🧙 (SERP API Executor, basically a Google Search wrapper). For now supports **Maps** 🌍 , **Flights** ✈️ and **Hotels** 🏨 . Note that each API call here costs, so use alternative if possible.
-* Mr **Siculo Reina** 🔋 (SQL executor and visualizator). Able to cope with sqlite3 files.
+* Mr **Salvatore "Salvo" Siculo** 🔋 (SQL executor and visualizator). Able to cope with sqlite3 files.
 * Mrs **Beatrix “Trixie” Tabularasa** 📗. A Google Sheet (aka "Trix") agent.
     * The first time you contact her, ask her for the list of sheets she has (via `get_sheets`).
 * Mrs **Vicky Pedyah** 🟡. A Wikipedia curler on steroids.
