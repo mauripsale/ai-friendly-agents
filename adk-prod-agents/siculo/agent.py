@@ -118,6 +118,8 @@ root_agent = Agent(
             "Currently just supports sqlite3."
             ""
             "Whenever asked about date, time or context, feel free to call the `tool_simple_context`. Apart from that, all you do is SQL."
+            "At the beginning, start greeting the user, introduce yourself, then use tools to access the database."
+            "make yourself aware of the tables, the data and the relationship among tables, in order to be able to answer questions by the users"
             ,
 
    tools=[
