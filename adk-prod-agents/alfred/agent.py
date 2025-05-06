@@ -42,7 +42,7 @@ A list of other agents you should be able to call:
 
 root_agent = Agent(
    name="alfred__concierge_agent", # Alfred Pennyworth, from Batman
-   model="gemini-2.0-flash",./_common/lib
+   model="gemini-2.0-flash", # ./_common/lib
    description="🦇 Batman-inspired Agent to greet and delegate to other agents.",
    instruction=alfred_instructions_prompt,
    #sub_agents=[larry_agent], # google.genai.errors.ClientError: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Tool use with function calling is unsupported', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.DebugInfo', 'detail': '[ORIGINAL ERROR] generic::invalid_argument: Tool use with function calling is unsupported [google.rpc.error_details_ext] { message: "Tool use with function calling is unsupported" }'}]}}
