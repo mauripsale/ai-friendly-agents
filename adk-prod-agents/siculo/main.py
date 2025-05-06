@@ -50,13 +50,18 @@ def main():
                 print(f"- {table}")
 
         elif args.command == "show-schema":
+            # Shows schema for JUST one table.
             schema = agent.get_table_schema(args.table_name)
             print(f"{Color.bold(f'Schema for table:')} {Color.blue(args.table_name)}")
             if schema:
                 # Find max length for alignment
                 max_name_len = max(len(name) for name in schema.keys())
                 max_type_len = max(len(type) for type in schema.values())
-                print(f"  {Color.underline(f'{'Column Name':<{max_name_len}}  {'Type':<{max_type_len}}')}")
+                #print(f"schema: {schema}")
+                padded_col_name = f"{'Column Name':<{max_name_len}}"
+                padded_col_type = f"{'Type':<{max_type_len}}"
+
+                print(f"  {Color.underline(padded_col_name)}  {Color.underline(padded_col_type)}")
                 for name, type in schema.items():
                     print(f"  {name:<{max_name_len}}  {type:<{max_type_len}}")
             else:
