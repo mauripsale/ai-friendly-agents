@@ -1,14 +1,13 @@
+This agent allows you to call SERP APIs to basically wrap Google Search into meticulous JSON for various services.
 
-## Search API - so many options!
+At the moment these services are implemented:
 
-There are a number of API out there with a decent free usage to test Google APIs.
+* **Google flights** (only search, not booking, and only return flights are supported).
+* **GOogle Hotels**. Allows to find every info about hotels except address, but has lat/long
+* **GOogle Maps**. Allows to map lat/long into a real address, and allows for random proximity queries like "Hotel near
+  Times Square NYC" or "Ryokan in Takayama".
 
-
-* https://serper.dev/
-* https://serpapi.com/ # Working now.
-* https://serply.io/ maybe?
-*  Note to self: Crew.ai already coded this, [seemingly](https://docs.crewai.com/tools/serperdevtool).
-
+These queries are now implemented through `serpapi.com`  APIs since they seem richer than other options.
 
 ## INSTALL
 
@@ -73,7 +72,19 @@ See also hotels in Modena:
 
 ![hotels in modena](image-1.png)
 
-## serper.dev (not implemented yet)
+## Search API - so many options!
+
+There are a number of API out there with a decent free usage to test Google APIs.
+
+
+* https://serper.dev/
+* https://serpapi.com/ # Working now.
+* https://serply.io/ maybe?
+*  Note to self: Crew.ai already coded this, [seemingly](https://docs.crewai.com/tools/serperdevtool).
+
+
+
+### serper.dev (not implemented yet)
 
 No python gem needed.
 sample python code: https://serper.dev/playground
@@ -97,7 +108,7 @@ response = requests.request("POST", url, headers=headers, data=payload)
 print(response.text)
 ```
 
-## serpapi.com (implemented)
+### serpapi.com (implemented)
 
 Gem needed: https://pypi.org/project/serpapi/ (new)
 Gem old: https://github.com/serpapi/google-search-results-python
