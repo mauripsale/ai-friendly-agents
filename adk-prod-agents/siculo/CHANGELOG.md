@@ -1,3 +1,4 @@
+20250506 v1.2 Added 3rd table to `my_test_db.sqlite`
 20250416 v1.1 tool_simple_context added VERSION to it thanks to RAILS_ROOT ;)
 20250416 v1.0 The agent officially works!
 20250416 v0.3 Adding markdown coloring.

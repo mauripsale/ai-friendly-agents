@@ -48,3 +48,10 @@ Basic functionality is there. Some nice touch I could add:
 | sku | <span style="color:#4DD0E1">TEXT</span> |
 | description | <span style="color:#4DD0E1">TEXT</span> |
 | price | <span style="color:#4DD0E1">REAL</span> |
+
+## Sample screenshots from my_test_db.sqlite
+
+Here's the DB schema dump in elegant markdown for `my_test_db.sqlite`:
+
+
+![schema dump for my_test_db.sqlite](image-2.png)
