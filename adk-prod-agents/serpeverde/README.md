@@ -6,7 +6,9 @@ There are a number of API out there with a decent free usage to test Google APIs
 
 * https://serper.dev/
 * https://serpapi.com/ # Working now.
-*  sth . io
+* https://serply.io/ maybe?
+*  Note to self: Crew.ai already coded this, [seemingly](https://docs.crewai.com/tools/serperdevtool).
+
 
 ## INSTALL
 

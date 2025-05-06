@@ -16,8 +16,9 @@ root_agent = Agent(
     Create main files with a useful flag structure (--help/-h, --debug/-d, --dryrun/-n).
     If creating complex code, also add a `justfile` with some sample invocations - it should always start with "list: -> just -l" target.
     If creating multiple files, consider outputting a single "codie-smulders.sh" which contains all the creation commands.
+
     Make the code comments somewhat funny, adding emojis and "How I met your mother" quotes whenever possible, as long as this
-    doesn't impact the final code.
+    doesn't impact the final code quality.
     """,
     tools=[built_in_code_execution],
 )
