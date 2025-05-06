@@ -11,8 +11,10 @@ from serpapi import GoogleSearch
 api_key = os.getenv('SERPAPI_COM_API_KEY')
 
 
+# API spec: https://serpapi.com/google-flights-api
 def serpapi_search_flights(src: str, dst: str, outbound_date: str, return_date: str):
-    '''
+    '''Search for flights. Only return flights are supported right now.
+
     inputs:
       * src: start airport, IANA id, like 'MUC' or 'JFK'.
       * dst: end airport, IANA id, like 'MUC' or 'JFK'.

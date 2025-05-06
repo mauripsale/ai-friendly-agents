@@ -2,10 +2,10 @@ This agent allows you to call SERP APIs to basically wrap Google Search into met
 
 At the moment these services are implemented:
 
-* **Google flights** (only search, not booking, and only return flights are supported).
-* **GOogle Hotels**. Allows to find every info about hotels except address, but has lat/long
+* **Google flights** (only search, not booking, and only return flights are supported). [API Spec](https://serpapi.com/google-flights-api)
+* **GOogle Hotels**. Allows to find every info about hotels except address, but has lat/long. [API Spec](https://serpapi.com/google-hotels-api)
 * **GOogle Maps**. Allows to map lat/long into a real address, and allows for random proximity queries like "Hotel near
-  Times Square NYC" or "Ryokan in Takayama".
+  Times Square NYC" or "Ryokan in Takayama". [API Spec](https://serpapi.com/google-maps-api).
 
 These queries are now implemented through `serpapi.com`  APIs since they seem richer than other options.
 
