@@ -7,8 +7,6 @@ My friendly agents:
 * 🟢 **Alfred Pennyless** 🦇 (Concierge, able to call other agents). Currently supports (and tested with): Claudia, Larry, Serpeverde, Siculo, Trixie, Vicky.
 * 🟢 **Claudia Gugghelheim** ☁️ (Google Cloud agent). Inspired by Cloud: 🔴🔵🟢🟡
 * 🟢 **Codie Smulders** 🐍 (code agent). For now, just `built_in_code_execution` from ADK.
-* 🔴 **Crudo** (Cloud Run agent). Coming soon.
-* 🔴 **Gitti** (`git` agent). Tells you things like "were you drunk when you pushed the latest commit?`. Coming soon.
 * 🟢 **Larry** 🧢  (cURLer / Google). For the moment, just googling 🔎 is implemented.
 * 🟢 **Serpeverde** 🧙 (SERP API Executor, basically a Google Search wrapper). For now supports **Maps** 🌍 , **Flights** ✈️ and **Hotels** 🏨 .
   Coming soon: Search 🔎 (for the moment, ask Larry :P)
@@ -16,7 +14,15 @@ My friendly agents:
 * 🔶 **Trixie** 📗 (Beatrix “Trixie” Tabularasa) WIP. A Google Sheet agent.
 * 🔶 **Vicky** 🟡 (Vicky Pedyah) WIP. A Wikipedia curler on steroids.
 
+
+![A group of robotic super friends who are LLM agents. They're dressed as super heroes. Very colorful, and they integrate with each other. they rensemble DC Leage of Super Friends](super-friends.png)
+
 More: go/ricc-personal-agents
+
+Coming soon:
+
+* 🔴 **Crudo** (Cloud Run agent). Coming soon.
+* 🔴 **Gitti** (`git` agent). Tells you things like "were you drunk when you pushed the latest commit?`. Coming soon.
 
 ## Notes on installation
 

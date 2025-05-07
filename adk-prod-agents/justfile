@@ -168,7 +168,23 @@ deploy-siculo:
 # I've tried it with expr 3 - doesnt work
 deploy-trixie:
     ./deploy-agent.sh trixie
-# I've tried it with expr 1 ..
+# I've tried it with expr 1 .. and IT WORKS!
 deploy-vicky:
     ./deploy-agent.sh vicky
+#  works for ricc, not for strebel.
+deploy-larry:
+    ./deploy-agent.sh larry
+# broken?
+deploy-claudia:
+    ./deploy-agent.sh claudia
+# broken
+deploy-serpeverde:
+    ./deploy-agent.sh serpeverde
+# WIP
+deploy-codie:
+    ./deploy-agent.sh codie
 
+
+google-com-magic-commands:
+    gcloud beta iap web get-iam-policy   --resource-type=cloud-run   --service=adk-larry   --region=europe-west1   --format=yaml | tee pvt/larry-iap-policy.yaml
+    gcloud beta iap web get-iam-policy   --resource-type=cloud-run   --service=adk-larry   --region=europe-west1   --format=json | tee pvt/larry-iap-policy.json
