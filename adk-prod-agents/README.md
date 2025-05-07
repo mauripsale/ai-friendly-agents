@@ -31,3 +31,13 @@ For trixie, you need to:
 ## Serpeverde
 
 * Get a SERP API key in https://serpapi.com
+
+## Deploy to Cloud Run
+
+Let's deploy the agent to Cloud Run with the dev UI enabled.
+
+1. First make sure the necessary APIs are enabled: `just deploy-setup-once`.
+2. Then, deploy using the adk tool: `just deploy-alfred`
+
+This builds a container for the agent and deploys to Cloud Run.
+You can visit the default URL of the Cloud Run service to interact with the agent.

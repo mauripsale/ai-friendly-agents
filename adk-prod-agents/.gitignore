@@ -1,3 +1,7 @@
 trixie_agent_symlink
 #_common/
 my_test_db.sqlite
+siculo-iam-ricc-pvt.sh
+.*.touch
+*.touch
+setup-iap-for-google.com-pvt.sh

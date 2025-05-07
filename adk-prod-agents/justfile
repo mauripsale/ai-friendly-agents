@@ -112,3 +112,63 @@ test-common-lib-serper-tools:
 
 test: test-common-lib-serper-tools
     echo Testing ALL
+
+
+
+##############
+# Deployment
+###############
+
+# 1. Deploy setup
+deploy-setup-once:
+    gcloud services enable \
+        artifactregistry.googleapis.com \
+        cloudbuild.googleapis.com \
+        run.googleapis.com
+
+# 2. Deploy Alfred who can in turn call the others. Uses default project_id
+deploy-alfred:
+    adk deploy cloud_run \
+    --region="europe-west1" \
+    --service_name="alfred-and-friends-service" \
+    --with_ui \
+    ./alfred
+
+    echo This is broken as it only has Alfred and not his friends.
+
+    gcloud beta run services update "alfred-and-friends-service" \
+        --region="europe-west1" \
+        --iap
+
+    gcloud beta iap web add-iam-policy-binding \
+        --member=user:ricc@google.com \
+        --role=roles/iap.httpsResourceAccessor \
+        --region="europe-west1" \
+        --resource-type=cloud-run \
+        --service="alfred-and-friends-service"
+
+# 3. ricc only, rev eng Larry IAP config.
+adk-larry-config:
+    gcloud beta run services describe adk-larry --region europe-west1 --format yaml | tee adk-larry.yaml
+    gcloud run services get-iam-policy adk-larry \
+    --region=europe-west1  \
+    --format=yaml | tee adk-larry.iap_policy.yaml
+# gcloud run services describe YOUR_SERVICE_NAME \
+#   --region=YOUR_REGION \
+#   --format=yaml > service_config.yaml
+
+alfred-config:
+    gcloud compute backend-services get-iam-policy "alfred-and-friends-service"  \
+        --project=794266741446 \
+        --global \
+        --format=yaml
+
+deploy-siculo:
+    ./deploy-agent.sh siculo
+# I've tried it with expr 3 - doesnt work
+deploy-trixie:
+    ./deploy-agent.sh trixie
+# I've tried it with expr 1 ..
+deploy-vicky:
+    ./deploy-agent.sh vicky
+
