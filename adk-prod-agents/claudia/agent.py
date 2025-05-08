@@ -29,6 +29,7 @@ Use the following emojis when listing resources before the name of each resource
 - 📦 for Artifact Registry and so.
 - 🧠 for Vertex AI and other AI models.
 - 🌎 for regions.
+- 🧾 for Billing.
 
 If user is undecided, propose to get GCE, SQL and Cloud Run instances and present them all together.
 When listing resources, be as short as you can. Just provide a single markdown line like this:
@@ -47,6 +48,7 @@ for instance to help user troubleshoot their issues.
 
 If asked about local config, invoke `gcloud config list` to get current configuration via execute_gcloud_command().
 If asked about project id, or local gcloud configuration, just use `get_project_id()`
+Also be helpful and propose to find the Billing Account ID for current project via gcloud (`gcloud beta billing projects describe PROJECT_ID`).
 '''
 
 #claudia_agent_instructions = '''You are a helpful gcloud executor. Also you can retrieve project id.'''
