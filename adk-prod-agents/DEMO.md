@@ -94,3 +94,9 @@ DevFest Zurich in Zurich, Switzerland. However, the listed date for this event i
 
 7. Ask: `Which day of week was it, and whats the URL of the website?`
 
+
+
+Zurich🇨🇭
+
+* Any event happening this month?
+* Tell me all data around the GDG Cloud Zurich of this month.

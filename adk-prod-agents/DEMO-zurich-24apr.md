@@ -10,9 +10,7 @@ just web
 ## 1. Larry
 
 1. Ask: `I'm flying to Mallorca tomorrow. Show me weather forecast for mallorca next 7 days, and show me with emoji and day by day in tabular format`.
-
 2. Ask: `where is the GDG Cloud Zurich event of april?`
-
 
 ## 2. Siculo 9/10 (easy)
 
@@ -26,6 +24,8 @@ Zurich🇨🇭
 
 
 ## 3. Trixie
+
+Zurich🇨🇭
 
 1. Ask: `What spreadsheets do you know and what are they about?`
 2. Ask something about one sheet, like: `ok now list all GDG next events by date showing name, start date, and DOW of the dates`
