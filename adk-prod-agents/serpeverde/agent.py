@@ -30,7 +30,6 @@ if common_lib_path not in sys.path:
 
 #from common_tools import carlessian_google_search, serp_search_flights
 # from _common.lib - needs
-#from serper_tools import serp_google_search
 from common_serpapi_tools import * # serpapi_google_search, serpapi_search_flights
 from common_time_tools import get_day_today
 

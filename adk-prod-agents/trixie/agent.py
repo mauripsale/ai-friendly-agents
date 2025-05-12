@@ -1,6 +1,7 @@
 import os
 import json
 import datetime
+from _common.lib.common_time_tools import get_day_today
 import logging
 from pathlib import Path
 from typing import List, Dict, Optional, Any
@@ -148,71 +149,6 @@ def get_sheets() -> Dict[str, Any]:
 
 
 #TODO: def get_sheets(json_file_path: Path = None ) -> List[Dict[str, Any]]:
-def get_sheets_old_returning_an_array() -> List[Dict[str, Any]]:
-    """
-    Reads sheet configurations from a JSON file specified by JSON_SHEET_FILE env var,
-    validates them using Pydantic, and returns a list of valid configurations as dictionaries.
-
-    Returns:
-        A list of dictionaries, where each dictionary represents a validated sheet configuration.
-        Returns an empty list if the file is not found, is invalid JSON, or contains no valid entries.
-    """
-    validated_sheets = []
-    print(f"⚙️ CWD2:                     {os.getcwd()}")
-
-    if not JSON_SHEET_FILE_PATH.is_file():
-        logging.error(f"Sheet configuration file not found: {JSON_SHEET_FILE_PATH}")
-        return []
-
-    print("get_sheets() called. File FOUND!")
-
-    try:
-        with open(JSON_SHEET_FILE_PATH, 'r') as f:
-            data = json.load(f)
-            if not isinstance(data, list):
-                logging.error(f"Sheet configuration file {JSON_SHEET_FILE_PATH} does not contain a list.")
-                return []
-
-        logging.info(f"Loaded {len(data)} sheet configurations from {JSON_SHEET_FILE_PATH}.")
-        print(f"⚙️ Config file found! {green(JSON_SHEET_FILE_PATH)}")
-
-        for i, entry in enumerate(data):
-            try:
-                # Validate using Pydantic
-                config = SheetConfig(**entry)
-                validated_sheets.append(config.dict()) # Convert back to dict for consistency if needed, or return SheetConfig objects
-
-                # Check for missing non-mandatory but suggested fields and log warnings
-                if config.relevant_columns is None:
-                    logging.warning(f"Sheet config #{i+1} (ID: {config.sheet_id}, Tab: {config.tab}) is missing 'relevant_columns'.")
-                if config.context is None:
-                     logging.warning(f"Sheet config #{i+1} (ID: {config.sheet_id}, Tab: {config.tab}) is missing 'context'.")
-                # No warning needed for skip_first_n_lines as it has a default (0)
-
-            except ValidationError as e:
-                logging.error(f"Validation failed for sheet configuration #{i+1} in {JSON_SHEET_FILE_PATH}: {e}")
-            except Exception as e:
-                 logging.error(f"Unexpected error processing sheet configuration #{i+1}: {e}")
-
-
-    except json.JSONDecodeError as e:
-        logging.error(f"Error decoding JSON from {JSON_SHEET_FILE_PATH}: {e}")
-        return []
-    except IOError as e:
-        logging.error(f"Error reading file {JSON_SHEET_FILE_PATH}: {e}")
-        return []
-    except Exception as e:
-        logging.error(f"An unexpected error occurred in get_sheets: {e}")
-        return []
-
-    logging.info(f"Successfully validated {len(validated_sheets)} sheet configurations.")
-    return validated_sheets
-
-
-def get_day_today() -> str:
-    '''Gets today's date in YYYY-MM-DD format'''
-    return str(datetime.date.today()) # Use date() for just the date part
-
 
 def get_sheet_content_v2(
     sheet_id: str,

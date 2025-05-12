@@ -10,6 +10,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # used by main - todo refactor to all use the same.
+# used by main.py
 def get_sheet_content(
     sheet_id: str,
     tab_name: str,
@@ -118,10 +119,8 @@ def get_sheet_content(
 
 
 
-# # --- Version 2 Function ---
 
 # def get_sheet_content_v2(
-#     sheet_id: str,
 #     tab_name: str,
 #     limit_rows: int = 10,
 #     relevant_columns: Optional[List[str]] = None,
