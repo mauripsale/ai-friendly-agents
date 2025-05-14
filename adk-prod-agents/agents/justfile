@@ -1,0 +1,24 @@
+
+list:
+    just -l
+
+# Runs larry
+run-larry-ng:
+    adk run larry/
+
+# Tests Larry
+test-larry-ng:
+    echo 'Whats the weather like in Zurich right now? Give me Min, Max and current. Do NOT use Fahrenheit' | adk run larry/
+
+# Runs a generic
+run-ng DIR:
+    adk run {{DIR}}
+
+# Evaluates an agent thanks to "pip install google-adk[eval]"
+eval-ng DIR:
+    adk eval {{DIR}}
+
+
+# Evaluates an agent thanks to "pip install google-adk[eval]"
+test-ng DIR:
+    just test-{{DIR}}-ng

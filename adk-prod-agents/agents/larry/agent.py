@@ -1,6 +1,11 @@
 from google.adk.agents import Agent
 from google.adk.tools import google_search  # Import the tool
 
+sample_questions = [
+   'What time is it in Zurich right now?',
+   'Whats the weather like in Zurich right now? Do NOT use Fahrenheit',
+]
+
 root_agent = Agent(
    # A unique name for the agent.
    name="larry__basic_search_agent", # Larry

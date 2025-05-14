@@ -36,7 +36,7 @@ class TestSerpGoogleSearch(unittest.TestCase):
         expected_response_data = {"results": ["result1", "result2"]}
         expected_response_str = json.dumps(expected_response_data)
 
-        with patch('_common.lib.serper_tools.http.client.HTTPSConnection') as mock_conn_constructor:
+        with patch('lib.serper_tools.http.client.HTTPSConnection') as mock_conn_constructor:
             # Configure the mock connection and response
             mock_response = MagicMock()
             mock_response.read.return_value = expected_response_str.encode('utf-8')
@@ -181,7 +181,7 @@ class TestSerpGoogleSearch(unittest.TestCase):
         # We need to ensure the module re-reads this. The easiest way is to patch the *value* used.
         # Let's patch the constant within the module's scope for this test.
         #with patch('serper_tools.SERPER_API_KEY', None):
-        with patch('_common.lib.serper_tools.SERPER_API_KEY', None):
+        with patch('lib.serper_tools.SERPER_API_KEY', None):
             result = serp_google_search(q=query)
 
             # Assertions
