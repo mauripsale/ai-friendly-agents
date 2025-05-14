@@ -1,5 +1,9 @@
 This agent allows you to call SERP APIs to basically wrap Google Search into meticulous JSON for various services.
 
+![Now create the image of another AI agent, called "Serpeverde". He's a dark yet fun dark-green agent from Slytherin, in the theme of Harry Potter. He has a magic wand and is able to summon little toy airplanes and toy hotels. In front of him, a computer  monitor saying something about a SERP API  and a long curl html result on CLI. Below the image, "SERPEVERDE". Below the cape, a vest with a slytherin logo](image-2.png)
+
+![Perfect! Now make the background a bit darker, maybe with a castle and an enchanted forest behind, enlightened just by a full moon, needs to be mysterious and dark.](image-3.png)
+
 At the moment these services are implemented:
 
 * **Google flights** (only search, not booking, and only return flights are supported). [API Spec](https://serpapi.com/google-flights-api)
