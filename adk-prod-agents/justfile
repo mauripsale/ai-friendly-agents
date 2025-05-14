@@ -5,26 +5,44 @@ set export
 
 # works because of set export
 #PYTHONPATH := "./_common/lib:${PYTHONPATH}"
-FOO := '4523452345'
+#FOO := '4523452345'
+AGENTS_DIR := 'agents'
+
 #set list := 'listami'
 a := "hello"
 
 # Shows justfile targets
 list:
     just -l
-    @echo "PYTHONPATH=$PYTHONPATH"
-    @echo "FOO=$FOO"
+    @echo "AGENTS_DIR=$AGENTS_DIR"
 
 # Shows justfile code
 cat:
     cat justfile
 
+
+# --- Web Server Targets for Your Agents ---
+
+# Target for your 'my_awesome_agent'
+# We 'cd' into the agent's directory before running 'adk web'.
+# The '&&' ensures 'adk web' only runs if the 'cd' was successful.
+run-agent-web:
+    @echo "🚀 Launching the ADK web server for '{{AGENTS_DIR}}'..."
+    cd {{AGENTS_DIR}} && adk web --port 8080
+
+web: run-agent-web
+# If you had another agent, say 'another_cool_agent' under agents/
+# run-another-agent-web:
+#     @echo "🚀 Launching the ADK web server for '{{AGENTS_DIR}}/another_cool_agent'..."
+#     cd {{AGENTS_DIR}}/another_cool_agent && adk web --port 8080
+
+
 # Web
-run-web:
-    adk web --port 8080
-web:
-    # RAILS_ROOT=`pwd`
-    adk web --port 8080
+# run-web:
+#     adk web --port 8080
+# web:
+#     # RAILS_ROOT=`pwd`
+#     adk web --port 8080
 
 web-serpeverde:
     @echo This enables Serpeverde common libraries and goes on port 8081.
