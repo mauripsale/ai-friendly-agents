@@ -28,36 +28,36 @@ web:
 
 web-serpeverde:
     @echo This enables Serpeverde common libraries and goes on port 8081.
-    PYTHONPATH="./_common/lib:$PYTHONPATH" adk web --port 8081
+    PYTHONPATH="./lib:$PYTHONPATH" adk web --port 8081
 
 # With generic key. Note I have to move the JSON_SHEET_FILE back one folder.
 run-trixie:
     GOOGLE_APPLICATION_CREDENTIALS="trixie/private/my-service-account-key.json" \
     JSON_SHEET_FILE="trixie/etc/sheets_config.json" \
-    adk run trixie/
+    adk run agents/trixie/
 
 
 run-sql-agent:
-    adk run siculo/
+    adk run agents/siculo/
 
 run-wikipedia-agent:
-    adk run vicky/
+    adk run agents/vicky/
 
 run-alfred-agent:
-    adk run alfred/
+    adk run agents/alfred/
 
 run-claudia-agent:
     echo Try: Show me GCE VMs
-    adk run claudia/
+    adk run agents/claudia/
 
 run-serpeverde-agent:
     @#PYTHONPATH="./_common/lib:$PYTHONPATH"
     @#echo This is to test _common/ code
-    PYTHONPATH="./_common/lib:$PYTHONPATH" adk run serpeverde/
+    PYTHONPATH="./lib:$PYTHONPATH" adk run agents/serpeverde/
 
 test-claudia-agent:
-    echo Show me my Project Id | adk run claudia/
-    echo Show me GCE VMs | adk run claudia/
+    echo Show me my Project Id | adk run agents/claudia/
+    echo Show me GCE VMs | adk run agents/claudia/
 
 find-python-and-env-files:
     find . -name \*.py -o -name .env
@@ -67,14 +67,14 @@ find-python-and-env-files:
 ##############
 # [deploy] Deploys SQL Agent to Riccardo Cloud Run project
 push-sql-to-cloud-run:
-    siculo/bin/create_sample_db.sh siculo/cloud_run_pushable_db.sqlite
+    agents/siculo/bin/create_sample_db.sh agents/siculo/cloud_run_pushable_db.sqlite
     # adk deploy cloud_run siculo/ --region europe-west1 --help
-    adk deploy cloud_run siculo/ --region europe-west1 --project ricc-genai --service_name siculo --with_ui
+    adk deploy cloud_run agents/siculo/ --region europe-west1 --project ricc-genai --service_name siculo --with_ui
     # => https://siculo-794266741446.europe-west1.run.app
     # Now you need to set ENV variables.
 
 push-larry-to-cloud-run:
-    adk deploy cloud_run larry/ --region europe-west1 --project ricc-genai --service_name adk-larry --with_ui --trace_to_cloud
+    adk deploy cloud_run agents/larry/ --region europe-west1 --project ricc-genai --service_name adk-larry --with_ui --trace_to_cloud
     gcloud --project ricc-genai run services add-iam-policy-binding adk-larry \
         --member="user:ricc@google.com" \
         --role="roles/run.invoker" --region europe-west1
@@ -108,7 +108,7 @@ iam-give-access-to-ricc:
 ##############
 
 test-common-lib-serper-tools:
-    python -m unittest _common.lib.serper_tools_test
+    python -m unittest lib.serper_tools_test
 
 test: test-common-lib-serper-tools
     echo Testing ALL
@@ -132,7 +132,7 @@ deploy-alfred:
     --region="europe-west1" \
     --service_name="alfred-and-friends-service" \
     --with_ui \
-    ./alfred
+    ./agents/alfred
 
     echo This is broken as it only has Alfred and not his friends.
 
@@ -164,25 +164,25 @@ alfred-config:
         --format=yaml
 
 deploy-siculo:
-    ./deploy-agent.sh siculo
+    ./deploy-agent.sh agents/siculo
 # I've tried it with expr 3 - doesnt work
 deploy-trixie:
-    ./deploy-agent.sh trixie
+    ./deploy-agent.sh agents/trixie
 # I've tried it with expr 1 .. and IT WORKS!
 deploy-vicky:
-    ./deploy-agent.sh vicky
+    ./deploy-agent.sh agents/vicky
 #  works for ricc, not for strebel.
 deploy-larry:
-    ./deploy-agent.sh larry
+    ./deploy-agent.sh agents/larry
 # broken?
 deploy-claudia:
-    ./deploy-agent.sh claudia
+    ./deploy-agent.sh agents/claudia
 # broken
 deploy-serpeverde:
-    ./deploy-agent.sh serpeverde
+    ./deploy-agent.sh agents/serpeverde
 # WIP
 deploy-codie:
-    ./deploy-agent.sh codie
+    ./deploy-agent.sh agents/codie
 
 
 google-com-magic-commands:

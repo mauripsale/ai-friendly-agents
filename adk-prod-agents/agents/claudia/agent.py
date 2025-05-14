@@ -4,6 +4,12 @@ import os
 import sys
 import subprocess
 
+sample_questions = [
+   'What can you do?',
+   'What is my Project id?',
+   'Show me the Cloud Run apps and GCE instances', # tests 2 FunCalls.
+]
+
 #common_lib_path = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..', '..', '_common', 'lib'))
 # from _common
 #from common_tools import carlessian_google_search

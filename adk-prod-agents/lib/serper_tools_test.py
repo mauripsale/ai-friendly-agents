@@ -7,7 +7,7 @@ import os
 # Assuming the function is in a file named 'serper_tools.py'
 # If it's in the same file, you can remove the 'serper_tools.' prefix
 #from serper_tools import serp_google_search
-from .serper_tools import serp_google_search
+from lib.serper_tools import serp_google_search
 
 # Store original environment variable if it exists
 ORIGINAL_SERPER_API_KEY = os.environ.get('SERPER_API_KEY')
@@ -29,23 +29,24 @@ class TestSerpGoogleSearch(unittest.TestCase):
         elif 'SERPER_API_KEY' in os.environ:
             del os.environ['SERPER_API_KEY']
 
-    @patch('http.client.HTTPSConnection')
-    def test_successful_search_default_params(self, mock_conn_constructor):
+    @patch('_common.lib.serper_tools.SERPER_API_KEY', 'test_api_key_123')
+    def test_successful_search_default_params(self, mock_serper_api_key):
         """Test a successful search with default location and country."""
         query = "test query"
         expected_response_data = {"results": ["result1", "result2"]}
         expected_response_str = json.dumps(expected_response_data)
 
-        # Configure the mock connection and response
-        mock_response = MagicMock()
-        mock_response.read.return_value = expected_response_str.encode('utf-8')
-        mock_response.status = 200 # Optional: Check status if needed
+        with patch('lib.serper_tools.http.client.HTTPSConnection') as mock_conn_constructor:
+            # Configure the mock connection and response
+            mock_response = MagicMock()
+            mock_response.read.return_value = expected_response_str.encode('utf-8')
+            mock_response.status = 200 # Optional: Check status if needed
 
-        mock_conn_instance = MagicMock()
-        mock_conn_instance.getresponse.return_value = mock_response
-        mock_conn_constructor.return_value = mock_conn_instance
+            mock_conn_instance = MagicMock()
+            mock_conn_instance.getresponse.return_value = mock_response
+            mock_conn_constructor.return_value = mock_conn_instance
 
-        # Call the function
+            # Call the function
         result = serp_google_search(q=query)
 
         # Assertions
@@ -67,8 +68,9 @@ class TestSerpGoogleSearch(unittest.TestCase):
         mock_response.read.assert_called_once()
         self.assertEqual(result, expected_response_str)
 
-    @patch('http.client.HTTPSConnection')
-    def test_successful_search_custom_country(self, mock_conn_constructor):
+    @patch('_common.lib.serper_tools.http.client.HTTPSConnection')
+    @patch('_common.lib.serper_tools.SERPER_API_KEY', 'test_api_key_123')
+    def test_successful_search_custom_country(self, mock_serper_api_key, mock_conn_constructor):
         """Test a successful search with a custom country."""
         query = "another query"
         custom_country = "us"
@@ -102,8 +104,9 @@ class TestSerpGoogleSearch(unittest.TestCase):
         )
         self.assertEqual(result, expected_response_str)
 
-    @patch('http.client.HTTPSConnection')
-    def test_successful_search_custom_location_ignored(self, mock_conn_constructor):
+    @patch('_common.lib.serper_tools.http.client.HTTPSConnection')
+    @patch('_common.lib.serper_tools.SERPER_API_KEY', 'test_api_key_123')
+    def test_successful_search_custom_location_ignored(self, mock_serper_api_key, mock_conn_constructor):
         """Test that custom location parameter is currently ignored by the implementation."""
         query = "location query"
         custom_location = "United States" # This should be ignored
@@ -139,9 +142,10 @@ class TestSerpGoogleSearch(unittest.TestCase):
         )
         self.assertEqual(result, expected_response_str)
 
-    @patch('http.client.HTTPSConnection')
+    @patch('_common.lib.serper_tools.http.client.HTTPSConnection')
+    @patch('_common.lib.serper_tools.SERPER_API_KEY', None)
     @patch('os.getenv')
-    def test_api_key_missing(self, mock_getenv, mock_conn_constructor):
+    def test_api_key_missing(self, mock_getenv, mock_serper_api_key, mock_conn_constructor):
         """Test behavior when SERPER_API_KEY environment variable is not set."""
         # Ensure getenv returns None for the API key
         mock_getenv.return_value = None
@@ -177,7 +181,7 @@ class TestSerpGoogleSearch(unittest.TestCase):
         # We need to ensure the module re-reads this. The easiest way is to patch the *value* used.
         # Let's patch the constant within the module's scope for this test.
         #with patch('serper_tools.SERPER_API_KEY', None):
-        with patch('_common.lib.serper_tools.SERPER_API_KEY', None):
+        with patch('lib.serper_tools.SERPER_API_KEY', None):
             result = serp_google_search(q=query)
 
             # Assertions
@@ -201,9 +205,10 @@ class TestSerpGoogleSearch(unittest.TestCase):
         # Restore env var if needed after the 'with' block (handled by tearDown)
 
 
-    @patch('http.client.HTTPSConnection')
+    @patch('_common.lib.serper_tools.SERPER_API_KEY', 'test_api_key_123')
+    @patch('_common.lib.serper_tools.http.client.HTTPSConnection')
     @patch('builtins.print') # Mock print to suppress debug output
-    def test_http_error_handling(self, mock_print, mock_conn_constructor):
+    def test_http_error_handling(self, mock_print, mock_conn_constructor, mock_serper_api_key):
         """Test how the function behaves with an HTTP error (it should still decode)."""
         query = "http error query"
         # Simulate an error response body (e.g., HTML error page or plain text)

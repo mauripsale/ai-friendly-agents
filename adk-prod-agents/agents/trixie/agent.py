@@ -1,7 +1,7 @@
 import os
 import json
 import datetime
-from _common.lib.common_time_tools import get_day_today
+from lib.common_time_tools import get_day_today
 import logging
 from pathlib import Path
 from typing import List, Dict, Optional, Any

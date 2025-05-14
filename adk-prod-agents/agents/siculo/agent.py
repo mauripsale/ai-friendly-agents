@@ -9,8 +9,8 @@ import datetime
 import platform
 
 # 2. local imports
-from .lib.sqlite_agent import * # SQLiteAgent, print_database_schema
-from .lib.colors import Color
+from lib.sqlite_agent import * # SQLiteAgent, print_database_schema
+from lib.colors import Color
 
 ########################################
 # ENV part - with dotenv of course.
