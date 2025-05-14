@@ -7,7 +7,7 @@ import os
 # Assuming the function is in a file named 'serper_tools.py'
 # If it's in the same file, you can remove the 'serper_tools.' prefix
 #from serper_tools import serp_google_search
-from .serper_tools import serp_google_search
+from lib.serper_tools import serp_google_search
 
 # Store original environment variable if it exists
 ORIGINAL_SERPER_API_KEY = os.environ.get('SERPER_API_KEY')
