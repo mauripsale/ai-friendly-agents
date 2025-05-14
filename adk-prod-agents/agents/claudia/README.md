@@ -1,6 +1,6 @@
 Claudia allows to run generic `gcloud` code ***safely***, to ascertain information about your GCP status.
 
-![alt text](image-1.png)
+![Claudia is a cute AI agent with purple hair and a tshirt I love gcloud](image-1.png)
 
 ## Instructions
 
