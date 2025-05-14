@@ -10,6 +10,15 @@ run-larry-ng:
 test-larry-ng:
     echo 'Whats the weather like in Zurich right now? Give me Min, Max and current. Do NOT use Fahrenheit' | adk run larry/
 
+# Tests Claudia
+test-claudia-ng:
+   echo 'Show me the Cloud Run apps and GCE instances' | adk run claudia/
+
+
+# Tests serpeverde
+test-serpeverde-ng:
+   echo 'show me flights from zurich to porto for tomorrow. And before you ask, YES Im sure and aware of API costs. Proceed!' | adk run serpeverde/
+
 # Runs a generic
 run-ng DIR:
     adk run {{DIR}}
@@ -19,6 +28,18 @@ eval-ng DIR:
     adk eval {{DIR}}
 
 
-# Evaluates an agent thanks to "pip install google-adk[eval]"
+# Tests an agent with Riccardo test string. Only works with Claudia and Larry
 test-ng DIR:
+    # Note this will fail if DIR has a trailing / ..
+    echo "1. Available for tests:"
+    just -l | grep test- | grep -- -ng | grep -v test-ng
+    echo '-------------------------------------------------'
+    echo "2. Now testing {{DIR}} da bon:"
     just test-{{DIR}}-ng
+
+# ADK Web
+run-web:
+    adk web --port 8081
+# ADK Web
+web:
+    adk web --port 8081

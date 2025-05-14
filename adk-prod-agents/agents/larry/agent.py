@@ -3,7 +3,7 @@ from google.adk.tools import google_search  # Import the tool
 
 sample_questions = [
    'What time is it in Zurich right now?',
-   'Whats the weather like in Zurich right now? Do NOT use Fahrenheit',
+   'Whats the weather like in Zurich right now? Give me Min, Max and current. Do NOT use Fahrenheit',
 ]
 
 root_agent = Agent(
