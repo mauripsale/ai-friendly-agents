@@ -3,9 +3,9 @@
 
 Refactoring test:
 
-* 🟢 Larry works
-* 🟢 Claudia
-* Serpeverde
+* 🟢 v2.0 Larry
+* 🟢 v2.0 Claudia
+* 🟢 v2.0 Serpeverde
 
 
 ## Branch TMP commands
