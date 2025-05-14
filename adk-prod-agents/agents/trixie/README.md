@@ -6,6 +6,8 @@ per-trix basis (see `etc/` for an inspiration).
 It's a bit hard to set up as you need to create a Service Account, download the key, give it as ENV to the script, and
 share the Sheets with this SA. However, this set up is pretty easy to test locally... until it works.
 
+![Now I need you to picture Beatrix (Trixie), an AI Agent who knows all about Google Sheets. She's a very busy and cute AI lady wotking with Google Sheets all the day, the image needs to convey a Google Sheet logo and some sort of dummy table on a computer screen, possibly with a pie chart beside the tabular data. Below, you can read "TRIXIE".](image.png)
+
 ## INSTALL (wip)
 
 To use this agent, you need to have:

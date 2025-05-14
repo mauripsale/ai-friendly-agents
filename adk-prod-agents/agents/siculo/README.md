@@ -1,7 +1,8 @@
 
-I want to create a sqlite3 DB inspector. Then once it works, I want to extend to PG/MY and other DBs as well.
+Salvatore Siculo is a `sqlite3` DB inspector.
 
-Note the agent is still TBD.
+
+![Salvatore Siculo](image-3.png)
 
 Self: https://github.com/palladius/ai-friendly-agents/tree/main/adk-prod-agents/siculo
 
@@ -21,10 +22,11 @@ Nothing to do, really :)
 
 Basic functionality is there. Some nice touch I could add:
 
-* Intercept the SQL queries, and if there are, print them
+* Intercept the SQL queries, and if there are, print them in ADK UI mode.
 * Memorize the filename in memory, and allow user to change context
 * Ability to cache schema and force a refresh upon EXPLICIT user request.
 * Show in memory/context the readonly vs not.
+* Once it works, I want to extend to PG/MY and other DBs as well.
 
 ## Markdown output from agent.
 
