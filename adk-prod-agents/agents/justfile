@@ -14,6 +14,8 @@ test-larry-ng:
 test-claudia-ng:
    echo 'Show me the Cloud Run apps and GCE instances' | adk run claudia/
 
+test-trixie-ng:
+   echo 'Show me what Trixes do you see. Then if you can show me all about GDGs.' | adk run trixie/
 
 # Tests serpeverde
 test-serpeverde-ng:

@@ -1,7 +1,6 @@
 import os
 import json
 import datetime
-from lib.common_time_tools import get_day_today
 import logging
 from pathlib import Path
 from typing import List, Dict, Optional, Any
@@ -15,11 +14,28 @@ from pydantic import BaseModel, Field, ValidationError # Import Pydantic
 import dotenv
 dotenv.load_dotenv()
 
+
+########################################################
+# BEGIN Carlessian needed magical lines to import lib/ (God didn't write the world in Python, I tell you that! Perl or Ruby, but not Python).
+# See `agents/README.md` for more info.
+#
+# --- MAGIC PATH FIXING START ---
+import os, sys # if needed
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(current_dir))
+sys.path.insert(0, project_root)
+# --- MAGIC PATH FIXING END ---
+########################################################
+from lib.common_time_tools import get_day_today
+
 # --- Configuration ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'] # Assuming read-only for now based on ADC scope
 DEFAULT_SHEET_CONFIG_FILE = 'etc/sheets_config.json' # Default filename if ENV is not set
+
+# GOOGLE_APPLICATION_CREDENTIALS="agents/trixie/private/my-service-account-key.json"
+# JSON_SHEET_FILE="trixie/etc/sheets_config.json"
 
 # --- Pydantic Model for Sheet Configuration ---
 class SheetConfig(BaseModel):
@@ -40,18 +56,27 @@ class SheetConfig(BaseModel):
 # --- Environment Variable Handling ---
 # Get the JSON file path from ENV, with a default
 JSON_SHEET_FILE_PATH_STR = os.getenv('JSON_SHEET_FILE', DEFAULT_SHEET_CONFIG_FILE)
+GOOGLE_APPLICATION_CREDENTIALS = Path(os.getenv('GOOGLE_APPLICATION_CREDENTIALS', None))
+
 #JSON_SHEET_FILE_PATH = Path(f"trixie/{JSON_SHEET_FILE_PATH_STR}" ) # locally to this code.
 JSON_SHEET_FILE_PATH = Path(JSON_SHEET_FILE_PATH_STR) # locally to this code.
 
+print("⚙️⚙️⚙️  Trixie Config (can be daunting, you'll thank me later) ⚙️⚙️⚙️")
 print(f"⚙️ JSON_SHEET_FILE_PATH_STR: {JSON_SHEET_FILE_PATH_STR}")
 print(f"⚙️ JSON_SHEET_FILE_PATH:     {JSON_SHEET_FILE_PATH}")
-print(f"⚙️ is it a file?!?:          {JSON_SHEET_FILE_PATH.is_file()}")
+print(f"⚙️ -> is it a file?!?:       {JSON_SHEET_FILE_PATH.is_file()}")
 print(f"⚙️ CWD:                      {os.getcwd()}")
 print(f"⚙️ GOOGLE_APPLICATION_CREDENTIALS: {os.getenv('GOOGLE_APPLICATION_CREDENTIALS')} # not necessary but useful..")
+print(f"⚙️  -> is it a file?!?:      {GOOGLE_APPLICATION_CREDENTIALS.is_file()}")
 
 if not JSON_SHEET_FILE_PATH.is_file():
-    print("⛔ ⚙️ config not found, my existence is futile.")
+    print("⛔ ⚙️ JSON_SHEET_FILE_PATH not found, my existence is futile.")
     exit(-1)
+if not JSON_SHEET_FILE_PATH.is_file():
+    print("⛔ ⚙️ GOOGLE_APPLICATION_CREDENTIALS not found, but this could still work on Cloud Run (if CR SvcAcct can read my trixes).")
+    #exit(-1)
+print("⚙️⚙️⚙️  /Trixie Config                                         ⚙️⚙️⚙️")
+
 # You could add other ENV vars here if needed, e.g., for Service Accounts if you re-introduce write access logic
 # READ_ONLY_SERVICE_ACCOUNT_EMAIL = os.getenv("READ_ONLY_SERVICE_ACCOUNT_EMAIL", "<NOT PROVIDED! Fix your ENV>")
 

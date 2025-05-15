@@ -2,11 +2,24 @@ from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 
 import sys
-# Allows to see other sibling agents.
-sys.path.append("../")
-# Allows to see SERPER libs for Serpeverde.
-sys.path.append("./_common/lib")
-#from common_serpapi_tools import *
+# # Allows to see other sibling agents.
+# sys.path.append("../")
+# # Allows to see SERPER libs for Serpeverde.
+# sys.path.append("./_common/lib")
+# #from common_serpapi_tools import *
+
+
+########################################################
+# BEGIN Carlessian needed magical lines to import lib/ (God didn't write the world in Python, I tell you that! Perl or Ruby, but not Python).
+# See `agents/README.md` for more info.
+#
+# --- MAGIC PATH FIXING START ---
+import os, sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(current_dir))
+sys.path.insert(0, project_root)
+# --- MAGIC PATH FIXING END ---
+########################################################
 
 from claudia.agent import root_agent as claudia_agent
 from larry.agent import root_agent as larry_agent

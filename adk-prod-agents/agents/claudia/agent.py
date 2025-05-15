@@ -4,6 +4,17 @@ import os
 import sys
 import subprocess
 
+########################################################
+# BEGIN Carlessian needed magical lines to import lib/ (God didn't write the world in Python, I tell you that! Perl or Ruby, but not Python).
+# See `agents/README.md` for more info.
+#
+# --- MAGIC PATH FIXING START ---
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(current_dir))
+sys.path.insert(0, project_root)
+# --- MAGIC PATH FIXING END ---
+########################################################
+
 sample_questions = [
    'What can you do?',
    'What is my Project id?',

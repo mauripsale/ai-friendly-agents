@@ -4,6 +4,8 @@ from google.adk.tools import agent_tool
 from google.adk.agents import Agent
 from google.adk.tools import google_search, built_in_code_execution
 
+NEEDS_MAGIC_PATH_LIB = False
+
 #coding_agent = Agent(
 root_agent = Agent(
 #    model='gemini-2.0-flash',
