@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# fake agents: "hello"
+FAKE_AGENTS_REGEX="hello|bin"
+
+set -euo pipefail
+
+cd agents/
+
+# my goodness this was hard!
+find . -maxdepth 1 -type d | egrep -v '\./\.'   |
+    egrep -v "$FAKE_AGENTS_REGEX" |
+    grep ./ |
+    sed -e s:^./:: |
+    sort
+
+
+
+

@@ -1,11 +1,20 @@
 
 set -euo pipefail
 
+set -x
+
+
+VERSION="0.2"
 # agent name and also FOLDER. keeping it simple.
 AGENT="$1"
 SVC_NAME="adk-$AGENT"
+REGION="europe-west1"
+
 # for now, region and user are grounded.
 
+echo "🚀 [Deploy v$VERSION ng] ADK Service for '$AGENT' in project: $PROJECT_ID"
+
+gcloud config set project "$PROJECT_ID"
 
 # TODO: fix the allow authenticated, maybe there's a gcloud env var to set it as dflt?
 # like:  gcloud config set run/allow_unauthenticated true
@@ -13,10 +22,10 @@ SVC_NAME="adk-$AGENT"
 # Allows just: cluster, cluster_location, platform and region. Damn.
 
 adk deploy cloud_run \
-    --region="europe-west1" \
+    --region="$REGION" \
     --service_name="$SVC_NAME" \
     --with_ui \
-    ./$AGENT
+    agents/$AGENT
 
 # BUG: Allow unauthenticated invocations to [adk-siculo] (y/N)?  y
 # should be programmable via CLI, like --cloudrun-options="--allow.."
@@ -28,7 +37,7 @@ else
     echo First time set up IAP
 
     gcloud beta run services update "$SVC_NAME" \
-        --region="europe-west1" \
+        --region="$REGION" \
         --iap
 
     echo ok. Now adding the binding.

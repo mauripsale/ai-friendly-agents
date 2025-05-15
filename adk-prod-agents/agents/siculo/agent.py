@@ -23,6 +23,13 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 DEFAULT_DB_FILE = 'siculo/google_events.sqlite'
 
 
+sample_questions = [
+    'Whats the name and path of the DB?',
+    'Show me a nice-looking schema dump of the DB',
+    # depends on DB, but could be:
+    'When is the next event? Show me the value AND the sql query you used, in backticks.',
+]
+
 # ENV -> vars
 DB_FILE = os.getenv("SICULO_AGENT_DB_FILE", DEFAULT_DB_FILE)
 ALLOW_WRITES = os.getenv("SICULO_AGENT_ALLOW_WRITES", False)

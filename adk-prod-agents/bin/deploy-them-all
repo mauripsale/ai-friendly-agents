@@ -1,0 +1,5 @@
+
+
+bin/enumerate-agents | while read AGENT ; do
+    just deployng "$AGENT"
+done
