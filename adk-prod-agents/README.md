@@ -90,13 +90,14 @@ Let's deploy the agent to Cloud Run with the dev UI enabled.
 
 🚦 My personal deploys amount to:
 
-* 🟠 [Alfred](https://adk-alfred-794266741446.europe-west1.run.app/dev-ui) 🔑 IAM error, fixable.
-* 🟠 [Claudia](https://adk-claudia-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
-* 🟠 [Codie](https://adk-codie-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
-* 🟢 [Larry](https://adk-larry-794266741446.europe-west1.run.app/dev-ui). Works!
-* 🔴 [Serpeverde](https://adk-serpeverde-794266741446.europe-west1.run.app/). ⚙️ Error: `{"error": "No module named 'lib'"}`
-* 🔴 [Siculo](https://adk-siculo-794266741446.europe-west1.run.app/dev-ui). ⚙️ Launches fine but get syntax error. `lib/` import issue.
-* 🟡 [Trixie](https://adk-trixie-794266741446.europe-west1.run.app/dev-ui). 🔗 Error with local .env symlink. Fixable with some work.
+* 🚀🟠 [Alfred](https://adk-alfred-794266741446.europe-west1.run.app/dev-ui) 🔑 IAM error, fixable.
+* 🚀🟠 [Claudia](https://adk-claudia-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
+* 🚀🟠 [Codie](https://adk-codie-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
+* 🚀🟢 [Larry](https://adk-larry-794266741446.europe-west1.run.app/dev-ui). Works!
+* 🚀🔴 [Serpeverde](https://adk-serpeverde-794266741446.europe-west1.run.app/). ⚙️ Error: `{"error": "No module named 'lib'"}`
+* 🚀🔴 [Siculo](https://adk-siculo-794266741446.europe-west1.run.app/dev-ui). ⚙️ Launches fine but get syntax error. `lib/` import issue.
+* 🚀🟡 [Trixie](https://adk-trixie-794266741446.europe-west1.run.app/dev-ui). 🔗 Error with local .env symlink. Fixing right now.
+* 🚀🟠 [Vicky](https://adk-vicky-794266741446.europe-west1.run.app/dev-ui). 🔗 Error@: {"error": "No module named 'bs4'"} Missing beautiful soup => adding it to the dir.
 
 Try this: `just deploy-them-all`.
 

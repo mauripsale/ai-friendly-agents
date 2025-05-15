@@ -31,47 +31,39 @@ run-agent-web:
     cd {{AGENTS_DIR}} && adk web --port 8080
 
 web: run-agent-web
-# If you had another agent, say 'another_cool_agent' under agents/
-# run-another-agent-web:
-#     @echo "🚀 Launching the ADK web server for '{{AGENTS_DIR}}/another_cool_agent'..."
-#     cd {{AGENTS_DIR}}/another_cool_agent && adk web --port 8080
 
-
-# Web
-# run-web:
-#     adk web --port 8080
-# web:
-#     # RAILS_ROOT=`pwd`
-#     adk web --port 8080
-
-web-serpeverde:
-    @echo This enables Serpeverde common libraries and goes on port 8081.
-    PYTHONPATH="./lib:$PYTHONPATH" adk web --port 8081
+# web-serpeverde:
+#     @echo This enables Serpeverde common libraries and goes on port 8081.
+#     PYTHONPATH="./lib:$PYTHONPATH" adk web --port 8081
 
 # With generic key. Note I have to move the JSON_SHEET_FILE back one folder.
-run-trixie:
+run-trixie-ng:
     GOOGLE_APPLICATION_CREDENTIALS="trixie/private/my-service-account-key.json" \
     JSON_SHEET_FILE="trixie/etc/sheets_config.json" \
     adk run agents/trixie/
 
+# Runs a generic NG agent.
+run-ng AGENT:
+    echo Running Agent {{AGENT}} after old NewGens mega-folder refactoring.
+    adk run agents/{{AGENT}}/
 
-run-sql-agent:
-    adk run agents/siculo/
+# run-sql-agent:
+#     adk run agents/siculo/
 
-run-wikipedia-agent:
-    adk run agents/vicky/
+# run-wikipedia-agent:
+#     adk run agents/vicky/
 
-run-alfred-agent:
-    adk run agents/alfred/
+# run-alfred-agent:
+#     adk run agents/alfred/
 
-run-claudia-agent:
-    echo Try: Show me GCE VMs
-    adk run agents/claudia/
+# run-claudia-agent:
+#     echo Try: Show me GCE VMs
+#     adk run agents/claudia/
 
-run-serpeverde-agent:
-    @#PYTHONPATH="./_common/lib:$PYTHONPATH"
-    @#echo This is to test _common/ code
-    PYTHONPATH="./lib:$PYTHONPATH" adk run agents/serpeverde/
+# run-serpeverde-agent:
+#     @#PYTHONPATH="./_common/lib:$PYTHONPATH"
+#     @#echo This is to test _common/ code
+#     PYTHONPATH="./lib:$PYTHONPATH" adk run agents/serpeverde/
 
 test-claudia-agent:
     echo Show me my Project Id | adk run agents/claudia/
@@ -145,7 +137,7 @@ deploy-setup-once:
         run.googleapis.com
 
 # 2. Deploy Alfred who can in turn call the others. Uses default project_id
-deploy-alfred:
+deploy-alfred-and-friends:
     adk deploy cloud_run \
     --region="europe-west1" \
     --service_name="alfred-and-friends-service" \
@@ -181,30 +173,32 @@ alfred-config:
         --global \
         --format=yaml
 
-deploy-siculo:
-    bin/deploy-agent.sh siculo
-# I've tried it with expr 3 - doesnt work
-deploy-trixie:
-    bin/deploy-agent.sh trixie
-# I've tried it with expr 1 .. and IT WORKS!
-deploy-vicky:
-    bin/deploy-agent.sh vicky
-#  works for ricc, not for strebel.
-deploy-larry:
-    bin/deploy-agent.sh larry
-# broken?
-deploy-claudia:
-    bin/deploy-agent.sh claudia
-# broken
-deploy-serpeverde:
-    bin/deploy-agent.sh serpeverde
-# WIP
-deploy-codie:
-    bin/deploy-agent.sh codie
+# deploy-siculo:
+#     bin/deploy-agent.sh siculo
+# # I've tried it with expr 3 - doesnt work
+# deploy-trixie:
+#     bin/deploy-agent.sh trixie
+# # I've tried it with expr 1 .. and IT WORKS!
+# deploy-vicky:
+#     bin/deploy-agent.sh vicky
+# #  works for ricc, not for strebel.
+# deploy-larry:
+#     bin/deploy-agent.sh larry
+# # broken?
+# deploy-claudia:
+#     bin/deploy-agent.sh claudia
+# # broken
+# deploy-serpeverde:
+#     bin/deploy-agent.sh serpeverde
+# # WIP
+# deploy-codie:
+#     bin/deploy-agent.sh codie
 
-# DEPLOY-NG
-deployng AGENT:
+# DEPLOY-NG a generic agent (only Larry works for now)
+deploy-ng AGENT:
     bin/deploy-agent.sh {{AGENT}}
+
+# Call ALL deploy-ng iteratively and in alpha order.
 deploy-them-all:
     bin/deploy-them-all
 
