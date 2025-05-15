@@ -1,5 +1,9 @@
+#!/bin/bash
 
+set -euo pipefail
+
+VER="1.1"
 
 bin/enumerate-agents | while read AGENT ; do
-    just deployng "$AGENT"
+    just deployng "$AGENT" && touch .deployed.$AGENT.touch
 done

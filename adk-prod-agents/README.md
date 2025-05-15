@@ -90,16 +90,28 @@ Let's deploy the agent to Cloud Run with the dev UI enabled.
 
 🚦 My personal deploys amount to:
 
-* 🟠  [Alfred](https://adk-alfred-794266741446.europe-west1.run.app/dev-ui?app=alfred) IAM error, fixable.
-* Claudia
-* 🟢 [Larry](https://adk-larry-794266741446.europe-west1.run.app/dev-ui?app=larry). Works fine
-* 🔴 [Siculo](https://adk-siculo-794266741446.europe-west1.run.app/dev-ui?app=siculo).  Launches fine but get syntax error.
-* 🟡 🔵 🟣 🟤 ⚫
+* 🟠 [Alfred](https://adk-alfred-794266741446.europe-west1.run.app/dev-ui) 🔑 IAM error, fixable.
+* 🟠 [Claudia](https://adk-claudia-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
+* 🟠 [Codie](https://adk-codie-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
+* 🟢 [Larry](https://adk-larry-794266741446.europe-west1.run.app/dev-ui). Works!
+* 🔴 [Serpeverde](https://adk-serpeverde-794266741446.europe-west1.run.app/). ⚙️ Error: `{"error": "No module named 'lib'"}`
+* 🔴 [Siculo](https://adk-siculo-794266741446.europe-west1.run.app/dev-ui). ⚙️ Launches fine but get syntax error. `lib/` import issue.
+* 🟡 [Trixie](https://adk-trixie-794266741446.europe-west1.run.app/dev-ui). 🔗 Error with local .env symlink. Fixable with some work.
 
-Try this: `jusy deploy-them-all` bin/enumerate-agents
+Try this: `just deploy-them-all`.
+
+![My Cloud run services all nicely aligned](cloudrun-service.png)
+
+*  🔵 🟣 🟤 ⚫
 
 This builds a container for the agent and deploys to Cloud Run.
 You can visit the default URL of the Cloud Run service to interact with the agent.
+
+### Possible errors
+
+```JSON
+{"error": "403 PERMISSION_DENIED. {'error': {'code': 403, 'message': 'Permission denied on resource project None.', 'status': 'PERMISSION_DENIED', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'CONSUMER_INVALID', 'domain': 'googleapis.com', 'metadata': {'consumer': 'projects/None', 'containerInfo': 'None', 'service': 'aiplatform.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'Permission denied on resource project None.'}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Google developers console', 'url': 'https://console.developers.google.com'}]}]}}"}
+```
 
 ### NOTE on deployment feasibility
 [BUG] Currently deploy is limited to self-contained agents (agents who do NOT use `lib/`). This is an `adk` implementation
@@ -114,7 +126,12 @@ echo now some black magic sed in siculo/agent.py
 adk push tmp-siculo/
 ```
 
-* Deploying such an agent will work but then on exec you'll get a similar error:
+In alternative, without re-inventing the wheel, I can just elaborate on this `Dockerfile`: https://github.com/google/adk-python/blob/main/src/google/adk/cli/cli_deploy.py#L96
+and . Finally, I could package the libraries as some sort of `pip install ricc-friendly-agent-lib`.
+
+
+
+**Note**: If the `lib/` dependency is there, deploying such an agent will work but then on exec you'll get a similar error:
 
 ```JSON
 {"error": "No module named 'lib'"}

@@ -16,6 +16,10 @@ echo "🚀 [Deploy v$VERSION ng] ADK Service for '$AGENT' in project: $PROJECT_I
 
 gcloud config set project "$PROJECT_ID"
 
+echo Checking folder exists...
+
+ls -al "agents/$AGENT"
+
 # TODO: fix the allow authenticated, maybe there's a gcloud env var to set it as dflt?
 # like:  gcloud config set run/allow_unauthenticated true
 # https://cloud.google.com/sdk/gcloud/reference/config/set
