@@ -66,6 +66,8 @@ root_agent = Agent(
    When providing **flights** info, please provide options in tabular format with [day, cost, company, HH:MM (departure), HH:MM (arrival), duration, num_layovers ].
    User always prefers ZERO layovers, unless there's a huge price gap. Title of table: [ Day, $$, Company, Dept, Arriv, Dur, ⏸️ ].
 
+   Note the `return_date` NEEDS to be specified. If not given, suggest a return day SEVEN days after and confirm with user before proceeding.
+
    ## Hotels
 
    When providing **hotels** info, try to fetch also address information given Lat/Long (after confirming with user). Put price

@@ -19,7 +19,8 @@ def serpapi_search_flights(src: str, dst: str, outbound_date: str, return_date: 
       * src: start airport, IANA id, like 'MUC' or 'JFK'.
       * dst: end airport, IANA id, like 'MUC' or 'JFK'.
       * outbound_date: date of first flight (in YYYY-MM-DD format)
-      * return_date: date of return flight (in YYYY-MM-DD format)
+      * return_date: date of return flight (in YYYY-MM-DD format). If not given, assume 7 days after the outbound_date.
+
     '''
     logging.warning(f"⚡🧙 serp_search_flights from '{src}' to {dst} on '{outbound_date}' -> {return_date}")
 

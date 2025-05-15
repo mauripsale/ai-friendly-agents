@@ -5,6 +5,7 @@ Refactoring test:
 
 * 🟢 v2.0 Alfred. works but fails one trixie call
 * 🟢 v2.0 Claudia. works!
+* 🟢 v2.0 Trixies. works! Had to change QUITE a few things, including pvt `.env`s.
 
 * 🟢 v2.0 Larry
 * 🟢 v2.0 Serpeverde
