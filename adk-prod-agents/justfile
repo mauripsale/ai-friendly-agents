@@ -44,7 +44,9 @@ run-trixie-ng:
 
 # Runs a generic NG agent.
 run-ng AGENT:
-    echo Running Agent {{AGENT}} after old NewGens mega-folder refactoring.
+    echo "🥷 Running Agent {{AGENT}} after old NewGens mega-folder refactoring."
+    echo "🦊 Checking agent exists before scomodating ADK.."
+    ls "agents/{{AGENT}}/"
     adk run agents/{{AGENT}}/
 
 # run-sql-agent:

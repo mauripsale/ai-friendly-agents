@@ -8,6 +8,19 @@ from typing import List, Dict, Any, Tuple, Optional, Type
 import datetime
 import platform
 
+
+########################################################
+# BEGIN Carlessian needed magical lines to import lib/ (God didn't write the world in Python, I tell you that! Perl or Ruby, but not Python).
+# See `agents/README.md` for more info.
+#
+# --- MAGIC PATH FIXING START ---
+import os, sys # if needed
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(current_dir))
+sys.path.insert(0, project_root)
+# --- MAGIC PATH FIXING END ---
+########################################################
+
 # 2. local imports
 from lib.sqlite_agent import * # SQLiteAgent, print_database_schema
 from lib.colors import Color
@@ -20,7 +33,7 @@ dotenv.load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 #DEFAULT_DB_FILE = 'siculo/my_test_db.sqlite'
-DEFAULT_DB_FILE = 'siculo/google_events.sqlite'
+DEFAULT_DB_FILE = 'agents/siculo/google_events.sqlite'
 
 
 sample_questions = [
