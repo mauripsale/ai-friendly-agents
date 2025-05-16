@@ -34,5 +34,6 @@
 rag/by-url/urls.yaml
 
 # Ignore experimental code
-01-prova-python/experiments/
+#01-prova-python/experiments/
+python-code/experiments/
 t.*
