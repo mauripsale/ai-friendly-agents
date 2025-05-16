@@ -29,7 +29,7 @@ It includes a command-line interface (CLI) agent for direct interaction and a St
 
 2.  **Set up your environment variables:**
 
-    Create a `.env` file in the `01-prova-python/` directory with the following variables:
+    Create a `.env` file in the `python-code/` directory with the following variables:
 
     ```dotenv
     GOOGLE_CLOUD_PROJECT=your-gcp-project-id
@@ -43,7 +43,7 @@ It includes a command-line interface (CLI) agent for direct interaction and a St
 
 3.  **Install dependencies:**
 
-    Navigate to the `01-prova-python/` directory and install the required Python packages:
+    Navigate to the `python-code/` directory and install the required Python packages:
 
     ```bash
     cd 01-prova-python/
@@ -65,7 +65,7 @@ It includes a command-line interface (CLI) agent for direct interaction and a St
 
 ### CLI Agent
 
-Navigate to the `01-prova-python/` directory and run the `main.py` script:
+Navigate to the `python-code/` directory and run the `main.py` script:
 
 ```bash
 python main.py
@@ -94,7 +94,7 @@ The application will open in your web browser.
 
 ```
 crudo/
-├── 01-prova-python/
+├── python-code/
 │   ├── app.py             # Older Streamlit app (can be removed)
 │   ├── app2.py            # Main Streamlit application
 │   ├── constants.py       # Project constants

@@ -34,7 +34,7 @@
 rag/by-url/urls.yaml
 
 # Ignore experimental code
-#01-prova-python/experiments/
+#python-code/experiments/
 python-code/experiments/
 t.*
 cloud_run_services_inventory.json
