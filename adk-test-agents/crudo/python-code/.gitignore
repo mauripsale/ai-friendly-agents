@@ -4,3 +4,4 @@ private/
 lib/streamlit/ui.py.vecchia
 lib/ricc_colors.py.sbrodolato
 .env
+.cache2/

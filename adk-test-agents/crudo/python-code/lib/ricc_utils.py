@@ -42,7 +42,7 @@ def get_projects_by_user_faker(email: str):
     ricc_work_projects = ricc_personal_projects + [
         'onramp-staging-379211',  # Onramp staging
         'serverlessusability', # Steve Fadden test one (PN: 291336490793)
-        #'ricc-genai', # empty
+        'ricc-genai', # empty
         #'amsterdam-demo-tmp-crun2049', # i believe this is just Riccardo's Cloud runner demo - useless.
         'cloud-runner-2049', # https://github.com/NucleusEngineering/2049/blob/main/.demoplate/project
                             # https://pantheon.corp.google.com/run/detail/europe-north1/cloud-runner-2049/metrics?e=TroubleshootingUiAdminLaunch::TroubleshootingUiAdminControl&invt=AbuTVA&mods=logs_tg_staging&project=cloud-runner-2049

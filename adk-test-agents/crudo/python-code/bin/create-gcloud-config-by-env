@@ -1,17 +1,26 @@
 #!/bin/bash
 
+echo "Usage: $0 [<envfile>]"
+
+ENVFILE="${1:-.env}"
+
 set -euo pipefail
 
-echo "Sourcing $1..."
-. "$1"
+
+echo "1. Sourcing $ENVFILE..."
+
+. "$ENVFILE"
+
+echo "2. Creating config from $ENVFILE..."
 
     gcloud config configurations create "$CONFIG_NAME" ||
         gcloud config configurations activate "$CONFIG_NAME"
     gcloud config set account "$USER_ACCOUNT"
     gcloud config set project "$GOOGLE_CLOUD_PROJECT"
     gcloud config set region  "$GOOGLE_CLOUD_LOCATION"
+    echo "Logging in as $USER_ACCOUNT..."
     gcloud auth application-default login "$USER_ACCOUNT"
-    echo "Setting quota for GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
-    gcloud auth application-default set-quota-project "$GOOGLE_CLOUD_PROJECT"
+    #echo "Setting quota for GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
+    #gcloud auth application-default set-quota-project "$GOOGLE_CLOUD_PROJECT"
 
 verde ALL OK.  "$CONFIG_NAME" is done. Now try: just

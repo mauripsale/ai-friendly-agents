@@ -24,6 +24,13 @@ This directory contains the core Python application for the Cloud Run Investigat
 
 ## Usage
 
+Before you run either agent, make sure to do this:
+
+```bash
+# Make sure all info is correctly set into .env
+bin/create-gcloud-config-by-env .env # or whichever the name of your dot env.
+```
+
 ### Run the CLI Agent
 
 ```bash
@@ -35,6 +42,7 @@ Use `--prompt` or `--promptfile` for initial input. Type `quit` or `exit` to end
 ### Run the Streamlit UI
 
 ```bash
+# or: just app
 streamlit run app2.py
 ```
 

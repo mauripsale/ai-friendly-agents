@@ -355,76 +355,6 @@ def get_cloud_run_config(project_id: str, region: str, service_name: str, revisi
         print(f"{C.ERROR_ICON} API Error in get_cloud_run_config: {e}", flush=True)
         return {"status": "error", "message": f"Failed to get config for revision {revision_name}: {e}"}
 
-# def get_cloud_run_logs_OLD(project_id: str, region: str, service_name: str, revision_name: str, hours_ago: int = 1, ignore_cache: bool = False) -> Dict[str, Any]:
-#     """
-#     Retrieves logs for a specific Cloud Run revision from the last N hours. It's safe to look back up to 365*24 hours.
-
-#     Args:
-#         project_id: The Google Cloud Project ID.
-#         region: The Google Cloud Region.
-#         service_name: The name of the Cloud Run service.
-#         revision_name: The name of the Cloud Run revision.
-#         hours_ago: How many hours back to fetch logs (default 1). Max depends on Logging retention.
-#         ignore_cache: If True, bypasses the cache.
-
-#     Returns:
-#         A dictionary containing the log entries as a string or an error message.
-#     """
-#     #print(f"{C.CLOUD_ICON} Function called: get_cloud_run_logs(..., revision_name={revision_name}, hours_ago={hours_ago}, ignore_cache={ignore_cache})", flush=True)
-#     log_function_called(f"get_cloud_run_logs(service_name={service_name}, revision_name={revision_name}, hours_ago={hours_ago}, ignore_cache={ignore_cache})")
-#     print("💤💤💤 TODO RICCARDO - add permaURL to Logs for this. So I can click while I wait... 💤💤💤")
-#     # Cache filename doesn't include hours_ago to keep it simple, just caches the *last fetch*
-#     cache_path = _get_cache_path(project_id, region, service_name, revision_name, data_type="logs.txt")
-
-#     # Cache validity check considers the *last fetch* time, not the log timestamps themselves
-#     if not ignore_cache and _is_cache_valid(cache_path):
-#         cached_data = _read_cache(cache_path)
-#         if cached_data:
-#             print(f"{C.CACHE_ICON} Returning cached log data.", flush=True)
-#             # Note: Cached logs might be older than `hours_ago` if cache is hit
-#             return {"status": "success_cache", "logs": cached_data}
-
-#     print(f"{C.INFO_ICON} Cache invalid or ignored. Fetching fresh logs from GCP Logging...", flush=True)
-#     try:
-#         client = logging_v2.Client(project=project_id)
-#         # Construct the filter - make sure labels match your setup
-#         log_filter = (
-#             f'resource.type="cloud_run_revision" '
-#             f'resource.labels.project_id="{project_id}" '
-#             f'resource.labels.location="{region}" ' # Sometimes location isn't needed if revision is unique
-#             f'resource.labels.service_name="{service_name}" '
-#             f'resource.labels.revision_name="{revision_name}" '
-#           #  f'timestamp >= "{datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=hours_ago)}"'
-#             #f'severity>=DEFAULT'
-#             f'severity>=WARNING'
-#         )
-#         print(f"{C.INFO_ICON} Using log filter: {log_filter}", flush=True)
-
-#         log_entries = []
-#         # Be mindful of page size and potential large log volumes
-#         for entry in client.list_entries(filter_=log_filter, order_by=logging_v2.DESCENDING, page_size=100): # Get latest first
-#             log_line = f"{entry.timestamp.isoformat()} [{entry.severity}] "
-#             if entry.payload is not None:
-#                  if isinstance(entry.payload, dict):
-#                       log_line += json.dumps(entry.payload)
-#                  else:
-#                       log_line += str(entry.payload)
-#             log_entries.append(log_line)
-
-#         # Reverse to show oldest first in the final output string
-#         log_output = "\n".join(reversed(log_entries))
-
-#         if not log_output:
-#             log_output = f"--- No logs found for {revision_name} in the last {hours_ago} hour(s) ---"
-
-#         _write_cache(cache_path, log_output)
-#         return {"status": "success_api", "logs": log_output}
-
-#     except Exception as e:
-#         print(f"{C.ERROR_ICON} API Error in get_cloud_run_logs: {e}", flush=True)
-#         return {"status": "error", "message": f"Failed to get logs for revision {revision_name}: {e}"}
-
-
 # --- Modified get_cloud_run_logs ---
 def get_cloud_run_logs(
     project_id: str,
@@ -432,6 +362,7 @@ def get_cloud_run_logs(
     service_name: str,
     revision_name: str,
     hours_ago: int = 1,
+    severity: str = 'INFO', # New optional parameter
     day_str: Optional[str] = None, # New optional parameter YYYYMMDD
     ignore_cache: bool = False
 ) -> Dict[str, Any]:
@@ -442,14 +373,17 @@ def get_cloud_run_logs(
     and going back `hours_ago`. It's safe to look back up to Logging retention limits (e.g., 30 days).
 
     Args:
-        project_id: The Google Cloud Project ID.
-        region: The Google Cloud Region.
-        service_name: The name of the Cloud Run service.
-        revision_name: The name of the Cloud Run revision.
-        hours_ago: How many hours back to fetch logs from the end time (default 1).
-        day_str: Optional day (YYYYMMDD format) to set the end time for the log query.
+        `project_id`: The Google Cloud Project ID.
+        `region`: The Google Cloud Region.
+        `service_name`: The name of the Cloud Run service.
+        `revision_name`: The name of the Cloud Run revision.
+        `hours_ago`: How many hours back to fetch logs from the end time (default 1).
+        `severity`: serverity (can be DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY )
+                  Default is INFO as it has every single CRun HTTP log hit. If you expect big logs, go to WARNING or more.
+                  If you look for something wrong, go to ERROR or more.
+        `day_str`: Optional day (YYYYMMDD format) to set the end time for the log query.
                  If None, defaults to the current day (today).
-        ignore_cache: If True, bypasses the cache.
+        `ignore_cache`: If True, bypasses the cache.
 
     Returns:
         A dictionary containing the log entries as a string or an error message.
@@ -481,7 +415,7 @@ def get_cloud_run_logs(
 
     # --- Cache Handling ---
     # Include day_str in the cache filename prefix
-    cache_filename_prefix = f"{day_str}_h{hours_ago}"
+    cache_filename_prefix = f"{day_str}_h{hours_ago}.sev={severity}"
     cache_path = _get_cache_path(
         project_id, region, service_name, revision_name,
         data_type="logs.txt",
@@ -507,7 +441,10 @@ def get_cloud_run_logs(
             f'timestamp >= "{start_time.isoformat()}" '
             f'timestamp <= "{end_time.isoformat()}" ' # Add end timestamp constraint
             #f'severity>=ERROR'
-            f'severity>=WARNING'
+            #f'severity>=WARNING'
+            #f'severity>=INFO' # in dev
+            f'severity>={severity}' # parametric, shoudl default to "INFO".
+            #f'severity>=WARNING' # in prod maybe?
         )
         print(f"{C.INFO_ICON} Using log filter: {log_filter}", flush=True)
         print(f"🌎 Pantheon URL : https://pantheon.corp.google.com/logs/query;query={log_filter}&project={project_id}")

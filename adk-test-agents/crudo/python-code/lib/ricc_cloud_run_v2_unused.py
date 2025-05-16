@@ -362,12 +362,14 @@ def get_cloud_run_config(project_id: str, region: str, service_name: str, revisi
         return {"status": "error", "message": f"Failed to get config for revision {revision_name}: {e}"}
 
 # --- Modified get_cloud_run_logs ---
+# 20250516 ricc changed it
 def get_cloud_run_logs(
     project_id: str,
     region: str,
     service_name: str,
     revision_name: str,
     hours_ago: int = 1,
+    severity: str = 'INFO', # New optional parameter
     day_str: Optional[str] = None, # New optional parameter YYYYMMDD
     ignore_cache: bool = False
 ) -> Dict[str, Any]:
@@ -383,6 +385,9 @@ def get_cloud_run_logs(
         service_name: The name of the Cloud Run service.
         revision_name: The name of the Cloud Run revision.
         hours_ago: How many hours back to fetch logs from the end time (default 1).
+        severity: serverity (can be DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT, EMERGENCY )
+                  Default is INFO as it has every single CRun HTTP log hit. If you expect big logs, go to WARNING or more.
+                  If you look for something wrong, go to ERROR or more.
         day_str: Optional day (YYYYMMDD format) to set the end time for the log query.
                  If None, defaults to the current day (today).
         ignore_cache: If True, bypasses the cache.
@@ -391,7 +396,7 @@ def get_cloud_run_logs(
         A dictionary containing the log entries as a string or an error message.
     """
     log_function_called(f"get_cloud_run_logs(service={service_name}, rev={revision_name}, hours={hours_ago}, day={day_str}, ignore_cache={ignore_cache})")
-    print("💤💤💤 TODO RICCARDO - add permaURL to Logs for this. So I can click while I wait... 💤💤💤")
+    print("💤💤💤 [get_cloud_run_logs] TODO RICCARDO - add permaURL to Logs for this. So I can click while I wait... 💤💤💤")
 
     # --- Determine End Time ---
     now_utc = datetime.datetime.now(pytz.utc)
@@ -415,7 +420,7 @@ def get_cloud_run_logs(
 
     # --- Cache Handling ---
     # Include day_str in the cache filename prefix
-    cache_filename_prefix = f"{day_str}_h{hours_ago}"
+    cache_filename_prefix = f"{day_str}_h{hours_ago}.sev={severity}"
     cache_path = _get_cache_path(
         project_id, region, service_name, revision_name,
         data_type="logs.txt",
@@ -440,7 +445,8 @@ def get_cloud_run_logs(
             f'resource.labels.revision_name="{revision_name}" '
             f'timestamp >= "{start_time.isoformat()}" '
             f'timestamp <= "{end_time.isoformat()}" ' # Add end timestamp constraint
-            f'severity>=WARNING'
+            f'severity>=INFO' # in dev
+            #f'severity>=WARNING' # in prod maybe?
         )
         print(f"{C.INFO_ICON} Using log filter: {log_filter}", flush=True)
 
