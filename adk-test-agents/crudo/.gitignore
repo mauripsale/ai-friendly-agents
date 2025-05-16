@@ -37,3 +37,5 @@ rag/by-url/urls.yaml
 #01-prova-python/experiments/
 python-code/experiments/
 t.*
+cloud_run_services_inventory.json
+cloud_run_services_inventory4user.json
