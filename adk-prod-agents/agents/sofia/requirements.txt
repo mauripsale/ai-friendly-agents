@@ -1,0 +1,19 @@
+############################
+# requirements.txt
+############################
+google-cloud-run
+google-cloud-logging
+google-cloud-monitoring
+# To list projects - google-cloud-resourcemanager_v3
+google-cloud-resource-manager
+google-api-python-client # Might be needed for certain discovery aspects or formatting
+google-auth # For authentication helpers
+google-genai
+python-dotenv
+pyyaml
+# For TZ
+pytz
+# For Monitoring graphs
+matplotlib
+# for the app
+streamlit
