@@ -1,0 +1,264 @@
+
+# justfile - Command runner recipes for the Cloud Run Assistant
+
+set dotenv-load
+
+list: load_env
+    just -l
+
+
+# echo $ENVs in .env
+load_env:
+    @echo "[Note that .env is autoparsed by justfile]"
+    @echo "🌱 GEMINI_MODEL=$GEMINI_MODEL"
+    @echo "🌱 GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION"
+    @echo "🌱 GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
+    @echo "🌱 GOOGLE_GENAI_USE_VERTEXAI=$GOOGLE_GENAI_USE_VERTEXAI"
+
+# Default recipe: Runs the application with standard output
+default: run
+
+# Run the application normally
+[group('run')]
+run:
+    @echo "🚀 Starting Cloud Run Assistant... NO DEBUG"
+    python3 main.py
+
+# Run the application normally for Onramp Staging project
+[group('run')]
+main-onramp:
+    # funge
+    GOOGLE_CLOUD_PROJECT='onramp-staging-379211' GOOGLE_CLOUD_PROJECT='onramp-staging-379211' GEMINI_MODEL='gemini-2.0-flash-001' python3 main.py
+    # NON VA
+    #GOOGLE_CLOUD_PROJECT='onramp-staging-379211' GOOGLE_CLOUD_PROJECT='onramp-staging-379211' GEMINI_MODEL='gemini-1.5-pro-latest' python3 main.py
+
+
+# Run the application with verbose output (shows function call details)
+[group('run')]
+run-verbose:
+    @echo "🚀 Starting Cloud Run Assistant (Verbose Mode)..."
+    python3 main.py --verbose
+
+# Run the application with debug output (shows verbose + function results)
+[group('run')]
+run-debug:
+    @echo "🚀 Starting Cloud Run Assistant (Debug Mode)..."
+    python3 main.py --debug
+
+# Alias for run-debug
+[group('run')]
+debug: run-debug
+
+# Alias for run-verbose
+[group('run')]
+verbose: run-verbose
+
+# Clean cache files
+[group('Base')]
+clean-cache:
+    @echo "🧹 Cleaning cache directory..."
+    @rm -rf .cache
+    @echo "Cache cleaned!"
+
+# Install dependencies
+[group('Base')]
+install:
+    @echo "🐍 Installing dependencies from requirements.txt..."
+    pip install -r requirements.txt
+    @echo "Dependencies installed!"
+
+
+
+############
+# Test functionalities
+############
+
+# Test chat mechanism - obsolete now
+[group('Test Functionalities')]
+test-chat:
+    python test_chat.py
+
+# Asks for weather in Geneve and returns.
+[group('Test Functionalities')]
+test-weather:
+    python main.py --prompt "what is the weather in Geneve"
+
+[group('Test Functionalities')]
+test-cloud-run:
+    python main.py --prompt "How are my Cloud Run services doing? Project id is 'palladius-genai' in europe-west1"
+
+[group('Test Functionalities')]
+test-charts:
+    python lib/ricc_cloud_monitoring_test.py
+
+############
+# Demos
+############
+
+# not implemented yet but great idea for tomorrow
+[group('Demo')]
+demo:
+    python main.py --promptfile etc/riccardo-crun-interaction.prompt
+
+
+
+
+[group('Demo')]
+demo-investigation:
+    python main.py --promptfile etc/investigation-broken-push.prompt
+
+
+[group('Demo')]
+demo-charts:
+    python main.py --promptfile etc/test-charts-creation.prompt # --debug
+
+
+# Show me latest revisions for service "cloud-runner-2049", Project:"cloud-runner-2049", Region: europe-north1
+[group('Demo')]
+demo-cr49:
+    GOOGLE_CLOUD_LOCATION="europe-north1" \
+    GOOGLE_CLOUD_PROJECT='cloud-runner-2049' \
+    FAVORITE_CLOUD_RUN_SERVICE="cloud-runner-2049" \
+        python main.py --promptfile etc/stamer-busy-cr49-investigation.prompt
+
+
+
+########################################
+# DEmo2 is with proper project and --env
+########################################
+
+# UT is currently broken sio i just test with a smart prompt. WORKS GREAT!
+[group('Demo2')]
+demo2-palladius-genai-revisions:
+    python main.py --env .env.palladius-genai --promptfile etc/palladius-genai-test-revisions-for-one-endpoint.prompt
+
+# SFadden app -
+[group('Demo2')]
+demo2-sfadden:
+    @# useless .. but they dont disturb
+    GOOGLE_CLOUD_LOCATION="us-central1" \
+    GOOGLE_CLOUD_PROJECT='serverlessusability' \
+    python main.py --env .env.sfadden --promptfile etc/sfadden-latency-simulator-investigation.prompt
+
+# WIP
+[group('Demo2')]
+demo2-logs-pal-genai-v2:
+    python main.py --env .env.palladius-genai --promptfile etc/palladius-genai-check-logs-from-last-rev.prompt
+
+
+################################
+# Unit Tests
+################################
+
+# [group('Unit Tests')]
+
+
+# proper Unit Test for lib/ricc_cloud_run_test.py
+[group('Unit Test')]
+test-unit-lib-cloud-run:
+    python3 -m unittest lib/ricc_cloud_run_test.py
+[group('Unit Test')]
+test-unit-main:
+    python3 -m unittest main_test.py
+
+# Unit Test for: lib/ricc_net_test.py
+[group('Unit Test')]
+ut-lib-ricc_net_test:
+    python3 -m unittest lib/ricc_net_test.py
+
+# All Unit tests
+[group('Unit Test')]
+test: unit-tests
+
+[group('Unit Test')]
+unit-tests: test-unit-lib-cloud-run test-unit-main ut-lib-ricc_net_test
+
+# Shows TODOs.md
+[group('glow')]
+todo:
+    glow TODOs.md
+
+# Shows README.md
+[group('glow')]
+readme:
+    glow README.md
+
+# Shows BUGs.md
+[group('glow')]
+bugs:
+    glow BUGs.md
+
+# EXPERIMENTS
+
+# cstanger-inspired: transforms a metric into an image.png
+[group('Experiments')]
+exp-mtric2img:
+    echo TODO: pip install google-cloud-monitoring matplotlib
+    python experiments/g25_metric2image.py
+
+
+history:
+    cat chat_history_from_prompt.latest.txt
+
+
+
+
+# runs streamlit app (beautiful but half broken)
+[group('streamlit')]
+app-broken:
+    streamlit run app.py
+
+# runs streamlit app - the NEW thing! Nearly there (GOOD)
+[group('streamlit')]
+app2:
+    echo Since i see no binary in .venv/activate/bin here you are:
+    python -m streamlit run app2.py
+app: app2
+####################
+# gcloud Login and auth
+####################
+
+
+# Created with bin/02-create-sa-key.sh
+[group('gcloud')]
+gcloud-configs:
+    echo 1. List configs:
+    gcloud config configurations list  | egrep "cloudrun-ricc|devops-as-ricc"
+    echo 1. List keys:
+    ls -al private/*.json
+
+
+# gcloud loring with GOOGLE_CLOUD_PROJECT
+[group('gcloud')]
+auth:
+    gcloud auth application-default login
+    gcloud auth application-default set-quota-project "$GOOGLE_CLOUD_PROJECT"
+
+# Sets config to 'devops-as-ricc' and auths as ricc (no SvcAcct)
+[group('gcloud')]
+auth-as-ricc:
+    gcloud config configurations create devops-as-ricc || gcloud config configurations activate devops-as-ricc
+    gcloud config set account ricc@google.com
+    gcloud config set project "$GOOGLE_CLOUD_PROJECT"
+    gcloud auth application-default login ricc@google.com
+    echo "Setting quota for GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
+    gcloud auth application-default set-quota-project "$GOOGLE_CLOUD_PROJECT"
+
+[group('gcloud')]
+auth-sa-onramp:
+    gcloud auth activate-service-account cloudrun-ricc-devops-agent@onramp-staging-379211.iam.gserviceaccount.com --key-file=private/onramp-staging-379211-cloudrun-ricc-devops-agent-key.json
+
+[group('gcloud')]
+gcloud-my-config:
+    gcloud config configurations list | grep True
+
+
+# Shows yout gcloud/.env config to make sure you're setup for success
+[group('gcloud')]
+env-troubleshoot:
+    @# echo trousblehoosting env and stuff
+    @echo '1. your gcloud config:'
+    @gcloud config configurations list | grep True | sgialla
+    gcloud config list| sgialla
+    @echo '2. .env'
+    just load_env | sverda

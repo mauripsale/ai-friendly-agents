@@ -1,0 +1,7 @@
+Show me latest revisions for service "cloud-runner-2049", Project:"cloud-runner-2049", Region: europe-north1.
+Please show me the of CloudRun requests vs latency chart for YESTERDAY and for 5 days ago.
+Show me logs for the past hour for the latest revisions.
+Also show me logs for last Saturday
+Create a graph for the "Number of Instances" in the past 48h.
+Whats the min/max instance for the service again?
+Any spikes? If so, at which time?

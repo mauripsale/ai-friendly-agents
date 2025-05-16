@@ -1,0 +1,8 @@
+Tell me what are my Cloud Run endpoints
+Tell me more about 'gemini-news-crawler-dev' Service.
+1. Create chart from gfc_generate_cloud_run_requests_vs_latency_chart for this service.
+2. Create chart from gfc_generate_cloud_run_instance_chart,
+3. Create chart from gfc_generate_cloud_run_network_chart,
+4. Create a chart showing cpu vs memory and suggest changes to image rectangularity
+In the images you've created, did you find any significant spikes? If so, please give me 1-3 of these: { file_name, spiked_metric, spike_timestamp (yyyyymmddd HH:MM::SS), simple_interpretation}.
+Finally, what has been the average CPU, Memory and #instances of my container in the past 7 days?

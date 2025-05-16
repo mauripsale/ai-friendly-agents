@@ -1,0 +1,4 @@
+Find all Cloud Run endpoints.
+tell me more about my "gemini-news-crawler-prod" endpoint .
+Find last 18 revisions for this endpoint and write them into a markdown table with: [date:YYYYMMDD, name, traffic, docker_image (just name:version without all the stuff before slash), HTTP_Port , errors: True/False].
+Whats the one serving the most traffic?

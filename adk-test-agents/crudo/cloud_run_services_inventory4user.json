@@ -1,0 +1,780 @@
+{
+  "carlessian-gyruss": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "zurigram": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "legoey-2d-carlessian-tetris": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "gugley-3d-tetris": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "smurfs-and-dragons": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "adroit-bit-nbt2m": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "amsterdam-demo-tmp-crun2049": [
+    {
+      "name": "http-cloudrunner",
+      "region": "us-central1"
+    },
+    {
+      "name": "http-cloudrunner-py",
+      "region": "us-central1"
+    },
+    {
+      "name": "http-cloudrunner-py2",
+      "region": "us-central1"
+    },
+    {
+      "name": "http-runner-py3",
+      "region": "us-central1"
+    },
+    {
+      "name": "pubsub-sinker",
+      "region": "us-central1"
+    }
+  ],
+  "php-appmod-15476": [
+    {
+      "name": "app-mod-workshop",
+      "region": "europe-west8"
+    }
+  ],
+  "gen-lang-client-0693660094": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "my-onramp-demo-001": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "alloydb-freetrial-test": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "onramp-tests-palladius-eu": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "palladius-eu-main": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ricc-devrel-challenge-04-prod": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ricc-devrel-challenge-03-dev": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "prova-hslu-nov24": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "appmod-php-app": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ricc-devrel-challenge-02": [
+    {
+      "name": "frontend-service-cd0a0c2f",
+      "region": "us-central1"
+    },
+    {
+      "name": "retrieval-service-cd0a0c2f",
+      "region": "us-central1"
+    }
+  ],
+  "ricc-devrel-challenge-01": [
+    {
+      "name": "karl-llm-tester",
+      "region": "us-central1"
+    },
+    {
+      "name": "mesop-duo-chat-5completed",
+      "region": "europe-west1"
+    },
+    {
+      "name": "mesop-duo-chat-5completed",
+      "region": "europe-west6"
+    },
+    {
+      "name": "mesop-duo-italian-chat",
+      "region": "europe-west6"
+    },
+    {
+      "name": "ricc-amenities-search",
+      "region": "us-central1"
+    },
+    {
+      "name": "test-wk10-ruby-from-pubsub",
+      "region": "us-central1"
+    },
+    {
+      "name": "zapiekanka",
+      "region": "europe-west6"
+    },
+    {
+      "name": "zapiekanka-prod",
+      "region": "europe-west6"
+    }
+  ],
+  "onramp-rails-on-the-run": [
+    {
+      "name": "cb-rails-on-run",
+      "region": "europe-west1"
+    }
+  ],
+  "test-neha-ruby-codelab": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ricc-demo-vegas24": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "rick-and-nardy-paljoo": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "careful-granite-416214": [
+    {
+      "name": "frontend-service-11ab490e",
+      "region": "us-central1"
+    },
+    {
+      "name": "retrieval-service-11ab490e",
+      "region": "us-central1"
+    },
+    {
+      "name": "ricc-amenities-search",
+      "region": "us-central1"
+    }
+  ],
+  "rick-and-nardy-pjndemo": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "clouddeploy-vertexai-demovegas": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "provapaccap-410016": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "palladius-genai": [
+    {
+      "name": "gemini-chat-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gemini-chat-manhouse-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gemini-chat-prod",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gemini-news-crawler-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gemini-news-crawler-manhouse-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gemini-news-crawler-manhouse-prod",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gemini-news-crawler-prod",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gemini-streamlit-app",
+      "region": "us-central1"
+    },
+    {
+      "name": "ollama",
+      "region": "us-central1"
+    },
+    {
+      "name": "rails8-gemini20-chat-dev",
+      "region": "europe-west8"
+    },
+    {
+      "name": "rails8-gemini20-chat-manhouse",
+      "region": "europe-west8"
+    },
+    {
+      "name": "ricc-hotrails-v2-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "ricc-hotrails-v2-prod",
+      "region": "europe-west1"
+    },
+    {
+      "name": "sobenme-firestore-trigger-function",
+      "region": "us-central1"
+    }
+  ],
+  "puffin-tours": [
+    {
+      "name": "annotate-http",
+      "region": "europe-west6"
+    },
+    {
+      "name": "js-simple-search-cb",
+      "region": "europe-west1"
+    },
+    {
+      "name": "puffintours-prod",
+      "region": "europe-west1"
+    },
+    {
+      "name": "puffintours-prova-con-secret",
+      "region": "us-central1"
+    },
+    {
+      "name": "tf-js-simple-search-cb",
+      "region": "europe-west1"
+    },
+    {
+      "name": "tf-url-ring",
+      "region": "europe-west1"
+    },
+    {
+      "name": "url-ring",
+      "region": "europe-west1"
+    }
+  ],
+  "aipp-load-testing": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "pall-it-prompteer": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "duet-ai-demo": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ricc-demos-386214": [
+    {
+      "name": "hslu-deleteme",
+      "region": "us-central1"
+    },
+    {
+      "name": "php-amarcord",
+      "region": "europe-west8"
+    },
+    {
+      "name": "php-amarcord-bin",
+      "region": "europe-west8"
+    },
+    {
+      "name": "php-amarcord-dev",
+      "region": "europe-west8"
+    },
+    {
+      "name": "php-amarcord-generate-caption",
+      "region": "europe-west8"
+    },
+    {
+      "name": "php-amarcord-generate-caption-manhouse",
+      "region": "europe-west8"
+    },
+    {
+      "name": "php-amarcord-prod",
+      "region": "europe-west8"
+    }
+  ],
+  "ai-dev-preview-external": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ricc-blueprint-tests": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "post-migrazione-20230415": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "gcp-trial-pbt": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "pbt-firebase-projects": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "onramp-palladius": [
+    {
+      "name": "onramp-manual",
+      "region": "europe-west4"
+    }
+  ],
+  "terraform-cazzabubbole": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "tfws-1679136190825": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "tfws-1679136020726": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "quiet-chalice-381010": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "tfws-1679135327521": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "tfws-1679133726179": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "cloud-build-ghent-tests": [
+    {
+      "name": "cloudrun-noauth2-d1d722d",
+      "region": "us-central1"
+    }
+  ],
+  "prova-enonomai-pall-joonix": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "prova-enonomai-palladius-it": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "prova-enonomai-carlessos": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "prova-enonomai-gol": [
+    {
+      "name": "tiered-web-app-api",
+      "region": "europe-west1"
+    },
+    {
+      "name": "tiered-web-app-fe",
+      "region": "europe-west1"
+    }
+  ],
+  "gcpprojects2sheets": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "pastang": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "cicd-platinum-test032": [
+    {
+      "name": "pulumi-classic-hello-2c27e4a",
+      "region": "europe-west1"
+    },
+    {
+      "name": "pulumiclassic-hello01-d428713",
+      "region": "europe-west1"
+    },
+    {
+      "name": "pulumiclassic-pasta01-b33748d",
+      "region": "europe-west1"
+    },
+    {
+      "name": "pulumiclassic-pasta02-78ac55d",
+      "region": "europe-west1"
+    },
+    {
+      "name": "pulumiclassic-pasta03-e4e4973",
+      "region": "europe-west1"
+    },
+    {
+      "name": "vanilla-app-a-mano",
+      "region": "us-central1"
+    },
+    {
+      "name": "vanilla-app-on-run",
+      "region": "us-central1"
+    },
+    {
+      "name": "vanilla-app-on-run2",
+      "region": "us-central1"
+    }
+  ],
+  "cicd-platinum-test031": [
+    {
+      "name": "sku-vanilla-app-on-prime",
+      "region": "asia-southeast2"
+    }
+  ],
+  "gcp-pulumi-challenge-in-a-box": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "gitlab-cloudseed-test": [
+    {
+      "name": "gitlab-32324353-main",
+      "region": "europe-west1"
+    }
+  ],
+  "ricc-gic": [
+    {
+      "name": "adservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "cartservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "checkoutservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "currencyservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "emailservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "frontend-de62a92",
+      "region": "us-central1"
+    },
+    {
+      "name": "paymentservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "productcatalogservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "recommendationservice",
+      "region": "us-central1"
+    },
+    {
+      "name": "shippingservice",
+      "region": "us-central1"
+    }
+  ],
+  "palladius-devrel-tests": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "pincopallinojoe": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "palladius-it-catalog": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "aablsk-bank-of-anthos": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "wcz-experimental2": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "storazzo-8ab31": [
+    {
+      "name": "js-simple-search",
+      "region": "europe-west1"
+    },
+    {
+      "name": "js-simple-search-cb",
+      "region": "europe-west1"
+    },
+    {
+      "name": "storazzo",
+      "region": "europe-west8"
+    }
+  ],
+  "carlessos-apigee-335712": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "carlessos-apigee": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ricc-apigee": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "carlessos-spanner-rails": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "eca-team-summit": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "palladius-strava": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "gluten-consumer-test": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "cloud-ops-sandbox-405814536": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "deleteme-300016": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "vulcanina": [
+    {
+      "name": "discord-bot-docker",
+      "region": "us-central1"
+    },
+    {
+      "name": "pixel-manhouse",
+      "region": "europe-west1"
+    },
+    {
+      "name": "pixel-tracker",
+      "region": "europe-west1"
+    },
+    {
+      "name": "pulu-prova-cloudrun-c55504d",
+      "region": "europe-west1"
+    },
+    {
+      "name": "rrtn-02-summarize-urls",
+      "region": "europe-west1"
+    },
+    {
+      "name": "rrtn-scrape-article",
+      "region": "europe-west1"
+    },
+    {
+      "name": "rrtn-share-article",
+      "region": "europe-west1"
+    },
+    {
+      "name": "rrtn-share-article-from-cb",
+      "region": "europe-west1"
+    },
+    {
+      "name": "rrtn-store-url",
+      "region": "europe-west1"
+    },
+    {
+      "name": "rrtn-store-whatsapp-urls",
+      "region": "europe-west1"
+    },
+    {
+      "name": "rrtn-summarize-urls",
+      "region": "europe-west1"
+    },
+    {
+      "name": "share-article-manhouse",
+      "region": "europe-west1"
+    }
+  ],
+  "palladius-eu-infra": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "spinno": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "riclife": {
+    "error": "Insufficient permissions (run.services.list likely missing)"
+  },
+  "ror-goldie": [
+    {
+      "name": "deploy-run-scooby-dev",
+      "region": "europe-west4"
+    },
+    {
+      "name": "dhh-vanilla-701-dev",
+      "region": "europe-west6"
+    },
+    {
+      "name": "dhh-vanilla-701-prod",
+      "region": "europe-west6"
+    },
+    {
+      "name": "genai-kids-stories-delayedjob-prod",
+      "region": "us-central1"
+    },
+    {
+      "name": "genai-kids-stories-gcloud",
+      "region": "us-central1"
+    },
+    {
+      "name": "genai-kids-stories-gcloud-local",
+      "region": "europe-west1"
+    },
+    {
+      "name": "genai-kids-stories-gcloud-local",
+      "region": "us-central1"
+    },
+    {
+      "name": "genai-kids-stories-gcloud-poor",
+      "region": "europe-west1"
+    },
+    {
+      "name": "genai-kids-stories-gcloud-test",
+      "region": "us-central1"
+    },
+    {
+      "name": "genai-kids-stories-jobrunner",
+      "region": "us-central1"
+    },
+    {
+      "name": "genai-kids-stories-manhouse",
+      "region": "europe-north1"
+    },
+    {
+      "name": "goldie-cli-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "goldie-cli-prod",
+      "region": "europe-west1"
+    },
+    {
+      "name": "goldie-cli-prod",
+      "region": "europe-west2"
+    },
+    {
+      "name": "prompteer-prod",
+      "region": "us-central1"
+    },
+    {
+      "name": "ror-dhh-vanilla",
+      "region": "us-central1"
+    },
+    {
+      "name": "saga-gallery-bin-manhouse-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "saga-gallery-cbpush-prod",
+      "region": "europe-west1"
+    },
+    {
+      "name": "saga-gallery-cbyaml-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "saga-gallery-da-wizard",
+      "region": "us-central1"
+    },
+    {
+      "name": "scooby-run-1a0a17e",
+      "region": "europe-west4"
+    },
+    {
+      "name": "scoobyng-auto",
+      "region": "europe-west4"
+    },
+    {
+      "name": "scoobyng-auto-dev",
+      "region": "europe-west6"
+    },
+    {
+      "name": "sinatrocolo-grotz-dev",
+      "region": "europe-west1"
+    },
+    {
+      "name": "tf-saga-gallery-rails-dev",
+      "region": "europe-west1"
+    }
+  ],
+  "goliardia-prod": [
+    {
+      "name": "goliardia-latest-container-test",
+      "region": "us-central1"
+    },
+    {
+      "name": "run-goliardia-cli",
+      "region": "europe-west1"
+    }
+  ],
+  "xpn-carlessos-org": [
+    {
+      "name": "hello",
+      "region": "europe-west6"
+    },
+    {
+      "name": "prova-del-menga",
+      "region": "europe-west1"
+    }
+  ],
+  "athos-test": [
+    {
+      "name": "recommendation-service-1",
+      "region": "us-central1"
+    },
+    {
+      "name": "recommendation-service-2",
+      "region": "us-west1"
+    }
+  ],
+  "gae-debiti": [
+    {
+      "name": "aaa",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gae-ror-app-datastore-1-run",
+      "region": "europe-west1"
+    },
+    {
+      "name": "gaed-ror-goldie-dev",
+      "region": "us-central1"
+    },
+    {
+      "name": "goldie-cli",
+      "region": "europe-west1"
+    },
+    {
+      "name": "ror-goldie-dev-3000",
+      "region": "us-central1"
+    },
+    {
+      "name": "ror-goldie-prod-3000",
+      "region": "us-central1"
+    }
+  ],
+  "ric-cccwiki": [
+    {
+      "name": "chat-flask-app",
+      "region": "us-central1"
+    },
+    {
+      "name": "dhh-rails-app",
+      "region": "southamerica-east1"
+    },
+    {
+      "name": "dhh-rails-pgv-langchain",
+      "region": "us-central1"
+    },
+    {
+      "name": "discord-bot-docker",
+      "region": "us-central1"
+    },
+    {
+      "name": "hello",
+      "region": "europe-west1"
+    },
+    {
+      "name": "hello-hslu",
+      "region": "us-central1"
+    },
+    {
+      "name": "prova-goldie-deleteme",
+      "region": "us-central1"
+    },
+    {
+      "name": "prova-ruby-auth-deleteme-gprojects-gen2",
+      "region": "europe-north1"
+    },
+    {
+      "name": "ricc-bookshelf",
+      "region": "us-central1"
+    },
+    {
+      "name": "ror6-2020-goldie-mysql-prod",
+      "region": "southamerica-east1"
+    },
+    {
+      "name": "septober-mysql-2-3-12-prova",
+      "region": "europe-central2"
+    },
+    {
+      "name": "sinatra",
+      "region": "us-central1"
+    },
+    {
+      "name": "sinatric",
+      "region": "us-central1"
+    },
+    {
+      "name": "twitter-scraper",
+      "region": "europe-west1"
+    },
+    {
+      "name": "twitter-scraper-staging",
+      "region": "europe-west1"
+    }
+  ]
+}

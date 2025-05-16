@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -euo pipefail
+
+echo "Sourcing $1..."
+. "$1"
+
+    gcloud config configurations create "$CONFIG_NAME" ||
+        gcloud config configurations activate "$CONFIG_NAME"
+    gcloud config set account "$USER_ACCOUNT"
+    gcloud config set project "$GOOGLE_CLOUD_PROJECT"
+    gcloud config set region  "$GOOGLE_CLOUD_LOCATION"
+    gcloud auth application-default login "$USER_ACCOUNT"
+    echo "Setting quota for GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT"
+    gcloud auth application-default set-quota-project "$GOOGLE_CLOUD_PROJECT"
+
+verde ALL OK.  "$CONFIG_NAME" is done. Now try: just

@@ -1,0 +1,38 @@
+\
+# Ignore temporary files
+.echodo_history
+.ondir.was.here.touch
+
+# Ignore IDE/Editor specific files
+.ruby-lsp/
+.vscode/
+
+# Ignore environment files
+**/.env*
+
+# Ignore cache, virtual environments, and build artifacts
+**/.cache/
+**/.venv/
+**/__pycache__/
+**/out/
+
+# Ignore generated files
+**/metric_chart*.png
+**/cloud_run_charts/
+
+# Ignore database files
+**/convos.sqlite3
+
+# Ignore chat history/log files
+**/chat_history*.txt
+
+# Ignore private and old code directories
+**/private/
+**/vecchiume/
+
+# Ignore specific potentially sensitive data files
+rag/by-url/urls.yaml
+
+# Ignore experimental code
+01-prova-python/experiments/
+t.*

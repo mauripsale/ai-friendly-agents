@@ -1,0 +1,5 @@
+Tell me what are my Cloud Run endpoints
+Tell me more about gemini-news-crawler-manhouse-prod.
+Please find all revisions for this endpoint and write them into a markdown table.
+Does the endpoint ping?
+What code version does the homepage suggest? Can you map it to some of the endpoint versions and correlate to the one currently serving traffic?

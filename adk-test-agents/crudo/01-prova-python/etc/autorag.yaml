@@ -1,0 +1,8 @@
+
+public_docs:
+  # Cloud Run APIs
+  - https://cloud.google.com/python/docs/reference/run/latest/summary_overview
+  - https://cloud.google.com/python/docs/reference/run/latest/google.cloud.run_v2.services.services
+  - https://cloud.google.com/python/docs/reference/run/latest/google.cloud.run_v2.services.revisions.RevisionsClient
+  - https://cloud.google.com/python/docs/reference/run/latest/google.cloud.run_v2.types
+  - https://cloud.google.com/python/docs/reference/run/latest/google.cloud.run_v2.types.TrafficTarget

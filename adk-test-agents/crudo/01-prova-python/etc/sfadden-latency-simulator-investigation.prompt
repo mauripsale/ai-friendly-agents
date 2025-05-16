@@ -1,0 +1,4 @@
+For this configuration  (projectid='serverlessusability', region='us-central1', service='latency-simulator'), please check Cloud Run endpoints for my service.
+Please compute all graphs/charts that you're able to compute for 'latency-simulator' service in us-central1.
+Whats the traffic like today, respect to yesterday for the same service 'latency-simulator'?
+When was the max traffic spike yesterday?
