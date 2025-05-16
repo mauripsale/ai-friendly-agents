@@ -15,5 +15,5 @@ pyyaml
 pytz
 # For Monitoring graphs
 matplotlib
-# for the app
+# ffor thwe app
 streamlit
