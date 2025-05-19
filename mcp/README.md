@@ -21,11 +21,11 @@ The protocol is well documented and well established. Again, all
 
 ## Ruby
 
-1. `ruby-sdk`. :yellow: The official gem only supports **STDIO**. the gem is not pushed anywhere, so I took the code and pushed it to
+1. [ruby-sdk](https://github.com/modelcontextprotocol/ruby-sdk).(48 🌟) :yellow: The official gem only supports **STDIO**. the gem is not pushed anywhere, so I took the code and pushed it to
   [model_context_protocol_riccardo](https://rubygems.org/gems/model_context_protocol_riccardo), and apologizing here.
     * Please see an example server in `ruby-sdk-example-stdio-server/`
-1. [mcp-rb](https://github.com/funwarioisii/mcp-rb). :yellow: Very simple gem, oriented to Sinatra. Only supports **stdio** and ping.
+1. [mcp-rb](https://github.com/funwarioisii/mcp-rb) (178 🌟). :yellow: Very simple gem, oriented to Sinatra. Only supports **stdio** and ping.
     * Please see an example server in `mcp-ruby-hello/`
-2. [mcp_on_ruby](https://github.com/nagstler/mcp_on_ruby). Seems to support  HTTP and STDIO transports.
+2. [mcp_on_ruby](https://github.com/nagstler/mcp_on_ruby) (65 🌟). Seems to support  HTTP and STDIO transports.
     * havent truied it yet.
-3. [fast-mcp](https://github.com/yjacquin/fast-mcp). Sull of emojis. ✅ Seems to support ALL transports! STDIO, HTTP, and SSE.
+3. [fast-mcp](https://github.com/yjacquin/fast-mcp) (619 🌟). Sull of emojis. ✅ Seems to support ALL transports! STDIO, HTTP, and SSE.

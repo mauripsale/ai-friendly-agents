@@ -1,0 +1,15 @@
+
+
+list:
+    just -l
+    @echo Gem code: https://github.com/yjacquin/fast-mcp
+
+install:
+    bundle install
+
+run:
+    bundle exec ruby sinatra_stdio_server.rb
+
+# test with inspector
+test:
+    npx @modelcontextprotocol/inspector sinatra_stdio_server.rb
