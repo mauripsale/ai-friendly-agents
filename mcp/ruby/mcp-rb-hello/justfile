@@ -1,0 +1,32 @@
+# Default recipe: lists available recipes.
+# Handy for a quick reminder of what you can do!
+# Usage: just
+default:
+    @just --list
+
+# Install dependencies using Gemfile.builder.
+# This recipe ensures all gems specified in your Gemfile.builder are installed.
+# We're explicitly telling Bundler to use 'Gemfile.builder'.
+# Usage: just install
+install:
+    @echo "📦 Bundling those Ruby gems... Hold onto your hats! 🤠"
+    # BUNDLE_GEMFILE={{justfile_directory()}}/Gemfile.builder bundle install --jobs=4 # Using --jobs for potentially faster bundling!
+    bundle install --jobs=4
+    @echo "✅ Gems installed successfully! You're ready to roll. 🎸"
+
+# Run the application server.
+# This recipe depends on 'install' to ensure dependencies are met before running.
+# Usage: just run-server
+run-server: install
+    @echo "🚀 Firing up the server! Hope you brought marshmallows! 🔥"
+    # 🟡 IMPORTANT: You might need to change 'ruby main.rb' below!
+    # This is a placeholder. Check how your 'mcp-rb' application is meant to be started.
+    # It could be 'ruby app.rb', 'rackup', or a specific command from the 'mcp-rb' gem.
+    # BUNDLE_GEMFILE={{justfile_directory()}}/Gemfile.builder bundle exec ruby main.rb
+    bundle exec ruby hello-mcp-server.rb
+
+
+
+# rake test
+test:
+    rake test:unit # run only the unit tests, skipping tests that test a running server
