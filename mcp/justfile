@@ -13,3 +13,7 @@ inspect-python-weather-server:
         --directory python/weather-server-python/ \
         run \
         weather
+
+
+download-fast-mcp:
+    git clone https://github.com/yjacquin/fast-mcp fast-mcp-copy/

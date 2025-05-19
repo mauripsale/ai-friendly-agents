@@ -1,2 +1,4 @@
-quickstart-resources-copy/
+#quickstart-resources-copy/
 claude-desktop-debian/
+#fast-mcp-copy/
+*-copy/

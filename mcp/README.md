@@ -29,3 +29,4 @@ The protocol is well documented and well established. Again, all
 2. [mcp_on_ruby](https://github.com/nagstler/mcp_on_ruby) (65 🌟). Seems to support  HTTP and STDIO transports.
     * havent truied it yet.
 3. [fast-mcp](https://github.com/yjacquin/fast-mcp) (619 🌟). Sull of emojis. ✅ Seems to support ALL transports! STDIO, HTTP, and SSE.
+    * Was able to get an SSE server up and running: http://localhost:9292/mcp/sse in `ruby/fast-mcp-hello-server$ bundle exec ruby rack_middleware.rb`
