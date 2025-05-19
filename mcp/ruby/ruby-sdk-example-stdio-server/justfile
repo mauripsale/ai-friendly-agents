@@ -1,0 +1,15 @@
+
+
+
+list:
+    just -l # --tree
+
+install:
+    bundle install
+
+run-stdio:
+    #    bundle exec ruby -Ilib -rjustfile -e 'Justfile.run(ARGV)' -- $ARGS
+    bundle exec ruby stdio_server.rb
+
+run-sse:
+    bundle exec ruby sse_server.rb

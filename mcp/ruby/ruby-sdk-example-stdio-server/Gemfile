@@ -1,0 +1,8 @@
+
+source "https://rubygems.org"
+
+
+#gem 'model_context_protocol'
+#https://rubygems.org/gems/model-context-protocol-rb
+#gem 'model-context-protocol-rb'
+gem 'model_context_protocol_riccardo'
