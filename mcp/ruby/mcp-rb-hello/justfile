@@ -27,6 +27,6 @@ run-server: install
 
 
 
-# rake test
-test:
-    rake test:unit # run only the unit tests, skipping tests that test a running server
+# rake test - only works on the gem, not here.
+# test:
+#     rake test:unit # run only the unit tests, skipping tests that test a running server
