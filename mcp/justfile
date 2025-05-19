@@ -1,0 +1,5 @@
+
+
+# want to see quickstart client server apps: https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python
+download-quickstart-resources:
+    git clone https://github.com/modelcontextprotocol/quickstart-resources quickstart-resources-copy/
