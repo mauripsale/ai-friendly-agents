@@ -1,0 +1,7 @@
+
+
+install:
+    @echo "Ricc: this wont work (source shenanings), need to move to a bash script.."
+    uv venv
+    source .venv/bin/activate
+    uv add mcp anthropic python-dotenv

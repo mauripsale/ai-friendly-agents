@@ -1,0 +1,19 @@
+
+
+install:
+    uv add "mcp[cli]" httpx
+    # uv add "mcp[cli]" anthropic python-dotenv
+
+# runs Weather Server via uvicorn
+# this is the same as running `uvicorn weather:app --host - says Gemini.
+run:
+    uv --active .venv/ run weather.py
+
+
+
+inspect-weather-server:
+    npx @modelcontextprotocol/inspector \
+        uv \
+        --directory ./ \
+        run \
+        weather
