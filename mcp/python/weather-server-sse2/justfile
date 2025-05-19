@@ -7,7 +7,8 @@ install:
 # runs Weather Server via uvicorn
 # this is the same as running `uvicorn weather:app --host - says Gemini.
 run:
-    uv --active .venv/ run weather.py
+    # --active .venv/
+    uv  run weather.py
 
 
 
