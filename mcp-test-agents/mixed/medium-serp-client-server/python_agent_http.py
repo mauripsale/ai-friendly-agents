@@ -6,12 +6,17 @@ from pydantic_ai import Agent
 from pydantic_ai.mcp import MCPServerHTTP
 import asyncio
 
+
+# Riccardo SSE endpoint configured in Rails
+    #url='http://localhost:3000/mcp/sse', # Default localhost SSE endpoint configured in Rails
+rails_url = 'http://localhost:8080/mcp/sse' # Default localhost SSE endpoint configured in Rails
+
 # Configure the MCP server connection via HTTP/SSE
 # Ensure your Rails server is running (e.g., `rails s`)
 # If authentication is enabled, provide the token:
 # headers = {'Authorization': 'Bearer your-secure-token'}
 server = MCPServerHTTP(
-    url='http://localhost:3000/mcp/sse', # The SSE endpoint configured in Rails
+    url=rails_url,
     # headers=headers # Uncomment if using authentication
 )
 
@@ -19,17 +24,21 @@ server = MCPServerHTTP(
 agent = Agent('google-gla:gemini-1.5-flash', mcp_servers=[server]) # Replace with your desired LLM
 
 async def main():
-    print("Running agent connected to Rails MCP server...")
+    print(f"Running agent connected to Rails MCP server at {rails_url}...")
     # The context manager ensures proper connection handling for SSE
     async with agent.run_mcp_servers():
         # Ask the agent to use one of the tools defined in Rails
-        result = await agent.run("Get me a list of all users.")
+        #result = await agent.run("Get me a list of all users.")
         # Example for creating a user:
-        # result = await agent.run("Create a new user named 'Alice' with email 'alice@example.com'.")
+        #result = await agent.run("Create a new user named 'Alice2' with email 'alice2@example.com' and password 'very-difficult'.")
+        result = await agent.run("Get me a list of all chats.")
 
     print("***********************")
     print("Agent Output:")
-    print(result.output)
+    def str_to_cyan(text):
+        return f"\033[96m{text}\033[0m"
+
+    print(str_to_cyan(result.output))
     print("***********************")
 
 if __name__ == "__main__":
