@@ -45,3 +45,7 @@ run-web:
 # ADK Web
 web:
     adk web --port 8081
+
+
+pip-update:
+    pip install --upgrade -r requirements.txt

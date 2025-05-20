@@ -1,8 +1,11 @@
 Copying C/S for python from here:
 * https://github.com/modelcontextprotocol/quickstart-resources/tree/main/weather-server-python
 
-
 I don't personally understand why Anthropic defaults to STDIO, with SSE I can host and see all servers very easily.
+
+## Libraries for Python MCP
+
+* ? https://github.com/jlowin/fastmcp (10k 🌟 !) Haven't tested it yet, but look at the stars! [pypi](https://pypi.org/project/fastmcp/)
 
 ## Transport
 

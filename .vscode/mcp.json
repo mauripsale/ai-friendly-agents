@@ -1,0 +1,25 @@
+{
+  "servers": {
+      "riccardo-from-youtube-docker-time": {
+          "command": "docker",
+          "args": [
+              "run",
+              "-i",
+              "--rm",
+              "mcp/time"
+          ],
+          "env": {}
+      },
+      "riccardo-own-turborails8-mcp-server": {
+          "type": "sse",
+          "url": "http://localhost:8080/mcp/sse"
+      },
+      // "ricc-python-stdio-mcp-server-weather": {
+      //   "type": "stdio",
+      //   "command": "python", // should add python to the command
+      //   "args": [
+      //       "/usr/local/google/home/ricc/git/ai-friendly-agents/mcp-prod-agents/python-sse-weather-server/weather.py"
+      //   ]
+      // }
+  }
+}
