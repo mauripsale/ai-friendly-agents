@@ -6,7 +6,7 @@ list:
 ruby-server:
     bundle exec ruby stdio-serp-mcp.rb
 
-python-client:
+python-stdio-client-to-rails-mcp-server:
     python python_agent_stdio.py
 
 sample-client-question-to-SERP:

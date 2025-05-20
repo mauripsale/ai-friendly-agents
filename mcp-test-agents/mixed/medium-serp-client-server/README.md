@@ -14,6 +14,7 @@ This folder (as per [this article](https://learnitnow.medium.com/bridging-the-ga
 2. An MCP client in python which calls a local Ruby on Rails app with a `CreateUser` and `ListUser` functionality. This needs an external RoR app with some
   devise-ish user creation functionality.
 
+Note the python code uses Gemini via [Pydantic AI agents](https://ai.pydantic.dev/agents/).
 
 ## Thanks
 
