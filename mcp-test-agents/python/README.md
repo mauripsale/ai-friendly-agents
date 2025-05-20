@@ -4,6 +4,10 @@ Copying C/S for python from here:
 
 I don't personally understand why Anthropic defaults to STDIO, with SSE I can host and see all servers very easily.
 
+## Transport
+
+MCP uses JSON-RPC 2.0 as its wire format.
+
 Seems like default port is `8000`: http://localhost:8000/sse
 
 There are 3 forms of transport (poorly defined in [official docs](https://modelcontextprotocol.io/docs/concepts/transports#built-in-transport-types) which only explains 2):

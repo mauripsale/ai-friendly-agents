@@ -17,3 +17,10 @@ inspect-python-weather-server:
 
 download-fast-mcp:
     git clone https://github.com/yjacquin/fast-mcp fast-mcp-copy/
+
+clean:
+    rm -rf quickstart-resources-copy
+    rm -rf fast-mcp-copy
+    # rm -rf python/weather-server-python/quickstart-resources-copy
+    # rm -rf python/weather-server-python/fast-mcp-copy
+    # rm -rf python/weather-server-python/quickstart-resources

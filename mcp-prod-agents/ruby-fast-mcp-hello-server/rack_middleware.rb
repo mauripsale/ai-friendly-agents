@@ -62,7 +62,7 @@ end
 # Create a simple Rack application
 app = lambda do |_env|
   [200, { 'Content-Type' => 'text/html' },
-   ['<html><body><h1>Hello from Rack!</h1><p>This is a simple Rack app with MCP middleware.</p></body></html>']]
+   ['<html><body><h1>Hello from 🗄️ Rack!</h1><p>This is a simple Rack app with MCP middleware.</p></body></html>']]
 end
 
 # Create the MCP middleware
