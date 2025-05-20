@@ -1,0 +1,17 @@
+
+list:
+    just -l
+
+
+ruby-server:
+    bundle exec ruby stdio-serp-mcp.rb
+
+python-client:
+    python python_agent_stdio.py
+
+sample-client-question-to-SERP:
+    echo "What is current date and time in Zurich (CH)?" |  python python_agent_stdio.py
+
+
+connect-to-rails-mcp-server:
+    python python_agent_http.py

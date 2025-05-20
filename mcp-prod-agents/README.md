@@ -5,13 +5,12 @@ Here are my working MCP servers. Yup, maybe PROD is a big word.
 
 **CoC**: Naming in folders respects this convention:
 
-* `LANGUAGE-MCPTRANSPORT-[LIBRARY-]SERVICENAME`, for instance:
+* `{LANGUAGE}-{MCP_TRANSPORT}-[{LIBRARY}-]{SERVICE_NAME}`, for instance:
     * `ruby-sse-my-program/`
     * `python-stdio-my-other-program/`
-* If choosing between multiple libraries, I'll prepend the library to the service name, eg
-    *  `ruby-sse-fastmcp-hello-server/`:
-    *  Language: Ruby
-    *  Transport: SSE
+* If choosing between multiple libraries, I'll prepend the library to the service name, eg let's decompose `ruby-sse-fastmcp-hello-server/`:
+    *  Language: **Ruby**
+    *  Transport: **SSE**
     *  Gem: `fast-mcp`
     *  Name: `hello-server`.
 

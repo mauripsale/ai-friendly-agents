@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+gem "fast-mcp"
+gem 'rack'
+gem "google_search_results"
+gem 'dotenv'
