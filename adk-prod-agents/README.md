@@ -1,5 +1,9 @@
 Self: https://github.com/palladius/ai-friendly-agents/
 
+**Note**: these agents are tested against the `0.5.0` version. The `1.0.0` brings [incompatible changes](https://github.com/google/adk-python/blob/3b5232c14f48e1d5b170f3698d91639b079722c8/CHANGELOG.md) which will require more work.
+
+`pip install git+https://github.com/google/adk-python.git@main`
+
 ## Agents
 
 My friendly agents:
