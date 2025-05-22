@@ -1,0 +1,97 @@
+
+(.venv) .venvricc-macbookpro3:adk-test-agents ricc$ adk run gemmina-adk050/
+Log setup complete: /var/folders/ml/1t92vmgs3_j8xfcjnczvjwnr0050ys/T/agents_log/agent.20250522_102228.log
+To access latest log: tail -F /var/folders/ml/1t92vmgs3_j8xfcjnczvjwnr0050ys/T/agents_log/agent.latest.log
+Running agent gemmina__local_agent, type exit to exit.
+[user]: does internet work?
+10:23:06 - LiteLLM:INFO: utils.py:2905 -
+LiteLLM completion() model= llama3.2:1b; provider = ollama_chat
+10:23:08 - LiteLLM:INFO: cost_calculator.py:655 - selected model name for cost calculation: ollama_chat/llama3.2:1b
+Traceback (most recent call last):
+  File "/Users/ricc/git/ai-friendly-agents/.venv/bin/adk", line 8, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/click/core.py", line 1442, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/click/core.py", line 1363, in main
+    rv = self.invoke(ctx)
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/click/core.py", line 1830, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/click/core.py", line 1226, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/click/core.py", line 794, in invoke
+    return callback(*args, **kwargs)
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/cli/cli_tools_click.py", line 175, in cli_run
+    asyncio.run(
+    ~~~~~~~~~~~^
+        run_cli(
+        ^^^^^^^^
+    ...<5 lines>...
+        )
+        ^
+    )
+    ^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/cli/cli.py", line 170, in run_cli
+    await run_interactively(
+    ...<4 lines>...
+    )
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/cli/cli.py", line 91, in run_interactively
+    async for event in runner.run_async(
+    ...<6 lines>...
+          click.echo(f'[{event.author}]: {text}')
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/runners.py", line 197, in run_async
+    async for event in invocation_context.agent.run_async(invocation_context):
+    ...<2 lines>...
+      yield event
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/agents/base_agent.py", line 133, in run_async
+    async for event in self._run_async_impl(ctx):
+      yield event
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/agents/llm_agent.py", line 246, in _run_async_impl
+    async for event in self._llm_flow.run_async(ctx):
+      self.__maybe_save_output_to_state(event)
+      yield event
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 243, in run_async
+    async for event in self._run_one_step_async(invocation_context):
+      last_event = event
+      yield event
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 272, in _run_one_step_async
+    async for event in self._postprocess_async(
+    ...<4 lines>...
+      yield event
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 342, in _postprocess_async
+    async for event in self._postprocess_handle_function_calls_async(
+    ...<2 lines>...
+      yield event
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/base_llm_flow.py", line 417, in _postprocess_handle_function_calls_async
+    if function_response_event := await functions.handle_function_calls_async(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        invocation_context, function_call_event, llm_request.tools_dict
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/functions.py", line 165, in handle_function_calls_async
+    function_response = await __call_tool_async(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+        tool, args=function_args, tool_context=tool_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/flows/llm_flows/functions.py", line 430, in __call_tool_async
+    return await tool.run_async(args=args, tool_context=tool_context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ricc/git/ai-friendly-agents/.venv/lib/python3.13/site-packages/google/adk/tools/function_tool.py", line 82, in run_async
+    return self.func(**args_to_call) or {}
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: check_internet() got an unexpected keyword argument 'type'

@@ -11,6 +11,8 @@ init:
     which uv || (echo "uv not found, installing..." && pip install uvicorn)
     uv venv
 
+install:
+    uv pip install -r requirements.txt
 
 # This is where things get extra depressing. If you happened to have local wheels of packages (somehow), you can install them with uv. For example:
 install-local-wheel:
@@ -19,3 +21,7 @@ install-local-wheel:
 #group[('uv')]
 build:
     python -m build .
+
+run-gemmina-050-via-uv:
+    which adk
+    export OLLAMA_API_BASE="http://localhost:11434" && adk run .

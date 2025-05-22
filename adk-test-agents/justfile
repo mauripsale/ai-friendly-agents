@@ -15,3 +15,13 @@ clean:
     find . -name "__pycache__" -delete
     find . -name ".pytest_cache" -delete
     find . -name ".mypy_cache" -delete
+
+run-gemmina-050: clean
+    which adk
+    export OLLAMA_API_BASE="http://localhost:11434" && adk run gemmina-adk050/
+
+adk-version:
+    echo adk --version NON VA
+    which adk
+    cat $(which adk)
+    ls -al "$(dirname $(which adk))"/../

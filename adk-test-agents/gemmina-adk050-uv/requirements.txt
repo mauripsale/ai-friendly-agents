@@ -1,0 +1,7 @@
+# !pip install google-adk -q
+# !pip install litellm -q
+#google-adk
+google-adk==0.5.0
+litellm
+
+#pip install litellm

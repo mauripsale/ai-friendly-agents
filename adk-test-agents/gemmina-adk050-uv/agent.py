@@ -17,9 +17,9 @@ import sys
 logger = logging.getLogger(__name__)
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 
-ollama_model = "gemma3:1b" # fastr, 815MB
+#ollama_model = "gemma3:1b" # fastr, 815MB
 # BROKEN REINSTALL PLS ollama_model = "gemma3:latest" # slower, 3.3GB - gives errors
-#ollama_model = 'llama3.2:1b' # 1.3GB # works
+ollama_model = 'llama3.2:1b' # 1.3GB # works
 
 
 #######################

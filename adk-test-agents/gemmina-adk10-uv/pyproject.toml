@@ -1,8 +1,10 @@
 [project]
 name = "gemmina-uv"  # Or whatever you want to call it
 version = "0.1.0"
-description = "My utterly pointless project" # Yeah, I said it.
-dependencies = []
+description = "My utterly pointless project (adk v1.0)" # Yeah, I said it.
+dependencies = [
+    # google-adk==1.0.0
+]
 
 [build-system]
 requires = ["hatchling"]

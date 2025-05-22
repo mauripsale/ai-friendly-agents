@@ -1,0 +1,26 @@
+
+
+list:
+    just -l
+    @which glow  && echo 'glow installed! You can use glow to read README. Try: just readme'
+
+readme:
+    glow README.md
+
+init:
+    which uv || (echo "uv not found, installing..." && pip install uvicorn)
+    uv venv
+
+
+# This is where things get extra depressing. If you happened to have local wheels of packages (somehow), you can install them with uv. For example:
+install-local-wheel:
+    uv pip install ./path/to/your/package.whl
+
+#group[('uv')]
+build:
+    python -m build .
+
+run:
+    which adk
+    # export OLLAMA_API_BASE="http://localhost:11434" && adk run .
+    adk run .

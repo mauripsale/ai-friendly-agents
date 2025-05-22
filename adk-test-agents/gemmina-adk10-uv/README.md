@@ -12,6 +12,8 @@ Gemmina was developed on a train from Zurich to Geneva swithout any internet. Di
 | **Components:**  | None |
 | **Python framework:**  | `uv` |
 | **ADK compatibility:**  | `1.0.0` (tested) |
+| Notes | sizes <3b tend to miss tool calls - see [bug/49](https://github.com/google/adk-python/issues/49)  |
+
 
 ## Gemmmina convo
 
