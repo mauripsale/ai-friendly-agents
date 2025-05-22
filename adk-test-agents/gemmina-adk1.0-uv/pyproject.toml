@@ -1,0 +1,9 @@
+[project]
+name = "gemmina-uv"  # Or whatever you want to call it
+version = "0.1.0"
+description = "My utterly pointless project" # Yeah, I said it.
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

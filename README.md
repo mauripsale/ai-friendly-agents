@@ -1,6 +1,12 @@
 
 Self: https://github.com/palladius/ai-friendly-agents/ (public)
 
+## Breaking changes
+
+Currently some agents are broken. I've added a dangerous change.
+
+However, a stable version is available here: https://github.com/palladius/ai-friendly-agents/tree/v0.9/
+
 # AI friendly agents
 
 A bunch of friendly agents ready to use with ADK, MCP, A2A et al.
