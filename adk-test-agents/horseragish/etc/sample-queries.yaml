@@ -1,0 +1,22 @@
+
+sample_queries:
+  - folder: google-financials
+    query: "What is the latest outlook of Google's financials?"
+    #expected_answer: "The capital of France is Paris."
+  - folder: google-financials
+    query: "Which quarter did Google do best? What about other bets?"
+    #expected_answer: "Harper Lee wrote 'To Kill a Mockingbird'."
+  # Maxime: edit away!
+  - folder: maxime_router
+    query: "How do I configure the Maxime router?"
+    #expected_answer: "The capital of France is Paris."
+
+
+folders_descriptions:
+  google-financials: |
+    Queries related to Google's financial performance and outlook.
+  maxime_router: |
+    Queries related to configuring the Maxime router.
+  ricc_schools: |
+    Queries related to the Ricc children schools at Tendem IMS Zurich.
+  # Add more folder descriptions as needed

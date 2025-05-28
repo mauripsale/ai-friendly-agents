@@ -1,0 +1,11 @@
+Based on this context file(s) extracted from PDF, please answer the user query:
+
+------------------------------------------------------
+Context files (title and content)
+------------------------------------------------------
+{{files_content}}
+
+------------------------------------------------------
+User query
+------------------------------------------------------
+{{user_query}}
