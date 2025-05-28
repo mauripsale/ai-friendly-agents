@@ -1,0 +1,28 @@
+I need to read all PDFs, TXT and Markdown in a folder and make it available to a high context-window LLM (Gemini 2.X).
+
+Please write a python script, which given a folder like "data/google_financials", takes all documented which i like (PDF and Markdown) and for each parses them into a markdown (of course the second is just read the file, the first needs some transformation). Add a flag "ignore_images" which is true by default - we wasnt to be frugal in LLM token optimization.
+
+when this is done, it returns a HUGE string containing a markdown like this:
+
+```markdown
+# [File 1] {{NameFILE_1}}
+
+{{ContentFile1}}
+
+# [File 2] {{NameFILE_2}}
+
+{{ContentFile2}}
+
+...
+```
+
+Of course we need to make sure all ContentFileX doesn not contain H1, so we dont have a chapter from file 42 accidentally becoming the title of file 43.
+
+To make sure the LLM is not surprised, we'll add [File X] at the beginning.
+
+re python:
+
+1. Use `uv` for project and deps setup
+2. If possible use `google-adk` if you're aware of it.
+3. Use strong typing - I'll need this for LLM function calling.
+
