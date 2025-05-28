@@ -3,6 +3,7 @@ install:
     uv pip install typer PyMuPDF typing-extensions
 
 run1:
-    python main.py data/sample_docs/ --output-file aggregated_documents.md --debug
+    python main.py data/sample_docs/ --output-file aggregated_documents.md --debug | tee run1.log.md
+
 run2:
-    python main.py data/sample_docs/
+    python main.py data/sample_docs/ | tee run2.log.md

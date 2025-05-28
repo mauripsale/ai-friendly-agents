@@ -23,3 +23,5 @@ Execution:
 4. returns to user.
 
 Bonus point if the function has a limit comntext window size, eg 1M, and stops reading at that point. I know there are libraries in `rust` and `go` which DO THIS: take N info/files, prioritize them and fit into the given context window.
+
+* https://github.com/zurawiki/tiktoken-rs
