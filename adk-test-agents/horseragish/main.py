@@ -1,125 +1,130 @@
-# main.py
-import argparse
+import typer
 from pathlib import Path
-import sys # For sys.exit, because sometimes we just need to stop.
+from typing import List, Optional
+from typing_extensions import Annotated # For Typer >0.9 for Optional flags
 
-# Attempt to import our local heroes from ricclib
-try:
-    from ricclib.file_parser import process_folder
-    from ricclib.colors import AnsiColors
-except ImportError as e:
-    # This is a critical error, the script can't run without its modules.
-    # Using a raw print here as AnsiColors might not be available.
-    print(f"[CRITICAL ERROR] Oh no! Failed to import modules from 'ricclib': {e}")
-    print("Please ensure 'ricclib' directory and its Python files (colors.py, file_parser.py, markdown_utils.py, __init__.py) exist where I expect them (same directory as me, main.py).")
-    print("Also, super important: have you installed 'pypdf'? If not, please run: pip install pypdf")
-    sys.exit(1) # Abandon ship!
+from ricclib.parsers import parse_pdf, parse_markdown, parse_txt
+from ricclib.utils import find_files
+from ricclib.colors import Color
 
-def main():
+app = typer.Typer(help="📄 Document Aggregator for LLMs 🤖\n\nCombines PDF, MD, and TXT files into one glorious Markdown string!")
+
+@app.command()
+def process_documents(
+    input_folder: Annotated[Path, typer.Argument(
+        exists=True, file_okay=False, dir_okay=True, readable=True,
+        help="Folder containing documents (PDF, MD, TXT) to process."
+    )],
+    output_file: Annotated[Optional[Path], typer.Option(
+        "--output-file", "-o",
+        help="File to save the combined markdown. Prints to stdout if not provided."
+    )] = None,
+    ignore_images: Annotated[bool, typer.Option(
+        "--ignore-images/--include-images",
+        help="[default: --ignore-images] Focus on text extraction for PDFs to optimize tokens. (Currently uses text-only extraction regardless)"
+    )] = True,
+    debug: Annotated[bool, typer.Option("--debug", "-d", help="Enable debug output. Let's see what's cookin'!")] = False,
+) -> None:
     """
-    Main function to parse arguments and orchestrate the file processing.
-    Your friendly neighborhood document muncher! 🍪 Ready to serve your LLM.
+    Processes PDF, TXT, and Markdown files from a folder into a single markdown string,
+    prefixed with file identifiers and with H1 headings demoted.
+    Ready to be fed to your favorite high-context LLM! 🧠
     """
-    parser = argparse.ArgumentParser(
-        description=AnsiColors.colorize("📚 Docu-Aggregator 3000: Gathers PDF, TXT, & MD files, processes them, and outputs a single Markdown string fit for an LLM king (or queen)! 👑", "magenta"),
-        formatter_class=argparse.RawTextHelpFormatter, # Allows for more control over help text formatting
-        epilog=f"""
-{AnsiColors.cyan("Example invocations (try these!):")}
-  {AnsiColors.green('python main.py ./my_research_papers --output_file research_digest.md')}
-  {AnsiColors.green('python main.py "path/with spaces/docs" --no-ignore-images --debug')}
-
-{AnsiColors.purple("May your tokens be efficiently used and your LLM insights be plentiful! ✨")}
-"""
-    )
-    parser.add_argument(
-        "input_folder",
-        type=str,
-        help=AnsiColors.colorize("Path to the folder stuffed with your precious documents (PDF, TXT, MD).\nI'll bravely venture into subdirectories too! 🗺️", "blue"),
-    )
-    parser.add_argument(
-        "--output_file",
-        "-o", # A classic short flag
-        type=str,
-        default="consolidated_llm_feed.md", # A descriptive default
-        help=AnsiColors.colorize("Where should I scribe the final epic Markdown? (default: consolidated_llm_feed.md) 📝", "blue"),
-    )
-    parser.add_argument(
-        "--ignore_images", # Becomes args.ignore_images
-        action=argparse.BooleanOptionalAction, # Gives --ignore-images and --no-ignore-images
-        default=True, # Sensible default for token optimization
-        help=AnsiColors.colorize("PDF Image Handling: '--ignore-images' (default) focuses on text for token saving. \n'--no-ignore-images' includes a note about potential image context (basic text extraction doesn't render images).", "blue"),
-    )
-    parser.add_argument(
-        "--debug",
-        "-d",
-        action="store_true",
-        help=AnsiColors.colorize("Activate Debug Mode! 🕵️‍♀️ Get ready for a flood of fascinating operational details.", "yellow"),
-    )
-
-    args = parser.parse_args()
-
-    if args.debug:
-        print(AnsiColors.yellow("🕵️‍♂️ Debug mode is ON! We're going deep undercover into the land of files..."))
-        print(f"  {AnsiColors.bold('Input Folder:')} {Path(args.input_folder).resolve()}")
-        print(f"  {AnsiColors.bold('Output File:')} {Path(args.output_file).resolve()}")
-        print(f"  {AnsiColors.bold('Ignore Images in PDF:')} {args.ignore_images}")
-        print(AnsiColors.yellow("-" * 40))
-
-    print(AnsiColors.green(f"🚀 All systems go! Processing folder: {AnsiColors.bold(args.input_folder)}"))
-    if PYPDF_AVAILABLE: # Check if pypdf was successfully imported in file_parser
-        print(AnsiColors.cyan("   (PDF processing capability: ENABLED via pypdf 📄��)"))
-    else:
-        print(AnsiColors.red("   (PDF processing capability: DISABLED - pypdf library not found! PDFs will be skipped or show errors. 📄❌)"))
-        print(AnsiColors.yellow("    Please install it with: pip install pypdf"))
+    if debug:
+        print(f"{Color.CYAN}--- Debug Mode Activated ---{Color.END}")
+        print(f"Processing documents from: {Color.YELLOW}{input_folder}{Color.END}")
+        print(f"Ignore images in PDFs (token optimization): {Color.YELLOW}{ignore_images}{Color.END}")
+        print(f"Output destination: {Color.YELLOW}{output_file if output_file else 'stdout'}{Color.END}")
+        Color.list_ten_typical()
+        print(f"{Color.MAGENTA}Note on google-adk: The google-adk (Google AI Developer Kit) is for on-device AI (e.g., Android) and not used by this script.{Color.END}")
 
 
-    # The main act!
-    consolidated_markdown = process_folder(args.input_folder, args.ignore_images)
+    allowed_extensions = [".pdf", ".md", ".txt"]
+    files_to_process = find_files(input_folder, allowed_extensions)
 
-    output_path = Path(args.output_file)
-    try:
-        # Ensure the directory for the output file exists, otherwise 'open' might cry.
-        output_path.parent.mkdir(parents=True, exist_ok=True) 
+    if not files_to_process:
+        print(f"{Color.YELLOW}🤔 No supported files (PDF, MD, TXT) found in '{input_folder}'. Sad trombone... 🎺{Color.END}")
+        raise typer.Exit(code=1)
+
+    if debug:
+        print(f"{Color.GREEN}Found {len(files_to_process)} files to process:{Color.END}")
+        for f_path_idx, f_path_val in enumerate(files_to_process):
+            print(f"  {f_path_idx+1}. {Color.CYAN}{f_path_val.name}{Color.END}")
+
+    all_content_parts: List[str] = []
+    successful_files: int = 0
+    failed_files: int = 0
+
+    for i, file_path in enumerate(files_to_process):
+        content: Optional[str] = None
+        file_header = f"# [File {i+1}] {file_path.name}\n" # Ensure newline after header
         
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write(consolidated_markdown)
-        
-        # Check if the output was just an error/info message from process_folder
-        if consolidated_markdown.startswith(("# Error", "# Information")):
-             final_message = f"✋ Hold your horses! The process finished, but the output file '{AnsiColors.bold(str(output_path.resolve()))}' seems to contain only operational messages (like errors or info that no files were found). You should probably check its content."
-             print(AnsiColors.yellow(final_message))
-        else:
-            final_message = f"🎉 Ta-da! All documents have been masterfully blended into: {AnsiColors.bold(str(output_path.resolve()))}"
-            print(AnsiColors.green(final_message))
-            print(AnsiColors.magenta("Your LLM is about to receive a beautifully prepared data feast! Bon appétit! 🧑‍🍳"))
+        if debug:
+            print(f"{Color.BLUE}Processing ({i+1}/{len(files_to_process)}): {file_path.name}...{Color.END}")
 
-        # Optional: print a snippet if debug or if content is very short (likely an error/info message)
-        if args.debug or len(consolidated_markdown) < 500 : # Increased length for snippet
-            print(AnsiColors.cyan("\n--- Snippet of Generated Content (or Full Content if Short) ---"))
-            lines = consolidated_markdown.splitlines()
-            if len(lines) > 20 and not args.debug: # Show more for debug
-                for line in lines[:10]: print(line)
-                print(AnsiColors.yellow("... (content truncated for brevity) ..."))
-                for line in lines[-10:]: print(line)
+        try:
+            if file_path.suffix.lower() == ".pdf":
+                content = parse_pdf(file_path, ignore_images)
+            elif file_path.suffix.lower() == ".md":
+                content = parse_markdown(file_path)
+            elif file_path.suffix.lower() == ".txt":
+                content = parse_txt(file_path)
+            # No else needed due to find_files filtering
+
+            if content is not None:
+                all_content_parts.append(file_header)
+                all_content_parts.append(content + "\n") # Add newline after content
+                successful_files += 1
             else:
-                print(consolidated_markdown) # Print all if short or if debug is on
-            print(AnsiColors.cyan("--- End of Snippet ---"))
+                # Error message already printed by the parser
+                if debug:
+                     print(f"{Color.YELLOW}Skipping {file_path.name} due to parsing error or no content.{Color.END}")
+                failed_files +=1
 
-    except IOError as e:
-        print(AnsiColors.red(f"💥 Oh snap! A gremlin interfered with writing to {output_path}: {e}"))
-        print(AnsiColors.yellow("Maybe check the path or permissions? Or perhaps offer the gremlin a cookie? 🍪"))
-        if len(consolidated_markdown) < 3000: # Avoid terminal flooding
-            print(AnsiColors.yellow("\n💡 Here's the content I tried to save (might be long!):\n"))
-            print(consolidated_markdown)
-    except Exception as e:
-        print(AnsiColors.red(f"🚨 Whoopsie! An unexpected interstellar anomaly (aka error) occurred: {e}"))
-        print(AnsiColors.yellow("If this looks serious, you might want to consult your local tech shaman or rubber duck. 🦆"))
+        except Exception as e:
+            print(f"{Color.RED}😱 Oh no! An unexpected error occurred while processing {file_path.name}: {e}{Color.END}")
+            if debug:
+                import traceback
+                traceback.print_exc()
+            failed_files += 1
+            
+    # Add an extra newline between file entries if there's content
+    final_markdown = "\n".join(all_content_parts).strip() # Join with single newline, then strip trailing
+
+    if final_markdown:
+        if output_file:
+            try:
+                output_file.write_text(final_markdown, encoding="utf-8")
+                print(f"{Color.GREEN}🎉 Success! Combined markdown written to: {output_file}{Color.END}")
+            except Exception as e:
+                print(f"{Color.RED}💥 Error writing to output file {output_file}: {e}{Color.END}")
+                if debug:
+                    print(f"{Color.YELLOW}Dumping to stdout instead due to file error:{Color.END}\n{final_markdown}")
+                raise typer.Exit(code=1)
+        else:
+            # Print to stdout if no output file specified
+            print(final_markdown)
+    elif successful_files == 0 and failed_files > 0:
+         print(f"{Color.RED}Processed {len(files_to_process)} files, but all failed or yielded no content. No output generated.{Color.END}")
+         raise typer.Exit(code=1)
+    elif not files_to_process : # Should be caught earlier, but as a safeguard
+        pass # Already handled
+    else: # No files processed successfully, or all files were empty
+        print(f"{Color.YELLOW}No content was aggregated. All processed files might have been empty or resulted in no text.{Color.END}")
+
+
+    if debug:
+        print(f"{Color.CYAN}--- Processing Summary ---{Color.END}")
+        print(f"Total files found: {len(files_to_process)}")
+        print(f"Successfully processed: {Color.GREEN}{successful_files}{Color.END}")
+        print(f"Failed or no content: {Color.RED if failed_files > 0 else Color.GREY}{failed_files}{Color.END}")
+
+    if failed_files > 0:
+        print(f"{Color.YELLOW}⚠️  {failed_files} file(s) could not be processed or yielded no content. Check logs above.{Color.END}")
+        # Optionally raise an error if any file fails
+        # raise typer.Exit(code=1)
+
 
 if __name__ == "__main__":
-    # This is where the journey begins when you type `python main.py ...`
-    # Make sure to import PYPDF_AVAILABLE for the main function to use
-    try:
-        from ricclib.file_parser import PYPDF_AVAILABLE
-    except ImportError: # Should have been caught earlier, but defensive
-        PYPDF_AVAILABLE = False
-    main()
+    app()
+

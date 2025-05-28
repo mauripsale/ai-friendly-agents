@@ -1,0 +1,5 @@
+This is a test text file.
+It has some simple lines.
+
+# This looks like an H1 but it's in a TXT file.
+The script should still demote it if it processes TXT files for headings.
