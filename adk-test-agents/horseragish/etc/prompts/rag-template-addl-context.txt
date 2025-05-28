@@ -1,0 +1,17 @@
+Based on this context file(s) extracted from PDF, and user additional context (eg, they ran some Linux commands to ascertain the status of a machine),
+please answer the user query:
+
+------------------------------------------------------
+Context files (title and content) - Knowledge Base
+------------------------------------------------------
+{{files_content}}
+
+------------------------------------------------------
+Commands - current state of the world
+------------------------------------------------------
+{{maxime_state_of_the_world}}
+
+------------------------------------------------------
+User query
+------------------------------------------------------
+{{user_query}}
