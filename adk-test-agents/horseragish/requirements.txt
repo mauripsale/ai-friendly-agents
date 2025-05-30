@@ -1,0 +1,4 @@
+typer
+PyMuPDF
+typing-extensions
+google-adk

@@ -1,3 +1,14 @@
+# Requirements
+
+Run
+
+```shell
+./install.sh
+source .venv/bin/activate
+```
+
+# Idea
+
 The idea is to NOT do RAG, but to achieve RAG counting on Gemini long context window and injecting ALL content into it.
 
 So I envision a few things:
