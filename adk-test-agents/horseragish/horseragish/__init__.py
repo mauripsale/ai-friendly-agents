@@ -1,1 +1,1 @@
-from .horseragish import agent
+from . import agent

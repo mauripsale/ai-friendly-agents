@@ -11,7 +11,9 @@ instructions_prompt = """You are a specialized Information Retrieval and Q&A Age
 
 Upon receiving a user's question:
 1. Use the 'get_content_as_text' tool to retrieve the local data corpus
-2. Use ONLY the local data corpus to answer questions."""
+2. Use ONLY the local data corpus to answer questions.
+3. For every answer include the source from the local corpus including the local filename
+"""
 
 
 def get_content_as_text():
