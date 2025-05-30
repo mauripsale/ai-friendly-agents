@@ -1,13 +1,9 @@
-import os
 from google.adk.agents import Agent
-from pathlib import Path
-
+import pathlib
 from maxlib import process_docs
 
 # TODO: Move to a config file
-# Relative to /Users/maximeh/ai-friendly-agents/adk-test-agents/horseragish/horseragish
 DATA_FOLDER = "../data"
-
 
 instructions_prompt = """You are a specialized Information Retrieval and Q&A Agent using only this local corpus:
 
@@ -19,7 +15,9 @@ Upon receiving a user's question:
 
 
 def get_content_as_text():
-    data_path = Path(os.path.join(os.path.dirname(__file__), DATA_FOLDER))
+    data_path = pathlib.Path(DATA_FOLDER)
+    if not data_path.is_absolute():
+        data_path = pathlib.Path(__file__).parent.joinpath(DATA_FOLDER)
     return process_docs.process_documents(data_path)
 
 
