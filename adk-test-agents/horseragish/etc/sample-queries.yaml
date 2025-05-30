@@ -1,13 +1,13 @@
 
 sample_queries:
-  - folder: google-financials
+  - folder: data/google-financials
     query: "What is the latest outlook of Google's financials?"
     #expected_answer: "The capital of France is Paris."
-  - folder: google-financials
+  - folder: data/google-financials
     query: "Which quarter did Google do best? What about other bets?"
     #expected_answer: "Harper Lee wrote 'To Kill a Mockingbird'."
   # Maxime: edit away!
-  - folder: maxime_router
+  - folder: data/maxime_router
     query: "How do I configure the Maxime router?"
     #expected_answer: "The capital of France is Paris."
 

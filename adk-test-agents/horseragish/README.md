@@ -8,6 +8,16 @@ source .venv/bin/activate
 ```
 
 # Idea
+=======
+This folder is about 🐴🧄 *HorseRAGish*, a pun on this not being really RAG but achieving THIS through long-context what RAG normally does through Vector DBs and Embeddings.
+
+Fun fact: I've been meaning to do this for months now, but I decided to do it when my buddy Maxime came to me with a real use case and we thought: let's do it!
+
+## Image
+
+**Prompt**: *A cute AI agent in the shape of a horse which is reading a lot of books, on their cover you can read "RAG", "PDF", "markdown". In front of him, some sushi with soy sauce and a huge quantity of wasabi. Wasabi everywhere. In the style of Pixar Cartoon.*
+
+## Idea
 
 The idea is to NOT do RAG, but to achieve RAG counting on Gemini long context window and injecting ALL content into it.
 

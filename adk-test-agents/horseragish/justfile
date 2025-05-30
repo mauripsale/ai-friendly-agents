@@ -1,9 +1,36 @@
 
+list:
+    just -l
+
 install:
     uv pip install typer PyMuPDF typing-extensions
 
 run1:
-    python main.py data/sample_docs/ --output-file aggregated_documents.md --debug | tee run1.log.md
+    python main.py etc/data/sample_docs/ --output-file aggregated_documents.md --debug
+    # | tee run1.log.md
 
 run2:
-    python main.py data/sample_docs/ | tee run2.log.md
+    python main.py etc/data/sample_docs/ | tee .tmp.run2.log.md
+
+run-alphabet-pdfs:
+    time python main.py etc/data/google-financials --output-file alphabet_aggregated.md
+
+# TODO fix stdin when everything works and 🔌 you have 🇧🇷 interneche
+ask-question-on-alphabet-revenue-from-stdin:
+    echo todo
+    # echo "What was the Cloud revenue vs revenue overall for Alphabet in the past quarter? How does it" | time python ask_question.py etc/data/google-financials/ -q -
+
+# Slower test on ✈️
+ask-question-on-alphabet-revenue:
+    time python ask_question.py etc/data/google-financials/ \
+        --output-file .tmp.alphabet_aggregated_rag.md \
+        --question "What was the Cloud revenue vs revenue overall for Alphabet in the past quarter?" \
+        --final-prompt-file alphabet_cloud_revenue_question.prompt
+
+# Fast test on ✈️
+ask-question-on-sample-docs:
+    time python ask_question.py etc/data/sample_docs/ \
+        --output-file .tmp.sample_docs_rag_input.md \
+        --question "How many files are in the Corpus?" \
+        --final-prompt-file sample_docs_final.prompt
+

@@ -1,65 +1,88 @@
 import typer
 from pathlib import Path
 from typing import List, Optional
-from typing_extensions import Annotated  # For Typer >0.9 for Optional flags
+from typing_extensions import Annotated # For Typer >0.9 for Optional flags
 
-from maxlib import process_docs
+from ricclib.parsers import parse_pdf, parse_markdown, parse_txt
+from ricclib.utils import find_files
+from ricclib.colors import Color
 
-app = typer.Typer(
-    help="📄 Document Aggregator for LLMs 🤖\n\nCombines PDF, MD, and TXT files into one glorious Markdown string!"
-)
+# This is Riccardo copying on a plane to London a main.py and repurposing it to ask a question.
 
+app = typer.Typer(help="📄 Document Aggregator for LLMs 🤖\n\nCombines PDF, MD, and TXT files into one glorious Markdown string!")
+
+def final_rag_prompt(files_content, user_query):
+    return f"""Based on this context file(s) extracted from PDF, please answer the user query:
+
+------------------------------------------------------
+Context files (title and content)
+------------------------------------------------------
+{files_content}
+
+------------------------------------------------------
+User query
+------------------------------------------------------
+{user_query}
+""".format(files_content=files_content, user_query=user_query )
+
+def create_ultimate_prompt(final_markdown, question, final_prompt_file, debug, prompt_template="etc/prompts/rag-template.txt"):
+    """Create an ultimate prompt based on final_markdown and question. Finally, it writes it on final_prompt_file.
+    This whole prompt is now ready to be fed AS-IS to an LLM, which at the moment i have no access to since Im offline.
+
+    Arguments:
+        todo
+    returns: a markdown prompt contains all the context info AND the question.
+    """
+    if debug or True:
+        print(f"1. final_markdown: {len(final_markdown)}B")
+        #print(f"2. prompt_template: {prompt_template} [not used on plane]")
+        print(f"3. question: {question}")
+    separator = "==================="
+    final_prompt_markdown = final_rag_prompt(final_markdown, question)
+    # " blah \n\n" + final_markdown
+    if debug:
+        print(f"== final_prompt_markdown ==\n\n{final_prompt_markdown}")
+    return final_prompt_markdown
 
 @app.command()
 def process_documents(
-    input_folder: Annotated[
-        Path,
-        typer.Argument(
-            exists=True,
-            file_okay=False,
-            dir_okay=True,
-            readable=True,
-            help="Folder containing documents (PDF, MD, TXT) to process.",
-        ),
-    ],
-    output_file: Annotated[
-        Optional[Path],
-        typer.Option(
-            "--output-file",
-            "-o",
-            help="File to save the combined markdown. Prints to stdout if not provided.",
-        ),
-    ] = None,
-    ignore_images: Annotated[
-        bool,
-        typer.Option(
-            "--ignore-images/--include-images",
-            help="[default: --ignore-images] Focus on text extraction for PDFs to optimize tokens. (Currently uses text-only extraction regardless)",
-        ),
-    ] = True,
-    debug: Annotated[
-        bool,
-        typer.Option(
-            "--debug", "-d", help="Enable debug output. Let's see what's cookin'!"
-        ),
-    ] = False,
+    input_folder: Annotated[Path, typer.Argument(
+        exists=True, file_okay=False, dir_okay=True, readable=True,
+        help="Folder containing documents (PDF, MD, TXT) to process."
+    )],
+    output_file: Annotated[Optional[Path], typer.Option(
+        "--output-file", "-o",
+        help="File to save the combined RAG markdown. Prints to stdout if not provided."
+    )] = None,
+    ignore_images: Annotated[bool, typer.Option(
+        "--ignore-images/--include-images",
+        help="[default: --ignore-images] Focus on text extraction for PDFs to optimize tokens. (Currently uses text-only extraction regardless)"
+    )] = True,
+    #     question: Annotated[str, typer.Argument(
+    #     "--question", "-q",
+    #     help="Question to ask to LLM based on this context."
+    # )] = None,
+    question: Annotated[str, typer.Option(
+        "--question", "-q",
+        help="Enable debug output. Let's see what's cookin'!")] = None,
+    final_prompt_file:  Annotated[Optional[Path], typer.Option(
+        "--final-prompt-file", "-p",
+        help="File to save the combined PROMPT markdown. Prints to stdout if not provided."
+    )] = None,
+    debug: Annotated[bool, typer.Option("--debug", "-d", help="Enable debug output. Let's see what's cookin'!")] = False,
 ) -> None:
     """
     Processes PDF, TXT, and Markdown files from a folder into a single markdown string,
     prefixed with file identifiers and with H1 headings demoted.
     Ready to be fed to your favorite high-context LLM! 🧠
     """
-    # Maxime
-    # return process_docs.process_documents(
-    #     input_folder, output_file, ignore_images, debug
-    # )
     if debug:
         print(f"{Color.CYAN}--- Debug Mode Activated ---{Color.END}")
         print(f"Processing documents from: {Color.YELLOW}{input_folder}{Color.END}")
         print(f"Ignore images in PDFs (token optimization): {Color.YELLOW}{ignore_images}{Color.END}")
         print(f"Output destination: {Color.YELLOW}{output_file if output_file else 'stdout'}{Color.END}")
-        Color.list_ten_typical()
-        print(f"{Color.MAGENTA}Note on google-adk: The google-adk functionality will be added to a future agent.py and not used by this script.{Color.END}")
+        #Color.list_ten_typical()
+        #print(f"{Color.MAGENTA}Note on google-adk: The google-adk (Google AI Developer Kit) is for on-device AI (e.g., Android) and not used by this script.{Color.END}")
 
 
     allowed_extensions = [".pdf", ".md", ".txt"]
@@ -78,6 +101,8 @@ def process_documents(
     successful_files: int = 0
     failed_files: int = 0
 
+    # Generate aggregated file from all RAG files
+    # TODO(rocc): abstract in a function.
     for i, file_path in enumerate(files_to_process):
         content: Optional[str] = None
         file_header = f"# [File {i+1}] {file_path.name}\n" # Ensure newline after header
@@ -114,6 +139,7 @@ def process_documents(
     # Add an extra newline between file entries if there's content
     final_markdown = "\n".join(all_content_parts).strip() # Join with single newline, then strip trailing
 
+    # 1.5 saving final_markdown, if defined by options
     if final_markdown:
         if output_file:
             try:
@@ -147,6 +173,23 @@ def process_documents(
         # Optionally raise an error if any file fails
         # raise typer.Exit(code=1)
 
+    # part 2. Now doing something with this.
+    print(f"{Color.YELLOW}⚠️ Part 2. Fitting the RAG buridone into a meta-prompt.{Color.END}")
+    # TODO
+    if debug:
+        print("ciao")
+    final_prompt_markdown = create_ultimate_prompt(final_markdown=final_markdown, question=question, final_prompt_file=final_prompt_file, debug=debug)
+    if final_prompt_markdown:
+        if final_prompt_file:
+            try:
+                final_prompt_file.write_text(final_prompt_markdown, encoding="utf-8")
+                print(f"{Color.GREEN}🎉 Success! Combined markdown written to: {final_prompt_file}{Color.END}")
+            except Exception as e:
+                print(f"{Color.RED}💥 Error writing to output file {final_prompt_file}: {e}{Color.END}")
+                if debug:
+                    print(f"{Color.YELLOW}Dumping to stdout instead due to file error:{Color.END}\n{final_prompt_markdown}")
+                raise typer.Exit(code=1)
 
 if __name__ == "__main__":
     app()
+
