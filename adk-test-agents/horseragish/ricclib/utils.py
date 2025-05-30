@@ -1,5 +1,8 @@
 from pathlib import Path
 from typing import List
+import pathlib
+
+DEFAULT_DATA_FOLDER= "etc/data/"
 
 def find_files(folder: Path, extensions: List[str]) -> List[Path]:
     """
@@ -10,7 +13,24 @@ def find_files(folder: Path, extensions: List[str]) -> List[Path]:
     for ext in extensions:
         # Using rglob for recursive search
         found_files.extend(list(folder.rglob(f"*{ext}")))
-    
+
     # Sort and unique for deterministic behavior
     return sorted(list(set(found_files)))
 
+
+
+def enumerate_data_sources(folder_path_str: str = DEFAULT_DATA_FOLDER) -> list[str]:
+    """Enumerate the data sources in the local corpus.
+    Basically, list the subfolders of given folder_path.
+
+    Arguments:
+        folder_path_str: the path to the folder containing the data sources (STRING). Defaults to "etc/data/".
+    Returns:
+        A list of STRING data sources (subfolders) in the given folder_path.
+    """
+    folder_path = pathlib.Path(folder_path_str)
+    if not folder_path.is_dir():
+        return []
+
+    subfolders = [p.name for p in folder_path.iterdir() if p.is_dir()]
+    return sorted(subfolders)

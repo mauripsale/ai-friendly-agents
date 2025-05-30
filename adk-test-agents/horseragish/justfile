@@ -34,3 +34,14 @@ ask-question-on-sample-docs:
         --question "How many files are in the Corpus?" \
         --final-prompt-file sample_docs_final.prompt
 
+# MAxime ADK agent
+run-agent-maxime:
+    adk run horseragish/
+
+# Riccardo ADK agent - copied and branched out.
+run-agent-riccardo:
+    adk run ./
+
+# ADK API server - never tried
+adk-api-server:
+    adk api_server
