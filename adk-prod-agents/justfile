@@ -54,6 +54,16 @@ run-larry10-web:
     @echo "🚀 Launching larry10 agent with uvicorn..."
     cd agents/larry10/ && source .venv/bin/activate && uvicorn agent:root_agent --reload &
 
+# Run the crudo10 agent with uvicorn
+run-crudo10:
+    @echo "🚀 Launching crudo10 agent with uvicorn..."
+    cd agents/crudo10/ && PYTHONPATH=./lib:$PYTHONPATH ../../.venv/bin/python -m uvicorn agent:root_agent --reload &
+
+# Run the crudo10 agent with adk web
+web-crudo10:
+    @echo "🚀 Launching crudo10 agent with adk web..."
+    cd agents/crudo10/ && source .venv/bin/activate && PYTHONPATH=./lib:$PYTHONPATH adk web --port 8001 &
+
 # run-sql-agent:
 #     adk run agents/siculo/
 

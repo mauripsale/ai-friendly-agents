@@ -1,2 +1,10 @@
 google-adk==1.1.0
 uvicorn
+google-cloud-monitoring
+google-cloud-run
+google-cloud-logging
+requests
+matplotlib
+pytz
+PyYAML
+python-dotenv

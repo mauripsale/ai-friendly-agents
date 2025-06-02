@@ -5,7 +5,7 @@ from google.adk.agents.llm_agent import LlmAgent
 from google.adk.tools import FunctionTool
 
 # Import functions from constants.py and lib
-from constants import (
+from .constants import (
     default_project_and_region_instructions,
     current_time,
     current_place,

@@ -1,25 +1,31 @@
+# Justfile for managing ADK agents
 
+
+# list all targets, and v1.0 agents
 list:
-    just -l
+    @echo -en '[🍲] '
+    @just -l
+    @echo "[🕵️‍♂️] Available v1.0 agents: "
+    @ls | egrep --color '10$'  | sort | sed 's/^/  🕵️‍♂️  /g'
 
 # Runs larry
-run-larry-ng:
+run-larry10:
     adk run larry/
 
 # Tests Larry
-test-larry-ng:
-    echo 'Whats the weather like in Zurich right now? Give me Min, Max and current. Do NOT use Fahrenheit' | adk run larry/
+test-larry10:
+    echo 'Whats the weather like in Zurich right now? Give me Min, Max and current. Do NOT use Fahrenheit' | adk run larry10/
 
 # Tests Claudia
-test-claudia-ng:
-   echo 'Show me the Cloud Run apps and GCE instances' | adk run claudia/
+test-claudia:
+    echo 'Show me the Cloud Run apps and GCE instances' | adk run claudia/
 
-test-trixie-ng:
-   echo 'Show me what Trixes do you see. Then if you can show me all about GDGs.' | adk run trixie/
+test-trixie:
+    echo 'Show me what Trixes do you see. Then if you can show me all about GDGs.' | adk run trixie/
 
 # Tests serpeverde
-test-serpeverde-ng:
-   echo 'show me flights from zurich to porto for tomorrow. And before you ask, YES Im sure and aware of API costs. Proceed!' | adk run serpeverde/
+test-serpeverde:
+    echo 'show me flights from zurich to porto for tomorrow. And before you ask, YES Im sure and aware of API costs. Proceed!' | adk run serpeverde/
 
 # Runs a generic
 run-ng DIR:
