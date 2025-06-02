@@ -16,6 +16,9 @@ Dir structure:
 * `adk-prod-agents/`: agents built with ADK. Production ready, ready to use.
 * `adk-test-agents/`: agents built with ADK. More to learn how to do things. Could be cut and paste of public docs.
 * `samples/`: end-to-end samples by the author.
+* `mcp-prod-agents`: agents built with MCP. Production ready, ready to use.
+* `mcp-test-agents`: agents built with MCP. More to learn how to do things.
+* Test MCP: `npx @modelcontextprotocol/inspector`
 
 Better samples can be found here: https://github.com/google/adk-samples
 

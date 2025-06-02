@@ -1,23 +1,29 @@
 Self: https://github.com/palladius/ai-friendly-agents/
 
-**Note**: these agents are tested against the `0.5.0` version. The `1.0.0` brings [incompatible changes](https://github.com/google/adk-python/blob/3b5232c14f48e1d5b170f3698d91639b079722c8/CHANGELOG.md) which will require more work.
+**IMPORTANT NOTE:** Most agents in this directory are currently using ADK v0.5. This version is now deprecated. Users should plan to upgrade to ADK 1.0.0. Some agents, like Filomena, have already been updated to use ADK v1.0 (`LlmAgent`).
 
-`pip install git+https://github.com/google/adk-python.git@main`
+To upgrade ADK, run: `pip install google-adk --upgrade`
 
-## Agents
+Agents v1.0 compatible:
 
-My friendly agents:
+| Folder | Agent | Description | ADK version |
+|---|---|---|---|
+| `agents/larry10/` | 🟢 **Larry** 🧢 | cURLer / Google. Both googling and curling works 🔎. | 1.1.0 |
+| `agents/filomena/` | 🟢 **Filomena** | (Based on search, uses LlmAgent) | 1.0 |
 
-* 🟢 **Alfred Pennyless** 🦇 (Concierge, able to call other agents). Currently supports (and tested with): Claudia, Larry, Serpeverde, Siculo, Trixie, Vicky.
-* 🟢 **Claudia Gugghelheim** ☁️ (Google Cloud agent). Inspired by Cloud: 🔴🔵🟢🟡
-* 🟢 **Codie Smulders** 🐍 (code agent). For now, just `built_in_code_execution` from ADK.
-* 🟢 **Larry** 🧢  (cURLer / Google). For the moment, just googling 🔎 is implemented.
-* 🟢 **Serpeverde** 🧙 (SERP API Executor, basically a Google Search wrapper). For now supports **Maps** 🌍 , **Flights** ✈️ and **Hotels** 🏨 .
-  Coming soon: Search 🔎 (for the moment, ask Larry :P)
-* 🟢 **Salvatore Siculo** 🧢  (SQL executor and visualizator). Just launched its **v1.0**. fun, safe, and smart!
-* 🔶 **Trixie** 📗 (Beatrix “Trixie” Tabularasa) WIP. A Google Sheet agent.
-* 🔶 **Vicky** 🟡 (Vicky Pedyah) WIP. A Wikipedia curler on steroids.
 
+## Agents v05
+
+| Agent | Description | ADK version |
+|---|---|---|
+| 🟢 **Alfred Pennyless** 🦇 | Concierge, able to call other agents. Currently supports (and tested with): Claudia, Larry, Serpeverde, Siculo, Trixie, Vicky. | 0.5 |
+| 🟢 **Claudia Gugghelheim** ☁️ | Google Cloud agent. Inspired by Cloud: 🔴🔵🟢🟡 | 0.5 |
+| 🟢 **Codie Smulders** 🐍 | code agent. For now, just `built_in_code_execution` from ADK. | 0.5 |
+| 🟢 **Larry** 🧢 | cURLer / Google. For the moment, just googling 🔎 is implemented. | 0.5 |
+| 🟢 **Serpeverde** 🧙 | SERP API Executor, basically a Google Search wrapper. For now supports **Maps** 🌍 , **Flights** ✈️ and **Hotels** 🏨 . Coming soon: Search 🔎 (for the moment, ask Larry :P) | 0.5 |
+| 🟢 **Salvatore Siculo** 🧢 | SQL executor and visualizator. Just launched its **v1.0**. fun, safe, and smart! | 0.5 |
+| 🔶 **Trixie** 📗 | Beatrix “Trixie” Tabularasa) WIP. A Google Sheet agent. | 0.5 |
+| 🔶 **Vicky** 🟡 | Vicky Pedyah) WIP. A Wikipedia curler on steroids. | 0.5 |
 
 ![A group of robotic super friends who are LLM agents. They're dressed as super heroes. Very colorful, and they integrate with each other. they rensemble DC Leage of Super Friends](super-friends.png)
 
@@ -72,6 +78,9 @@ eval_sample_questions = {
 TODO(ricc): move to precipuous folders.
 
 Some agents require additional installation parts (a service account, an API KEY, and so on).
+
+* Audio works from ADK version 1.0. However, be cautious to use the right model.
+   * Some models wont work; check errors like this:  `Please check server log for full details: received 1008 (policy violation) models/gemini-2.0-flash is not found for API version v1alpha, or is not supported for bidi`.
 
 ### Trixie
 

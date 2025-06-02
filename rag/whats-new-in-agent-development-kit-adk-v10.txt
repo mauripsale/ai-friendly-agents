@@ -1,0 +1,473 @@
+❤️✨ Add to Magic Bookmark
+Search
+Write
+3
+
+Riccardo Carlesso
+Get unlimited access to the best of Medium for less than $1/week.
+Become a member
+
+Google Cloud - Community
+What’s New in Agent Development Kit (ADK) v1.0.0
+Jack Wotherspoon
+Jack Wotherspoon
+
+Follow
+6 min read
+·
+3 days ago
+37
+
+
+
+
+
+
+Last week, Google released ADK 1.0.0 for Python! 🚀
+
+We’re excited to announce the v1.0.0 stable release of our Python Agent Development Kit. This milestone signifies that the Python ADK is now production-ready, offering a reliable and robust platform for developers to confidently build and deploy their agents in live environments.
+
+A robot riding a rocket in space
+This release brings a host of powerful new features, important updates to existing functionalities, and some breaking changes that developers should be aware of. This post will walk through what’s new, what’s changed, and how to get started with ADK 1.0! 🤖
+
+🔔 The ADK dev team is working fast, ADK v1.1.0 is already released!
+
+✨ What’s New and Exciting: Features in ADK v1.0.0
+ADK 1.0.0 isn’t just about changes; it’s packed with new features and improvements designed to make agent development more powerful and efficient.
+
+Traces in ADK Web UI
+A new trace view provides an overall visualization of agent invocations. This is invaluable for debugging and observing an agent’s decision-making process, offering a clear picture of the entire flow.
+
+
+Trace view in ADK web UI
+BaseToolset: A New Paradigm for Dynamic Tools
+ADK v1.0.0 introduces the BaseToolset class, a new concept allowing developers to dynamically provide tools to agents (see the docs). A toolset allows you to manage and provide a collection of tools to an agent.
+
+Benefits of a toolset:
+
+Organizing Related Tools: Grouping tools that serve a common purpose (e.g. all tools for mathematical operations, or all tools interacting with a specific API).
+Dynamic Tool Availability: Enabling an agent to have different tools available based on the current context (e.g. user permissions, session state, or other runtime conditions). The get_tools method of a toolset can decide which tools to expose.
+Integrating External Tool Providers: Toolsets can act as adapters for tools coming from external systems, like an OpenAPI specification or an MCP server, converting them into ADK-compatible BaseTool objects.
+from google.adk.agents import LlmAgent
+from google.adk.agents.readonly_context import ReadonlyContext
+from google.adk.tools import BaseTool, FunctionTool
+from google.adk.tools.base_toolset import BaseToolset
+from typing import Optional
+
+@FunctionTool
+def add(x: int, y: int) -> int:
+    """Add two numbers."""
+    return x + y
+
+@FunctionTool
+def subtract(x: int, y: int) -> int:
+    """Subtract two numbers."""
+    return x - y
+
+
+# Create a Toolset
+class SimpleMathToolset(BaseToolset):
+    def __init__(self):
+        super().__init__()
+
+    async def get_tools(
+        self, readonly_context: Optional[ReadonlyContext] = None
+    ) -> list[BaseTool]:
+        # Example of dynamic behavior:
+        # Could use readonly_context.state to decide which tools to return
+        # For instance, if readonly_context.state.get("enable_advanced_math"):
+        #    return [add, subtract, multiply]
+
+        # For this simple example, always return both tools
+        return [add, subtract]
+
+    async def close(self) -> None:
+        pass
+
+
+math_toolset = SimpleMathToolset()
+
+root_agent = LlmAgent(
+    model="gemini-2.0-flash",
+    name="math_agent",
+    instruction="You are a helpful math assistant.",
+    tools=[math_toolset],  # Pass toolset to Agent
+)
+Other toolset classes like MCPToolset, GoogleApiTool, GoogleApiToolset and ApplicationIntegrationToolset all inherit from the BaseToolset interface.
+
+MCPToolset: Improved Flexibility with tool filters
+Building on the introduction of BaseToolset, configuring MCPToolset has become more flexible. MCPToolset now supports a tool_filter parameter. It allows developers to selectively expose only a subset of tools from an MCP server. This is beneficial for security (Principle of Least Privilege) and can reduce the complexity of the toolset presented to the agent, potentially simplifying its decision-making.
+
+root_agent = LlmAgent(
+    model='gemini-2.0-flash',
+    name='enterprise_assistant',
+    instruction='Help user accessing their file systems',
+    tools=[
+        MCPToolset(
+            connection_params=StdioServerParameters(
+                command='npx',
+                args=[
+                    '-y',  # Arguments for the command
+                    '@modelcontextprotocol/server-filesystem',
+                    'path/to/your/allowed/dir',
+                ],
+            ),
+            # Expose read-only tools
+            tool_filter=[
+                'read_file',
+                'read_multiple_files',
+                'list_directory',
+                'directory_tree',
+                'search_files',
+                'get_file_info',
+                'list_allowed_directories',
+            ],
+        )
+    ],
+)
+Additional new features in ADK 1.0:
+Token Usage in LlmResponse: The LlmResponse object now includes information about token usage.
+Dynamic Auth in Integration Connector Tool: Support for dynamic authentication has been added to the integration connector tool.
+ADK web address: ADK web UI now binds to localhost by default instead of 0.0.0.0, which is a more secure default.
+Improved docstrings: Various docstring improvements have been made across the codebase, making the SDK easier to understand and use.
+🌟 Getting Started with ADK v1.0.0 (now v1.1.0)
+Upgrade to version v1.1.0 of Agent Development Kit today using the following command.
+
+pip install google-adk --upgrade
+⚠️ Navigating the Upgrade: Key Breaking Changes
+As with any major version release that aims to improve an SDK’s architecture and long-term maintainability, ADK 1.0.0 introduces some breaking changes. Here is what you need to know if you are upgrading existing code.
+
+1. Async Services
+A fundamental shift in ADK 1.0.0 is the move to asynchronous operations for all core service interfaces. This includes BaseSessionService, BaseArtifactService, and BaseMemoryService. This change significantly improves performance and scalability, especially for I/O-bound operations that are common in agent interactions (like calling external tools or APIs).
+
+This means all core services now require adding an await expression.
+
+# All service methods must now be awaited
+artifact = await tool_context.load_artifact(...)
+2. MCP Toolsets: Simplified Configuration
+Adding MCP tools to your ADK agent has gotten a lot simpler in ADK 1.0.0 with a revamp of the MCPToolset class. No more needing to keep track of an exit stack or creating your agent asynchronously, ADK now handles that for you.
+
+Previously: ADK v0.5.0 ❌
+
+# DO NOT USE
+async def create_agent():
+  """Gets tools from MCP Server."""
+  tools, exit_stack = await MCPToolset.from_server(
+      connection_params=StdioServerParameters(
+          command='npx',
+          args=[
+              '-y',  # Arguments for the command
+              '@modelcontextprotocol/server-filesystem',
+              'path/to/your/allowed/dir',
+          ],
+      )
+  )
+
+  agent = LlmAgent(
+      model='gemini-2.0-flash',
+      name='helpful_assistant',
+      instruction='Help user accessing their file systems',
+      tools=tools,
+  )
+  return agent, exit_stack
+
+
+root_agent = create_agent()
+Now: ADK v1.0.0+ ✅
+
+root_agent = LlmAgent(
+    model='gemini-2.0-flash',
+    name='helpful_assistant',
+    instruction='Help user accessing their file systems',
+    tools=[
+        MCPToolset(
+            connection_params=StdioServerParameters(
+                command='npx',
+                args=[
+                    '-y',  # Arguments for the command
+                    '@modelcontextprotocol/server-filesystem',
+                    'path/to/your/allowed/dir',
+                ],
+            ),
+        )
+    ],
+)
+3. Built-in Code Execution
+The built_in_code_execution pre-built tool has been renamed to BuiltInCodeExecutor and moved from the google.adk.tools package to the google.adk.code_executors package. This change aims to make the interface less confusing by drawing a clear distinction between “tools” (capabilities an agent uses) and “executors” (mechanisms for how certain operations, like code execution, are performed by the agent).
+
+The BuiltInCodeExecutor is now typically assigned to the code_executor parameter of an Agent.
+
+Previously: ADK v0.5.0 ❌
+
+# DO NOT USE
+from google.adk.tools import built_in_code_execution
+
+root_agent = Agent(
+  ...
+  tools=[built_in_code_execution]
+)
+Now: ADK v1.0.0+ ✅
+
+from google.adk.code_executors import BuiltInCodeExecutor
+
+root_agent = Agent(
+  ...
+  code_executor=BuiltInCodeExecutor(),
+)
+4. Evaluation Schema Redesign
+The evaluation dataset schema has undergone a significant redesign. Any previously saved evaluation files will need to be regenerated. This applies to evaluations run via the adk eval CLI and those viewed in the evaluation tab of the ADK web UI.
+
+Previously, the evaluation schema relied on free-form dictionaries , list[dict[str, Any]]. ADK 1.0.0 transitions to well-defined Pydantic models. This shift enhances the evaluation pipeline by enforcing a clear schema, providing automatic data validation, and offering type hinting.
+
+The key Pydantic models underpinning the new evaluation schema include EvalSet (a test suite) and EvalCase (a test case). These structured models provide for more sophisticated and reliable agent assessment.
+
+Additional Notable Breaking Changes
+BaseSessionService method removals: The list_events and close_session methods have been removed from BaseSessionService.
+MCP Toolbox for Databases integration: The ToolboxTool has been removed in favor of ToolboxToolset. Users can reference this sample.
+Private Class Attributes: Various class attributes within the google.adk.tools package have been marked as private (e.g., by prefixing with _) to enforce encapsulation and improve API stability.
+Wire Format Change for API server / curl commands : The data format for the ADK API server has changed from snake_case to camelCase for all JSON payloads and responses. Consequently, all curl commands or custom scripts interacting directly with the ADK API server will need to be updated to use camelCase.
+📣 ADK-Related Announcements
+In addition to ADK v1.0.0 being released, there are also other ADK-related announcements you may want to be aware of 😃
+
+🕸 ADK Web (dev UI) code is now public: The adk web UI code is now public in its own GitHub repository. All bugs or feature requests for the dev UI can now be filed against this specific repo.
+️️️☕ ️ADK Java has been released: Java developers can now experience the same ADK experience as Python developers through the Java SDK for Agent Development Kit.
+🤖 Agent Engine support for ADK v.1.0.0: The latest release of Vertex AI Agent Engine now supports ADK v1.0.0+ 🎉. It can be found in v1.95.0+ of google-cloud-aiplatform package.
+Check out the Vertex AI Agent Engine documentation to see how it can help you manage and scale your AI Agents into production 📈.
+
+Feedback Wanted
+We encourage all developers to try out ADK v1.0.0+, explore the new features, and see how the improvements can streamline your agent development workflow.
+
+Your feedback is invaluable to us. Please report any bugs or issues you encounter on our GitHub (google-adk library issues, documentation issues).
+
+We are excited to see what you build with ADK v1.0.0+! 🚀
+
+Adk
+Google
+Agents
+AI
+Agent Development Kit
+No rights reserved
+
+ by the author.
+
+37
+
+
+
+
+
+Google Cloud - Community
+Published in Google Cloud - Community
+65K followers
+·
+Last published 1 day ago
+A collection of technical articles and blogs published or curated by Google Cloud Developer Advocates. The views expressed are those of the authors and don't necessarily reflect those of Google.
+
+
+Following
+Jack Wotherspoon
+Written by Jack Wotherspoon
+20 followers
+·
+10 following
+Python Developer Advocate @ Google
+
+
+Follow
+No responses yet
+Riccardo Carlesso
+Riccardo Carlesso
+﻿
+
+Cancel
+Respond
+More from Jack Wotherspoon and Google Cloud - Community
+Model Context Protocol(MCP) with Google Gemini LLM — A Deep Dive (Full Code)
+Google Cloud - Community
+In
+
+Google Cloud - Community
+
+by
+
+Arjun Prabhulal
+
+Model Context Protocol(MCP) with Google Gemini LLM — A Deep Dive (Full Code)
+A step-by-step guide with code, architecture, and real-world use case
+Apr 4
+1.1K
+16
+
+
+Getting Started with Google A2A: A Hands-on Tutorial for the Agent2Agent Protocol
+Google Cloud - Community
+In
+
+Google Cloud - Community
+
+by
+
+Heiko Hotz
+
+Getting Started with Google A2A: A Hands-on Tutorial for the Agent2Agent Protocol
+Bridging LangGraph, CrewAI, and ADK Agents
+Apr 15
+231
+3
+
+
+Building AI Agents with Google’s Agent Development Kit (ADK) as MCP Client — A Deep Dive (Full…
+Google Cloud - Community
+In
+
+Google Cloud - Community
+
+by
+
+Arjun Prabhulal
+
+Building AI Agents with Google’s Agent Development Kit (ADK) as MCP Client — A Deep Dive (Full…
+Google Cloud Next ’25 unveiled several groundbreaking announcements, and I had the privilege of attending the event in person. It was…
+Apr 12
+809
+15
+
+
+Architecting a Multi-Agent System with Google A2A and ADK
+Google Cloud - Community
+In
+
+Google Cloud - Community
+
+by
+
+Karl Weinmeister
+
+Architecting a Multi-Agent System with Google A2A and ADK
+How will you build AI systems with complex reasoning and distinct, specialized skills? Consider financial trading: success requires not…
+Apr 19
+514
+1
+
+
+See all from Jack Wotherspoon
+See all from Google Cloud - Community
+Recommended from Medium
+Kagent: When AI Agents Meet Kubernetes
+Craine Operators Blog
+In
+
+Craine Operators Blog
+
+by
+
+Jason T Clark
+
+Kagent: When AI Agents Meet Kubernetes
+Meet kagent: the CNCF sandbox project that’s bringing true autonomy to cloud-native operations through intelligent AI agents
+5d ago
+69
+3
+
+
+6 MCP Servers Every Developer Needs to Try
+Coding Nexus
+In
+
+Coding Nexus
+
+by
+
+Code Coup
+
+6 MCP Servers Every Developer Needs to Try
+I’ve spent the last two months around with over 100 MCP servers, and let me tell you, some of these are straight-up awesome.
+
+6d ago
+494
+7
+
+
+Mastering Google ADK Ep 2: Building Advanced Multi-Agent Systems for Stock Analysis
+Google Cloud - Community
+In
+
+Google Cloud - Community
+
+by
+
+Bhargav Patel
+
+Mastering Google ADK Ep 2: Building Advanced Multi-Agent Systems for Stock Analysis
+In our previous exploration of Google’s Agent Development Kit (ADK), we built a basic stock analyzer agent (Link) that demonstrated ADK’s…
+May 3
+2
+
+
+Google Has Solved AI’s Biggest Problem (And 19 Other Major Updates)
+Write A Catalyst
+In
+
+Write A Catalyst
+
+by
+
+Ashen Thilakarathna
+
+Google Has Solved AI’s Biggest Problem (And 19 Other Major Updates)
+What Google I/O 2025 revealed will change how you think about AI forever
+
+May 24
+768
+20
+
+
+SpaceX Has Finally Figured Out Why Starship Exploded, And The Reason Is Even More Humiliating Than…
+Will Lockett
+Will Lockett
+
+SpaceX Has Finally Figured Out Why Starship Exploded, And The Reason Is Even More Humiliating Than…
+Musk is making a fatal mistake.
+
+4d ago
+8.3K
+185
+
+
+Mastering Google’s ADK for Enterprise-Grade AI Agents
+Data And Beyond
+In
+
+Data And Beyond
+
+by
+
+TONI RAMCHANDANI
+
+Mastering Google’s ADK for Enterprise-Grade AI Agents
+Hook
+
+6d ago
+105
+
+
+See more recommendations
+Help
+
+Status
+
+About
+
+Careers
+
+Press
+
+Blog
+
+Privacy
+
+Rules
+
+Terms
+
+Text to speech

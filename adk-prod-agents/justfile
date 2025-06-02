@@ -49,6 +49,11 @@ run-ng AGENT:
     ls "agents/{{AGENT}}/"
     adk run agents/{{AGENT}}/
 
+# Run the larry10 agent with uvicorn
+run-larry10-web:
+    @echo "🚀 Launching larry10 agent with uvicorn..."
+    cd agents/larry10/ && source .venv/bin/activate && uvicorn agent:root_agent --reload &
+
 # run-sql-agent:
 #     adk run agents/siculo/
 
