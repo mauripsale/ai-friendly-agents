@@ -1,8 +1,6 @@
-import typer
 import logging
 from pathlib import Path
 from typing import List, Optional
-from typing_extensions import Annotated  # For Typer >0.9 for Optional flags
 
 from ricclib.parsers import parse_pdf, parse_markdown, parse_txt
 from ricclib.utils import find_files
@@ -10,11 +8,21 @@ from ricclib.colors import Color
 
 
 def process_documents(input_folder: Path) -> str:
+
+    if not input_folder.exists():
+        raise RuntimeError(f'{input_folder} does not exist')
+    if not input_folder.is_dir():
+        raise RuntimeError(f'{input_folder} is not a directory')
+    
+    logging.debug(f'Looking for files in {input_folder}')
+
     allowed_extensions = [".pdf", ".md", ".txt"]
     files_to_process = find_files(input_folder, allowed_extensions)
 
     if not files_to_process:
-        raise typer.Exit(code=1)
+        raise RuntimeError("No files to process in local corpus")
+    
+    logging.debug(f'Found {len(files_to_process)} files to process.')
 
     all_content_parts: List[str] = []
     successful_files: int = 0
@@ -25,14 +33,16 @@ def process_documents(input_folder: Path) -> str:
         file_header = (
             f"# [File {i+1}] {file_path.name}\n"  # Ensure newline after header
         )
-
-        if file_path.suffix.lower() == ".pdf":
+      
+        extension = file_path.suffix.lower()
+        if extension == ".pdf":
             content = parse_pdf(file_path, ignore_images=True)
-        elif file_path.suffix.lower() == ".md":
+        elif extension == ".md":
             content = parse_markdown(file_path)
-        elif file_path.suffix.lower() == ".txt":
+        elif extension == ".txt":
             content = parse_txt(file_path)
-        # No else needed due to find_files filtering
+        else:
+            raise RuntimeError(f'Unexpected extension: {extension}')
 
         if content is not None:
             all_content_parts.append(file_header)
@@ -41,12 +51,13 @@ def process_documents(input_folder: Path) -> str:
         else:
             failed_files += 1
 
-    # Add an extra newline between file entries if there's content
-    final_markdown = "\n".join(
-        all_content_parts
-    ).strip()  # Join with single newline, then strip trailing
+    final_markdown = "\n".join(all_content_parts).strip()
+
+    logging.info(f"final_markdown --> {len(final_markdown)} bytes.")
+    
 
     if final_markdown:
+        logging.info(f"Returning final_markdown --> {len(final_markdown)} bytes.")
         return final_markdown
 
     elif successful_files == 0 and failed_files > 0:

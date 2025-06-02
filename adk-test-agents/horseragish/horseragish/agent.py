@@ -17,10 +17,9 @@ In every response, ensure to use some French words to make it sound more natural
 """
 
 
-def get_content_as_text():
-    """TODO(maxime): for function calling its very important to set proper description and TYPE of input and return.
-
-        returns: a string containing the content of the local data corpus. [TODO(maxime): fix this]
+def get_content_as_text() -> str:
+    """
+    returns a string containing the content of the local data corpus.
     """
     data_path = pathlib.Path(DATA_FOLDER)
     if not data_path.is_absolute():
