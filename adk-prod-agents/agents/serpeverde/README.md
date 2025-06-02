@@ -24,7 +24,9 @@ PYTHONPATH="./_common/lib:$PYTHONPATH" adk run serpeverde/
 
 You need to explicitly add the `_common/lib/` to the `PYTHONPATH` for the code to find common API code. This will be fixed in a future release.
 
-## Example
+## Notes
+
+* You might want to try the MCP version of this! **https://github.com/ilyazub/serpapi-mcp-server**: `pip install mcp serpapi python-dotenv`, export SERPAPI_API_KEY and that's pretty much it!
 
 ## Getting a Key
 
