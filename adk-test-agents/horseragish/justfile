@@ -57,3 +57,18 @@ show-todos:
     @echo "[🇫🇷] Searching for TODOs from MAX in the codebase..."
     @find . -maxdepth 3 -type f -name "*.py" -exec grep -H "TODO(max" {} \; || echo "🤷 No TODOs found => Max is a slacker"
 # grep --exclude-dir={.venv} -r "TODO(max" . || echo "No TODOs found."
+
+# 🧹 Cleans up Python bytecode and cache files
+clean:
+    @echo "🧹 Cleaning up Python bytecode and cache files. Size before the cure:"
+    du -sh .
+    find . -name "*.pyc" -delete
+    find . -name "__pycache__" -delete
+    find . -name ".pytest_cache" -delete
+    find . -name ".mypy_cache" -delete
+    @echo "🧹 Size AFTER the cure:"
+    du -sh .
+
+# [👍] This is another script Maxime will thank me for 😉 -> https://github.com/charmbracelet/glow
+readme:
+    cat README.md | glow -s dracula --width 100
