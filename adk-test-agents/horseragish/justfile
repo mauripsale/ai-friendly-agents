@@ -1,18 +1,20 @@
 
+# This list here
 list:
     just -l
 
 
 # TODO(ricc) add deps in toml file - seems more idiomatic.
 install:
-    echo TODO ricc add deps in toml file.
+    @echo TODO ricc add deps in toml file.
+    @echo For now use: just install-from-requirements
 
 # [👍] Configuring uv correctly, but taking deps from requirements.txt (partially suboptimal?)
 install-from-requirements:
+    which uv || (echo "uv not found, installing it..." && pip install uv)
     uv venv
     time uv pip install -r requirements.txt
-    @echo "Installed dependencies from requirements.txt. Goodness me this is fast! 😅 Take this poetry!"
-
+    @echo "⏰ Installed dependencies from requirements.txt. Goodness me this is fast! 😅 Take this poetry!"
 
 # Ricc loves 🍕 TODO
 [group('after-meeting')]
@@ -30,9 +32,9 @@ run-horseragish-web:
     adk web
 
 # TODO implement this
-[group('after-meeting')]
-init:
-    echo "Initializing new world agents..."
+# [group('after-meeting')]
+# init:
+#     echo "Initializing new world agents..."
 # TODO make it work .
 
 
