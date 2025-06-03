@@ -6,25 +6,17 @@ list:
 
 # TODO(ricc) add deps in toml file - seems more idiomatic.
 install:
-    @echo TODO ricc add deps in toml file.
-    @echo For now use: just install-from-requirements
-
-# [👍] Configuring uv correctly, but taking deps from requirements.txt (partially suboptimal?)
-install-from-requirements:
-    which uv || (echo "uv not found, installing it..." && pip install uv)
-    uv venv
-    time uv pip install -r requirements.txt
-    @echo "⏰ Installed dependencies from requirements.txt. Goodness me this is fast! 😅 Take this poetry!"
+    uv sync
 
 # Ricc loves 🍕 TODO
 [group('after-meeting')]
-run-horseragish-ricc:
-    adk run horseragish_ricc/
+run-horseragish-ricc: install
+    uvx --from google-adk adk run horseragish_ricc/
 
 # [👍] Max loves 🇫🇷 (agent works, but i had to remove functions and deps - Max to fix)
 [group('after-meeting')]
-run-horseragish-max:
-    adk run horseragish_max/
+run-horseragish-max: install
+    uvx --from google-adk adk run horseragish_max/
 
 # [👍] TODO(max): add your logging prefs as you wish
 [group('after-meeting')]

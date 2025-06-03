@@ -1,5 +1,0 @@
-# TODO - remove Typer, looks like its useless.
-# typer
-PyMuPDF
-typing-extensions
-google-adk==1.1.0
