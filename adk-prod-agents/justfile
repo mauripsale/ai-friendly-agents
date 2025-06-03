@@ -222,3 +222,4 @@ deploy-them-all:
 google-com-magic-commands:
     gcloud beta iap web get-iam-policy   --resource-type=cloud-run   --service=adk-larry   --region=europe-west1   --format=yaml | tee pvt/larry-iap-policy.yaml
     gcloud beta iap web get-iam-policy   --resource-type=cloud-run   --service=adk-larry   --region=europe-west1   --format=json | tee pvt/larry-iap-policy.json
+

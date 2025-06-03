@@ -1,7 +1,9 @@
 
+# Todo add .env here. copy from PROD
 
 list:
     just -l
+    # @echo GEMINI_API_KEY=$GEMINI_API_KEY
 
 # Executes agents on web. Pretty sweet if you ask me.
 web:
@@ -25,3 +27,22 @@ adk-version:
     which adk
     cat $(which adk)
     ls -al "$(dirname $(which adk))"/../
+
+
+
+
+
+# Ricc loves 🍕
+[group('newworld')]
+run-horseragish-ricc:
+    adk run horseragish/horseragish_ricc/
+
+# Max loves 🇫🇷
+[group('newworld')]
+run-horseragish-max:
+    adk run horseragish/horseragish_max/
+
+[group('newworld')]
+init:
+    echo "Initializing new world agents..."
+# TODO make it work .
