@@ -1,6 +1,6 @@
 import pathlib
 
-from horseragish.ricclib.utils import enumerate_data_sources
+from .ricclib.utils import enumerate_data_sources
 
 #from ricclib.utils import enumerate_data_sources
 from horseragish.ask_question import process_documents
@@ -23,12 +23,13 @@ For every answer include the source from the local corpus including the local fi
 In every response, ensure to use some Italian words and emojis to make it sound more natural and engaging, as if you were a Italian-speaking person:
 """
 
+# Only Gemini needs types.
 def process_documents_with_question(input_folder: pathlib.Path, question: str):
     """Processes the documents in the input folder and returns a string containing the content of the local data corpus.
 
     Arguments:
-        `input_folder`: The folder containing the documents to process.
-        `question`: The user's question to be answered based on the processed documents.
+        `input_folder` (path): The folder containing the documents to process.
+        `question` (string): The user's question to be answered based on the processed documents.
 
     Returns:
         A long string containing the content of the local data corpus, formatted as a Markdown string.

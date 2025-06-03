@@ -23,16 +23,16 @@ ask-question-on-alphabet-revenue-from-stdin:
 # Slower test on ✈️
 ask-question-on-alphabet-revenue:
     time python ask_question.py etc/data/google-financials/ \
-        --output-file .tmp.alphabet_aggregated_rag.md \
+        --output-file out/tmp.alphabet_aggregated_rag.md \
         --question "What was the Cloud revenue vs revenue overall for Alphabet in the past quarter?" \
-        --final-prompt-file alphabet_cloud_revenue_question.prompt
+        --final-prompt-file out/alphabet_cloud_revenue_question.prompt
 
 # Fast test on ✈️
 ask-question-on-sample-docs:
     time python ask_question.py etc/data/sample_docs/ \
-        --output-file .tmp.sample_docs_rag_input.md \
+        --output-file out/tmp.sample_docs_rag_input.md \
         --question "How many files are in the Corpus?" \
-        --final-prompt-file sample_docs_final.prompt
+        --final-prompt-file out/sample_docs_final.prompt
 
 # MAxime ADK agent
 run-agent-maxime:
