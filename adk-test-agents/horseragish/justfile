@@ -3,12 +3,10 @@
 list:
     just -l
 
-
-# TODO(ricc) add deps in toml file - seems more idiomatic.
 install:
     uv sync
 
-# Ricc loves 🍕 TODO
+# Ricc loves 🍕
 [group('after-meeting')]
 run-horseragish-ricc: install
     uvx --from google-adk adk run horseragish_ricc/
@@ -18,10 +16,10 @@ run-horseragish-ricc: install
 run-horseragish-max: install
     uvx --from google-adk adk run horseragish_max/
 
-# [👍] TODO(max): add your logging prefs as you wish
+# [👍] Runs ADK WEB
 [group('after-meeting')]
 run-horseragish-web:
-    adk web
+    uvx --from google-adk adk web --reload --log_level info
 
 # TODO implement this
 # [group('after-meeting')]
