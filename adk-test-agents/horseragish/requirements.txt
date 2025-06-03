@@ -1,5 +1,5 @@
-typer
+# TODO - remove Typer, looks like its useless.
+# typer
 PyMuPDF
 typing-extensions
-# this dhold have 0.5 or 1.0
 google-adk==1.1.0

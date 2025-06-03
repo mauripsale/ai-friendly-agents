@@ -3,13 +3,12 @@ list:
     just -l
 
 
-# install:
-#     uv pip install typer PyMuPDF typing-extensions
-# ADK API server - never tried
-# adk-api-server:
-#     adk api_server
+# TODO(ricc) add deps in toml file - seems more idiomatic.
+install:
+    echo TODO ricc add deps in toml file.
 
-install-from-reqs:
+# [👍] Configuring uv correctly, but taking deps from requirements.txt (partially suboptimal?)
+install-from-requirements:
     uv venv
     time uv pip install -r requirements.txt
     @echo "Installed dependencies from requirements.txt. Goodness me this is fast! 😅 Take this poetry!"
@@ -18,15 +17,41 @@ install-from-reqs:
 # Ricc loves 🍕 TODO
 [group('after-meeting')]
 run-horseragish-ricc:
-    adk run horseragish/horseragish_ricc/
+    adk run horseragish_ricc/
 
-# Max loves 🇫🇷 TODO
+# [👍] Max loves 🇫🇷 (agent works, but i had to remove functions and deps - Max to fix)
 [group('after-meeting')]
 run-horseragish-max:
-    adk run horseragish/horseragish_max/
+    adk run horseragish_max/
+
+# [👍] TODO(max): add your logging prefs as you wish
+[group('after-meeting')]
+run-horseragish-web:
+    adk web
 
 # TODO implement this
 [group('after-meeting')]
 init:
     echo "Initializing new world agents..."
 # TODO make it work .
+
+
+# [👍] simple test for the max agent
+[group('tests')]
+test-riccardo-agent:
+    echo 'how are you?' |adk run horseragish/horseragish_ricc/
+
+# [👍] simple test for the max agent
+[group('tests')]
+test-max-agent:
+    echo 'how are you?' |adk run horseragish/horseragish_max/
+
+# [👍] Show Action Items on code
+[group('tests')]
+show-todos:
+    @echo "TODOs in this project:"
+    @echo "[🇮🇹] Searching for TODOs from RICC in the codebase..."
+    @find . -maxdepth 3 -type f -name "*.py" -exec grep -H "TODO(ricc" {} \; || echo "🤷 No TODOs found => ricc rocks!"
+    @echo "[🇫🇷] Searching for TODOs from MAX in the codebase..."
+    @find . -maxdepth 3 -type f -name "*.py" -exec grep -H "TODO(max" {} \; || echo "🤷 No TODOs found => Max is a slacker"
+# grep --exclude-dir={.venv} -r "TODO(max" . || echo "No TODOs found."

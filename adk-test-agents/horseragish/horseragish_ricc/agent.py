@@ -1,8 +1,7 @@
 import pathlib
 
-from .ricclib.utils import enumerate_data_sources
+#from .ricclib.utils import enumerate_data_sources
 
-#from ricclib.utils import enumerate_data_sources
 from horseragish.ask_question import process_documents
 from google.adk.agents import Agent
 
@@ -58,8 +57,8 @@ root_agent = Agent(
     description="Agent that reads local content from local files and answers questions on that corpus",
     instruction=instructions_prompt,
     tools=[
-        enumerate_data_sources,
-        process_documents_with_question,  # This is the function that processes documents and answers questions
+        #enumerate_data_sources,
+        #process_documents_with_question,  # This is the function that processes documents and answers questions
 
         # Maxime: get_content_as_text
     ],
