@@ -3,8 +3,7 @@
 Run
 
 ```shell
-./install.sh
-source .venv/bin/activate
+./run.sh  # will install requirements if necessary
 ```
 
 # Idea
