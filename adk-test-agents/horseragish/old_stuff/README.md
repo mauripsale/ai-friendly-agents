@@ -6,8 +6,15 @@ Run
 ./run.sh  # will install requirements if necessary
 ```
 
+## History
+
+On 3jun25, Riccardo talked to Maxime and we agreed on a new way fwd:
+1. only 2 functions
+2. use `uv` for pkg management.
+
 # Idea
 =======
+
 This folder is about 🐴🧄 *HorseRAGish*, a pun on this not being really RAG but achieving THIS through long-context what RAG normally does through Vector DBs and Embeddings.
 
 Fun fact: I've been meaning to do this for months now, but I decided to do it when my buddy Maxime came to me with a real use case and we thought: let's do it!
