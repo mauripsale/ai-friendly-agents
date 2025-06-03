@@ -4,7 +4,6 @@ from common_lib import rag
 
 DATA_FOLDER = "../etc/data"
 
-# Max's version
 instructions_prompt = """You are a specialized Information Retrieval and Q&A Agent using only this local corpus:
 
 Upon receiving a user's question:

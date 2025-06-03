@@ -2,18 +2,8 @@ import pathlib
 import json
 from common_lib import process_docs
 
-# Let's add here
-# 1.  Enumerate sources() as Ricc did
-# 2. BuildDocument(source) - but make sure to return a JSON:
-#  { status: "ok", content: "..." } vs
-#  { status: "error", message: "..." }
-# Should habve some sort of error handling and optimize for 1M context window.
 
-# Notes
-# * NO Process documents with question - ERicc did but its wrong
-# * local cache: local `.cache/buridone.md` and have a timestamp which expires in 1h.
-
-
+# TODO: for each folder add a file that summarizes the content so that AI models can decide which to pick
 def enumerate_data_sources(folder_path_str: str) -> list[str]:
     """Enumerate the data sources in the local corpus.
     Basically, list the subfolders of given folder_path.
@@ -30,6 +20,8 @@ def enumerate_data_sources(folder_path_str: str) -> list[str]:
     return [p.name for p in folder_path.iterdir() if p.is_dir()]
 
 
+# TODO: add some sort of error handling and optimize for 1M context window.
+# TODO: local cache: local `.cache/buridone.md` - with some expiration heuristic (timestamp or other)
 def build_document(folder_path_str: pathlib.Path) -> str:
     try:
         content = process_docs.process_documents(folder_path_str)
