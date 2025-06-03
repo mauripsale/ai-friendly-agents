@@ -4,11 +4,6 @@ version = "0.1.0"
 description = "Max and Riccardo trying to create a MVP" # Yeah, I said it.
 dependencies = [
     "google-adk==1.1.0", # at least 1.0.0, but 1.1.0 is better
-    #"typer", # CLI framework - maybe we should move to a TYPE hint, so we can find better.
-            # TODO(ricc): find better library from python standard.
-            # its called `TypeHints`.
-    "PyMuPDF", # Max has better idea.
-    "typing-extensions",
 ]
 
 [build-system]

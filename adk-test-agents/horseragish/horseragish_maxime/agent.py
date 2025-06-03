@@ -1,6 +1,7 @@
 from google.adk.agents import Agent
 import pathlib
-from maxlib import process_docs
+# TODO(max): Move to a config file in common_lib/
+#from maxlib import process_docs
 
 
 DATA_FOLDER = "../etc/data"
@@ -24,7 +25,8 @@ def get_content_as_text() -> str:
     data_path = pathlib.Path(DATA_FOLDER)
     if not data_path.is_absolute():
         data_path = pathlib.Path(__file__).parent.joinpath(DATA_FOLDER)
-    return process_docs.process_documents(data_path)
+    return "TODO"
+#    return process_docs.process_documents(data_path)
 
 
 root_agent = Agent(

@@ -1,0 +1,32 @@
+
+list:
+    just -l
+
+
+# install:
+#     uv pip install typer PyMuPDF typing-extensions
+# ADK API server - never tried
+# adk-api-server:
+#     adk api_server
+
+install-from-reqs:
+    uv venv
+    time uv pip install -r requirements.txt
+    @echo "Installed dependencies from requirements.txt. Goodness me this is fast! 😅 Take this poetry!"
+
+
+# Ricc loves 🍕 TODO
+[group('after-meeting')]
+run-horseragish-ricc:
+    adk run horseragish/horseragish_ricc/
+
+# Max loves 🇫🇷 TODO
+[group('after-meeting')]
+run-horseragish-max:
+    adk run horseragish/horseragish_max/
+
+# TODO implement this
+[group('after-meeting')]
+init:
+    echo "Initializing new world agents..."
+# TODO make it work .
