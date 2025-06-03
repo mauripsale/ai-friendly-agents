@@ -9,17 +9,17 @@ install:
 # Ricc loves 🍕
 [group('after-meeting')]
 run-horseragish-ricc: install
-    uvx --from google-adk adk run horseragish_ricc/
+    source .venv/bin/activate ; adk run horseragish_ricc/
 
 # [👍] Max loves 🇫🇷 (agent works, but i had to remove functions and deps - Max to fix)
 [group('after-meeting')]
 run-horseragish-max: install
-    uvx --from google-adk adk run horseragish_max/
+    source .venv/bin/activate ; adk run horseragish_max/
 
 # [👍] Runs ADK WEB
 [group('after-meeting')]
 run-horseragish-web:
-    uvx --from google-adk adk web --reload --log_level info
+    source .venv/bin/activate ; adk web --reload --log_level info
 
 # TODO implement this
 # [group('after-meeting')]
@@ -55,6 +55,7 @@ clean:
     find . -name "*.pyc" -delete
     find . -name "__pycache__" -delete
     find . -name ".pytest_cache" -delete
+    find . -name ".venv" -delete
     find . -name ".mypy_cache" -delete
     @echo "🧹 Size AFTER the cure:"
     du -sh .

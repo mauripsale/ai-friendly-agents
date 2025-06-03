@@ -1,11 +1,12 @@
 [project]
 name = "horseragish" # Or whatever you want to call it
 version = "0.1.0"
+requires-python = ">=3.13"
 description = "Max and Riccardo trying to create a MVP" # Yeah, I said it.
 dependencies = [
-    "google-adk==1.1.0", # at least 1.0.0, but 1.1.0 is better
-    "pymupdf>=1.26.0",
-    "typer>=0.16.0",
+    "google-adk==1.1.0",         # at least 1.0.0, but 1.1.0 is better
+    "pdfminer-six>=20250506",
+    "typer",
     "typing-extensions>=4.14.0",
 ]
 

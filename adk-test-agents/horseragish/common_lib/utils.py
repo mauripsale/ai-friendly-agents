@@ -2,7 +2,6 @@ from pathlib import Path
 from typing import List
 import pathlib
 
-DEFAULT_DATA_FOLDER= "etc/data/"
 
 def find_files(folder: Path, extensions: List[str]) -> List[Path]:
     """
@@ -18,8 +17,7 @@ def find_files(folder: Path, extensions: List[str]) -> List[Path]:
     return sorted(list(set(found_files)))
 
 
-
-def enumerate_data_sources(folder_path_str: str = DEFAULT_DATA_FOLDER) -> list[str]:
+def enumerate_data_sources(folder_path_str: str) -> list[str]:
     """Enumerate the data sources in the local corpus.
     Basically, list the subfolders of given folder_path.
 
@@ -33,4 +31,5 @@ def enumerate_data_sources(folder_path_str: str = DEFAULT_DATA_FOLDER) -> list[s
         return []
 
     subfolders = [p.name for p in folder_path.iterdir() if p.is_dir()]
+    print(subfolders)
     return sorted(subfolders)
