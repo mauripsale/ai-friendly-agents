@@ -3,23 +3,24 @@
 list:
     just -l
 
-install:
+# This creates a .venv folder - only used by vscode
+venv:
     uv sync
 
 # Ricc loves 🍕
 [group('after-meeting')]
-run-horseragish-ricc: install
-    source .venv/bin/activate ; adk run horseragish_ricc/
+run-horseragish-ricc:
+    uv run adk run horseragish_ricc/
 
 # [👍] Max loves 🇫🇷 (agent works, but i had to remove functions and deps - Max to fix)
 [group('after-meeting')]
-run-horseragish-max: install
-    source .venv/bin/activate ; adk run horseragish_max/
+run-horseragish-max:
+    uv run adk run horseragish_max/
 
 # [👍] Runs ADK WEB
 [group('after-meeting')]
 run-horseragish-web:
-    source .venv/bin/activate ; adk web --reload --log_level info
+    uv run adk web --reload --log_level info
 
 # TODO implement this
 # [group('after-meeting')]
