@@ -39,7 +39,10 @@ def _get_cache_path(
     data_type: str = "json", # or 'yaml', 'txt'
     filename_prefix: str = ""
 ) -> Path:
-    """Constructs the deterministic cache path."""
+    """Constructs the deterministic cache path.
+
+    Includes improved filename logic from v2, especially for logs, incorporating the filename_prefix.
+    """
     base_path = CACHE_DIR / project_id  / "cloud-run" # / region
     if service_name:
         base_path /= service_name
@@ -361,6 +364,7 @@ def get_cloud_run_config(project_id: str, region: str, service_name: str, revisi
         return {"status": "error", "message": f"Failed to get config for revision {revision_name}: {e}"}
 
 # --- get_cloud_run_logs (from v1) ---
+# This function primarily fetches logs based on the current date and hours_ago.
 def get_cloud_run_logs(
     project_id: str,
     region: str,
@@ -555,6 +559,8 @@ def update_cloud_run_memory(project_id: str, region: str, service_name: str, mem
 
 
 # --- get_cloud_run_logs_for_date (from v2) ---
+# This function provides more granular control over the log retrieval time range.
+# Note: This function was still under development and might be half broken as per user.
 def get_cloud_run_logs_for_date(
     project_id: str,
     region: str,
@@ -568,6 +574,7 @@ def get_cloud_run_logs_for_date(
 ) -> Dict[str, Any]:
     """
     Retrieves logs for a specific Cloud Run revision within a specified date and time range.
+"""
 
     Args:
         project_id: The Google Cloud Project ID.
