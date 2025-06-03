@@ -2,10 +2,10 @@ from google.adk.agents import Agent
 import pathlib
 from maxlib import process_docs
 
-# TODO: Move to a config file
-DATA_FOLDER = "../data"
 
-# Maxime version
+DATA_FOLDER = "../etc/data"
+
+# Max's version
 instructions_prompt = """You are a specialized Information Retrieval and Q&A Agent using only this local corpus:
 
 Upon receiving a user's question:
