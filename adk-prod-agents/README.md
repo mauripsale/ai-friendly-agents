@@ -9,7 +9,7 @@ Agents v1.0 compatible:
 | Folder | Agent | Description | ADK version |
 |---|---|---|---|
 | `agents/larry10/` | 🟢 **Larry** 🧢 | cURLer / Google. Both googling and curling works 🔎. | 1.1.0 |
-| `agents/filomena/` | 🟢 **Filomena** | (Based on search, uses LlmAgent) | 1.0 |
+| `agents/filomena/` | 🟢 **Filomena** 💾 | MCP File server on local folder, uses LlmAgent, can navigate or create/edit files. | 1.0 |
 
 
 ## Agents v05
@@ -106,6 +106,7 @@ Let's deploy the agent to Cloud Run with the dev UI enabled.
 * 🚀🟠 [Alfred](https://adk-alfred-794266741446.europe-west1.run.app/dev-ui) 🔑 IAM error, fixable.
 * 🚀🟠 [Claudia](https://adk-claudia-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
 * 🚀🟠 [Codie](https://adk-codie-794266741446.europe-west1.run.app/dev-ui) 🔑 403 permission denied on project None.
+* 🚀🔴 [Filomena]. Not there yet.
 * 🚀🟢 [Larry](https://adk-larry-794266741446.europe-west1.run.app/dev-ui). Works!
 * 🚀🔴 [Serpeverde](https://adk-serpeverde-794266741446.europe-west1.run.app/). ⚙️ Error: `{"error": "No module named 'lib'"}`
 * 🚀🔴 [Siculo](https://adk-siculo-794266741446.europe-west1.run.app/dev-ui). ⚙️ Launches fine but get syntax error. `lib/` import issue.
