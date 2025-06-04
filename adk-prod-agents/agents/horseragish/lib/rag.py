@@ -1,6 +1,6 @@
 import pathlib
 import json
-from common_lib import process_docs
+from lib import process_docs
 
 
 # TODO: for each folder add a file that summarizes the content so that AI models can decide which to pick

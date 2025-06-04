@@ -3,33 +3,30 @@
 list: readme-update
     just -l
 
-# Install uv dependencies.
-install: venv
-    @echo "Installing dependencies... the Max way."
 
 # This creates a .venv folder - only used by vscode
-venv:
+install:
     uv sync
 
 # Run the agent in the CLI
-[group('after-meeting')]
-run-horseragish:
+[group('agents')]
+run-horseragish: install
     uv run adk run horseragish/
 
 # [👍] Runs ADK WEB
-[group('after-meeting')]
-run-horseragish-web:
+[group('agents')]
+run-horseragish-web: install
     uv run adk web --reload --log_level info
 
 # TODO implement this
-# [group('after-meeting')]
+# [group('agents')]
 # init:
 #     echo "Initializing new world agents..."
 # TODO make it work .
 
 
 # [👍] Take me to github page for [emoji horse][emoji garlic]ish
-[group('after-meeting')]
+[group('util')]
 open-github:
     open https://github.com/palladius/ai-friendly-agents/tree/main/adk-test-agents/horseragish
 
@@ -50,7 +47,7 @@ test-horseragish:
     echo 'What data sources can you see? Please use enumerate_sources to do so and provide a bullet point list where every element is prepended by a folder emoji.' |uv run adk run horseragish/
 
 # [👍] Show Action Items on code
-[group('tests')]
+[group('util')]
 show-todos:
     @echo "TODOs in this project:"
     @echo "[🇮🇹] Searching for TODOs from RICC in the codebase..."
@@ -60,6 +57,7 @@ show-todos:
 # grep --exclude-dir={.venv} -r "TODO(max" . || echo "No TODOs found."
 
 # 🧹 Cleans up Python bytecode and cache files
+[group('util')]
 clean:
     @echo "🧹 Cleaning up Python bytecode and cache files. Size before the cure:"
     du -sh .
@@ -72,11 +70,12 @@ clean:
     du -sh .
 
 # [👍] This is another script Maxime will thank me for 😉 -> https://github.com/charmbracelet/glow
-readme:
+readme-show:
     cat README.md | glow -s dracula --width 100
 
 
 # [👍] Updates the README with the latest `just` output
+[group('util')]
 readme-update:
     @if [ ! -f ".justfile_last_update" ] ; then \
         touch .justfile_last_update; \

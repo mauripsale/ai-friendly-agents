@@ -9,7 +9,7 @@ Instead of classical RAG retrieval, we use the sueperior Gemini context window t
 
 ## Tasks 1
 
-There are a lot of functions in `common_lib/` . Please check in the methods in all python files in commong_libs/ and
+There are a lot of functions in `lib/` . Please check in the methods in all python files in commong_libs/ and
 cross-correlate to the calling functions under `horseragish/agent.py`. Now, please find:
 
 1. All functions which are NOT called at all.

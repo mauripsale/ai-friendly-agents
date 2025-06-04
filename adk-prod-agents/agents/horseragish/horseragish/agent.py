@@ -1,6 +1,6 @@
 from google.adk.agents import Agent
 import pathlib
-from common_lib import rag
+from lib import rag
 
 DATA_FOLDER = "../etc/data"
 

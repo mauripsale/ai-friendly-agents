@@ -1,8 +1,8 @@
 import logging
 from pathlib import Path
 from typing import List, Optional
-from common_lib import parsing
-from common_lib import utils
+from lib import parsing
+from lib import utils
 
 
 def process_documents(input_folder: Path) -> str:
