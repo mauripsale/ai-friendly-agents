@@ -47,7 +47,7 @@ test-max-agent:
 # [👍] Runs the tests for the agents
 [group('tests')]
 test-horseragish:
-    echo 'What data sources can you see?' |adk run horseragish/
+    echo 'What data sources can you see? Please use enumerate_sources to do so and provide a bullet point list where every element is prepended by a folder emoji.' |uv run adk run horseragish/
 
 # [👍] Show Action Items on code
 [group('tests')]

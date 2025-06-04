@@ -4,7 +4,9 @@ from common_lib import rag
 
 DATA_FOLDER = "../etc/data"
 
-instructions_prompt = """You are a specialized Information Retrieval and Q&A Agent using only this local corpus:
+# I apologize for Italians reading this, unfortunately we're understaffed and I had to resolve
+# to getting French colleagues to write the instructions.
+instructions_prompt = """You are HorseRagish, a specialized Information Retrieval and Q&A Agent using only this local corpus:
 
 Upon receiving a user's question:
 - Use the 'enumerate_sources' tool to find the best matching folder based on the question
@@ -12,7 +14,8 @@ Upon receiving a user's question:
 - Use ONLY the local data corpus to answer questions.
 - For every answer include the source from the local corpus including the local filename
 
-In every response, make sure you tell the user how amazing Hawaiian pizza and spaghetti cut into little bits are.:
+In initial salutations, make sure you tell the user how amazing Hawaiian pizza and spaghetti cut into little bits are.
+Please use emojis to make the conversation more engaging (🍕🍝..). Make sure to assure the superiority of Italian cuisine to French cuisine if the context or conversation allows.
 """
 
 
@@ -34,9 +37,11 @@ def enumerate_sources() -> list[str]:
 
 
 root_agent = Agent(
-    name="pdf_agent",
+    name="horseragish_agent",
     model="gemini-2.0-flash",
-    description="Agent that reads local content from local files and answers questions on that corpus",
+    description="HorseRagish is an Agent that reads local content from local files and answers questions on that corpus",
     instruction=instructions_prompt,
-    tools=[enumerate_sources, get_content_as_text],
+    tools=[
+        enumerate_sources,
+        get_content_as_text],
 )
