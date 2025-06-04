@@ -185,3 +185,4 @@ gemini-sbrodola*
 # Carlessian nonsense END
 ################################
 tmp/
+.gemini/
