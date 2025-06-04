@@ -31,11 +31,11 @@ def get_content_as_text(source_name: str) -> str:
 
     Returns:
         A string containing the aggregated text content of the documents in the specified source folder.
-        The format of the returned string is a JSON string indicating status and content or error.
+        The format of the returned string is a JSON string indicating status, content, and content size in bytes, or error.
 
     Example:
         >>> get_content_as_text('sample_docs')
-        '{"status": "ok", "content": "# [File 1] doc1.txt\\nContent of doc1.\\n# [File 2] doc2.md\\n## Content of doc2.\\n"}'
+        '{"status": "ok", "content": "# [File 1] doc1.txt\\nContent of doc1.\\n# [File 2] doc2.md\\n## Content of doc2.\\n", "content_size": 78}'
     """
     data_path = pathlib.Path(DATA_FOLDER).joinpath(source_name)
     if not data_path.is_absolute():
