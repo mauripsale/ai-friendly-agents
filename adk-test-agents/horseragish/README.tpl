@@ -19,5 +19,5 @@ Just use `just`:
 
 ## Nice to have
 
-- `glow`: useless but nice and colorful. [website](https://github.com/charmbracelet/glow)
+- `glow`: nice and colorful. [website](https://github.com/charmbracelet/glow)
 - `git-privatize`: from the insane mind of Ricc: [git-privatize](https://github.com/palladius/sakura/blob/master/bin/git-privatize)
