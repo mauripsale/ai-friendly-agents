@@ -19,3 +19,12 @@ cross-correlate to the calling functions under `horseragish/agent.py`. Now, plea
 
 We are moving to optimize the codebase and publish it in production so I want the files, the folders, and everything to LOOK GOOD.
 
+## Task 2
+
+Function Calling can be error prone, and sometimes LLMs give wrong arguments.
+Let's make sure that EACH function call is validated against its expected input types and ranges, which means ultimately two things:
+
+1. Let's ensure EVERY function callable method has strong typing in input and output.
+2. Let's ensure EVERY function has a nice docstring (written by you, Gemini!) containing arguments types, return, what the function does and so on, maybe a sensible example for input. Adhere to python LINT / best practices for docstring - you know better than me. 🛡️
+
+You can find fun_call methods in tools=[...] in `horseragish/agent.py`.

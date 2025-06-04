@@ -6,6 +6,29 @@ from lib import utils
 
 
 def process_documents(input_folder: Path) -> str:
+    """Processes documents in a given folder by parsing supported file types.
+
+    Supported file types are PDF, Markdown, and TXT. The content of all successfully
+    parsed files is concatenated into a single markdown string.
+
+    Args:
+        input_folder: The path to the folder containing the documents to process.
+
+    Returns:
+        A single string containing the concatenated content of all processed documents
+        in markdown format.
+
+    Raises:
+        RuntimeError:
+            - If the input_folder does not exist or is not a directory.
+            - If no files with supported extensions are found in the input_folder.
+            - If all found files fail to process or yield no content.
+            - If an unexpected file extension is encountered.
+
+    Example:
+        >>> process_documents(Path("etc/data/sample_docs"))
+        '# [File 1] doc1.txt\nContent of doc1.\n# [File 2] doc2.md\n## Content of doc2.\n'
+    """
     if not input_folder.exists():
         raise RuntimeError(f"{input_folder} does not exist")
     if not input_folder.is_dir():

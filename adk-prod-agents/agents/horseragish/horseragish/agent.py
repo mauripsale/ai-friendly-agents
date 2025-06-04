@@ -20,8 +20,22 @@ Please use emojis to make the conversation more engaging (🍕🍝..). Make sure
 
 
 def get_content_as_text(source_name: str) -> str:
-    """
-    returns a string containing the content of the local data corpus.
+    """Retrieves the concatenated text content from documents within a specified data source folder.
+
+    This function takes a source name, constructs the path to the corresponding data folder,
+    and uses the `rag.build_document` function to process the files within that folder
+    and return their aggregated content as a string.
+
+    Args:
+        source_name: The name of the data source folder (e.g., 'sample_docs').
+
+    Returns:
+        A string containing the aggregated text content of the documents in the specified source folder.
+        The format of the returned string is a JSON string indicating status and content or error.
+
+    Example:
+        >>> get_content_as_text('sample_docs')
+        '{"status": "ok", "content": "# [File 1] doc1.txt\\nContent of doc1.\\n# [File 2] doc2.md\\n## Content of doc2.\\n"}'
     """
     data_path = pathlib.Path(DATA_FOLDER).joinpath(source_name)
     if not data_path.is_absolute():

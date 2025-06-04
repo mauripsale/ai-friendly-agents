@@ -5,9 +5,19 @@ from pdfminer.high_level import extract_text
 
 
 def _normalize_headings(content: str) -> str:
-    """
-    Demotes H1 headings (# Blah) to H2 (## Blah) to avoid conflicts
-    with the main file headers.
+    """Normalizes markdown headings by demoting H1 headings to H2.
+
+    This prevents conflicts with main document headers.
+
+    Args:
+        content: The input string content, potentially containing markdown headings.
+
+    Returns:
+        The content string with H1 headings demoted to H2.
+
+    Example:
+        >>> _normalize_headings("# Title\n## Subtitle")
+        '## Title\n## Subtitle'
     """
     lines = content.splitlines()
     processed_lines: list[str] = []
@@ -20,9 +30,23 @@ def _normalize_headings(content: str) -> str:
 
 
 def parse_pdf(file_path: Path) -> Optional[str]:
-    """
-    Parses a PDF file and extracts text content.
+    """Parses a PDF file and extracts text content.
+
     Ignores images and thus aligns with token frugality.
+
+    Args:
+        file_path: The path to the PDF file.
+
+    Returns:
+        The extracted text content as a string, or None if no text was extracted.
+
+    Raises:
+        FileNotFoundError: If the specified PDF file does not exist.
+        Exception: If an error occurs during PDF parsing.
+
+    Example:
+        >>> parse_pdf(Path("document.pdf"))
+        'Extracted text from PDF.'
     """
     if not file_path.exists():
         raise FileNotFoundError(f"PDF file {file_path.name} not found.")
@@ -39,7 +63,22 @@ def parse_pdf(file_path: Path) -> Optional[str]:
 
 
 def parse_markdown(file_path: Path) -> Optional[str]:
-    """Reads a Markdown file and normalizes its headings."""
+    """Reads a Markdown file and normalizes its headings.
+
+    Args:
+        file_path: The path to the Markdown file.
+
+    Returns:
+        The content of the Markdown file with normalized headings, or None if an error occurs.
+
+    Raises:
+        FileNotFoundError: If the specified Markdown file does not exist.
+        Exception: If an error occurs during file reading or heading normalization.
+
+    Example:
+        >>> parse_markdown(Path("notes.md"))
+        '## My Notes\nContent here.'
+    """
     if not file_path.exists():
         raise FileNotFoundError(f"Markdown file {file_path.name} not found.")
     try:
@@ -51,7 +90,24 @@ def parse_markdown(file_path: Path) -> Optional[str]:
 
 
 def parse_txt(file_path: Path) -> Optional[str]:
-    """Reads a TXT file. Normalization is applied but less likely to change TXT content."""
+    """Reads a TXT file and normalizes its headings.
+
+    Normalization is applied but less likely to change TXT content.
+
+    Args:
+        file_path: The path to the TXT file.
+
+    Returns:
+        The content of the TXT file with normalized headings, or None if an error occurs.
+
+    Raises:
+        FileNotFoundError: If the specified TXT file does not exist.
+        Exception: If an error occurs during file reading or heading normalization.
+
+    Example:
+        >>> parse_txt(Path("document.txt"))
+        'Plain text content.'
+    """
     if not file_path.exists():
         raise FileNotFoundError(f"TXT file {file_path.name} not found.")
     try:

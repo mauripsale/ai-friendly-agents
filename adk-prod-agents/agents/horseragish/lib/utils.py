@@ -4,9 +4,21 @@ import pathlib
 
 
 def find_files(folder: Path, extensions: List[str]) -> List[Path]:
-    """
-    Finds files with given extensions in a folder and its subfolders.
-    Returns a sorted list of unique file paths.
+    """Finds files with given extensions in a folder and its subfolders.
+
+    Performs a recursive search within the specified folder for files ending with any
+    of the provided extensions. Returns a sorted list of unique file paths.
+
+    Args:
+        folder: The path to the directory to search within.
+        extensions: A list of file extensions (e.g., ['.txt', '.md']) to search for.
+
+    Returns:
+        A sorted list of unique Path objects representing the found files.
+
+    Example:
+        >>> find_files(Path("etc/data/sample_docs"), [".txt", ".md"])
+        [Path('etc/data/sample_docs/doc1.txt'), Path('etc/data/sample_docs/doc2.md')]
     """
     found_files: List[Path] = []
     for ext in extensions:
