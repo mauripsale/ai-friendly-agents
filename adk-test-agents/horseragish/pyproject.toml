@@ -13,3 +13,11 @@ dependencies = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "jinja2>=3.1.6",
+]
+
+[project.scripts]
+generate-readme = "generate_readme:generate_readme"

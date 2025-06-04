@@ -186,3 +186,4 @@ gemini-sbrodola*
 ################################
 tmp/
 .gemini/
+**/.DS_Store

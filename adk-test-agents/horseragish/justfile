@@ -78,4 +78,4 @@ readme:
 
 # [👍] Updates the README with the latest `just` output
 readme-update:
-    ./update_readme.sh
+    uv run generate-readme
