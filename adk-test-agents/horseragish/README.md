@@ -1,12 +1,12 @@
 
 ## Pre-requisites
 
-Install `uv` and `just`
+Install `uv` and `just` (+ `glow` for the readme CLI integration)
 
 On macos:
 
 ```
-brew install just uv
+brew install just uv glow
 ```
 
 ## Running the agents
