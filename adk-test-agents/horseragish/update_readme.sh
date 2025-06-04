@@ -1,0 +1,33 @@
+#!/bin/bash
+
+cat << 'EOF' > README.md
+
+## Pre-requisites
+
+Install `uv` and `just` (+ `glow` for the readme CLI integration)
+
+On macos:
+
+```
+brew install just uv glow
+```
+
+## Running the agents
+
+Just use `just`:
+
+```
+EOF
+
+just -l >> README.md
+
+cat << 'EOF' >> README.md
+```
+
+
+## Nice to have
+
+- `glow`: useless but nice and colorful. [website](https://github.com/charmbracelet/glow)
+- `git-privatize`: from the insane mind of Ricc: [git-privatize](https://github.com/palladius/sakura/blob/master/bin/git-privatize)
+
+EOF

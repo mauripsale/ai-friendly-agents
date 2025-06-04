@@ -65,3 +65,8 @@ clean:
 # [👍] This is another script Maxime will thank me for 😉 -> https://github.com/charmbracelet/glow
 readme:
     cat README.md | glow -s dracula --width 100
+
+
+# [👍] Updates the README with the latest `just` output
+readme-update:
+    ./update_readme.sh
