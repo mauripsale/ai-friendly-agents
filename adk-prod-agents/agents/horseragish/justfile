@@ -86,3 +86,23 @@ readme-update:
         uv run generate-readme; \
         touch .justfile_last_update; \
     fi
+
+
+
+# OLD versions
+# readme-update:
+#     @if [ ! -f ".justfile_last_update" ] ; then \
+#         touch .justfile_last_update; \
+#     fi
+#     @if [ "justfile" -nt ".justfile_last_update" ] || [ "README.tpl" -nt ".justfile_last_update" ] ; then \
+#         echo "justfile or README.tpl has been updated. Running readme generation..."; \
+#         uv run generate-readme; \
+#         touch .justfile_last_update; \
+#     fi
+
+
+
+# DOESNT WORK - see https://github.com/casey/just/issues/867 - here Makefile would be better!                │
+# [👍] Updates the README with the latest `just` output                                                      │
+#readme-update: justfile, ".README.template.md"                                                               │
+#    uv run generate-readme

@@ -12,7 +12,7 @@ def generate_readme():
     3. Using Jinja2 to render a template, injecting the captured output.
     4. Writing the final content to 'README.md'.
 
-    NOTE: using `README.tpl` as the base template.
+    NOTE: using `.README.template.md` as the base template.
     """
 
     logging.basicConfig(level=logging.ERROR)
@@ -20,9 +20,9 @@ def generate_readme():
     try:
         just_l_output = subprocess.check_output(['just', '-l'], text=True)
 
-        with open('./README.tpl') as fh:
+        with open('./.README.template.md') as fh:
             rendered_readme = Template(fh.read()).render(just_l_output=just_l_output)
-            
+
         with open('README.md', 'w') as f:
             f.write(rendered_readme)
             logging.info("README.md generated successfully!")
