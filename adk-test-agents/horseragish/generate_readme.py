@@ -15,7 +15,7 @@ def generate_readme():
     NOTE: using `README.tpl` as the base template.
     """
 
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.ERROR)
 
     try:
         just_l_output = subprocess.check_output(['just', '-l'], text=True)

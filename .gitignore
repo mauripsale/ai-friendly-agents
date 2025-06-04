@@ -186,4 +186,5 @@ gemini-sbrodola*
 ################################
 tmp/
 .gemini/
-**/.DS_Store
+.DS_Store
+.justfile_last_update

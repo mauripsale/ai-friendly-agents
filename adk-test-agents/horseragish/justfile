@@ -1,6 +1,6 @@
 
 # This list here
-list:
+list: readme-update
     just -l
 
 # Install uv dependencies.
@@ -78,4 +78,11 @@ readme:
 
 # [👍] Updates the README with the latest `just` output
 readme-update:
-    uv run generate-readme
+    @if [ ! -f ".justfile_last_update" ] ; then \
+        touch .justfile_last_update; \
+    fi
+    @if [ "justfile" -nt ".justfile_last_update" ] || [ "README.tpl" -nt ".justfile_last_update" ] ; then \
+        echo "justfile or README.tpl has been updated. Running readme generation..."; \
+        uv run generate-readme; \
+        touch .justfile_last_update; \
+    fi
