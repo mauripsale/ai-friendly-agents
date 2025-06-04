@@ -3,7 +3,18 @@ Let's start with the retrieval of Cloud Run instances.
 
 Note that ADK v1.0 (documented in: [https://github.com/google/adk/tree/main/adk](https://github.com/googlecloudplatform/advisory-digital-kit/tree/main/adk) desn't import files normally.
 
-So creating a `constants.py` file wuill yield this error:
+## fixing dupes
+
+ the code in `crudo10/lib/` has plenty of duplication (under ). can u help me find what we're         │
+calling and what not? *Im pretty sure adk-prod-agents/agents/crudo10/lib/ricc_cloud_run_v1.py and
+adk-prod-agents/agents/crudo10/lib/ricc_cloud_run_v2.py are nearly identical and my main code is calling only one. Please:
+1. tell me what's the difference between the 2 and help me dedupe them
+2. lets delete the one we dont use (after having migrated some code which possibly might be useful another time).
+3. I'm sure the diff is very small.
+
+## Library errors:
+
+Creating a `constants.py` file wuill yield this error:
 
 ## ERROR from constants.py
 
