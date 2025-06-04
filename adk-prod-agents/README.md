@@ -10,6 +10,7 @@ Agents v1.0 compatible:
 |---|---|---|---|
 | `agents/larry10/` | 🟢 **Larry** 🧢 | cURLer / Google. Both googling and curling works 🔎. | 1.1.0 |
 | `agents/filomena/` | 🟢 **Filomena** 💾 | MCP File server on local folder, uses LlmAgent, can navigate or create/edit files. | 1.0 |
+| `agents/horseragish/` | 🟡 **[Horseragish](agents/horseragish/)** 🐎🧄 | RAG-ish agent, can navigate through different data sources and answer questions on TXT, MD and PDFs in it. | 1.0 |
 
 
 ## Agents v05
