@@ -3,6 +3,10 @@
 list:
     just -l
 
+# Install uv dependencies.
+install: venv
+    @echo "Installing dependencies... the Max way."
+
 # This creates a .venv folder - only used by vscode
 venv:
     uv sync
@@ -24,21 +28,26 @@ run-horseragish-web:
 # TODO make it work .
 
 
-# [👍] Take me to github
+# [👍] Take me to github page for [emoji horse][emoji garlic]ish
 [group('after-meeting')]
-github:
+open-github:
     open https://github.com/palladius/ai-friendly-agents/tree/main/adk-test-agents/horseragish
 
 
-# [👍] simple test for the max agent
+# [💔] simple test for the max agent  (broken by an evil French dev)
 [group('tests')]
 test-riccardo-agent:
     echo 'how are you?' |adk run horseragish/horseragish_ricc/
 
-# [👍] simple test for the max agent
+# [💔] simple test for the max agent (broken by an evil French dev)
 [group('tests')]
 test-max-agent:
     echo 'how are you?' |adk run horseragish/horseragish_max/
+
+# [👍] Runs the tests for the agents
+[group('tests')]
+test-horseragish:
+    echo 'What data sources can you see?' |adk run horseragish/
 
 # [👍] Show Action Items on code
 [group('tests')]
