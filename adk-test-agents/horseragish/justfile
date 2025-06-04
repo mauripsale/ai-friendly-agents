@@ -7,15 +7,10 @@ list:
 venv:
     uv sync
 
-# Ricc loves 🍕
+# Run the agent in the CLI
 [group('after-meeting')]
-run-horseragish-ricc:
-    uv run adk run horseragish_ricc/
-
-# [👍] Max loves 🇫🇷 (agent works, but i had to remove functions and deps - Max to fix)
-[group('after-meeting')]
-run-horseragish-max:
-    uv run adk run horseragish_max/
+run-horseragish:
+    uv run adk run horseragish/
 
 # [👍] Runs ADK WEB
 [group('after-meeting')]
