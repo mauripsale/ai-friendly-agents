@@ -24,6 +24,12 @@ run-horseragish-web:
 # TODO make it work .
 
 
+# [👍] Take me to github
+[group('after-meeting')]
+github:
+    open https://github.com/palladius/ai-friendly-agents/tree/main/adk-test-agents/horseragish
+
+
 # [👍] simple test for the max agent
 [group('tests')]
 test-riccardo-agent:
