@@ -19,30 +19,25 @@ def generate_readme():
 
     try:
         just_l_output = subprocess.check_output(['just', '-l'], text=True)
+
+        with open('./README.tpl') as fh:
+            rendered_readme = Template(fh.read()).render(just_l_output=just_l_output)
+            
+        with open('README.md', 'w') as f:
+            f.write(rendered_readme)
+            logging.info("README.md generated successfully!")
+
     except FileNotFoundError:
-        just_l_output = "Error: 'just' command not found. Please ensure it's installed and in your PATH."
-        logging.error(just_l_output)
+        logging.error("Error: 'just' command not found. Please ensure it's installed and in your PATH.")
         sys.exit(1)
     except subprocess.CalledProcessError as e:
-        just_l_output = f"Error running 'just -l': {e.output}"
         logging.error(f"Error executing command: {e}")
         sys.exit(1)
     except Exception as e:
-        just_l_output = f"An unexpected error occurred: {e}"
         logging.error(f"An unexpected error occurred: {e}")
         sys.exit(1)
 
 
-    # Create a Jinja2 Template object from the defined string content.
-    with open('./README.tpl') as fh:
-        template = Template(fh.read())
-
-    rendered_readme = template.render(just_l_output=just_l_output)
-
-    with open('README.md', 'w') as f:
-        f.write(rendered_readme)
-
-    logging.info("README.md generated successfully!")
 
 if __name__ == "__main__":
     # Ensure this function is called only when the script is executed directly.
