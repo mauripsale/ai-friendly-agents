@@ -1,0 +1,6 @@
+[project]
+name = "serper-mcp-wrapper"
+version = "0.1.0"
+dependencies = [
+    "google-adk==1.2.0"
+]
