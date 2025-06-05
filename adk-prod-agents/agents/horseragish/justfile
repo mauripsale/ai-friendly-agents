@@ -31,16 +31,6 @@ open-github:
     open https://github.com/palladius/ai-friendly-agents/tree/main/adk-prod-agents/agents/horseragish
 
 
-# [💔] simple test for the max agent  (broken by an evil French dev)
-[group('tests')]
-test-riccardo-agent:
-    echo 'how are you?' |adk run horseragish/horseragish_ricc/
-
-# [💔] simple test for the max agent (broken by an evil French dev)
-[group('tests')]
-test-max-agent:
-    echo 'how are you?' |adk run horseragish/horseragish_max/
-
 # [👍] Runs the tests for the agents
 [group('tests')]
 test-horseragish:
