@@ -28,7 +28,7 @@ run-horseragish-web: install
 # [👍] Take me to github page for [emoji horse][emoji garlic]ish
 [group('util')]
 open-github:
-    open https://github.com/palladius/ai-friendly-agents/tree/main/adk-test-agents/horseragish
+    open https://github.com/palladius/ai-friendly-agents/tree/main/adk-prod-agents/agents/horseragish
 
 
 # [💔] simple test for the max agent  (broken by an evil French dev)
