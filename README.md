@@ -15,12 +15,18 @@ Dir structure:
 
 * `adk/prod/`: agents built with ADK. Production ready, ready to use.
 * `adk/dev/`: agents built with ADK. More to learn how to do things. Could be cut and paste of public docs.
-* `samples/`: end-to-end samples by the author.
-* `mcp-prod-agents`: agents built with MCP. Production ready, ready to use.
+* `mcp-agents/prod`: agents built with MCP. Production ready, ready to use.
 * `mcp-agents/dev`: agents built with MCP. More to learn how to do things.
-* Test MCP: `npx @modelcontextprotocol/inspector`
+* `rag/`: samples to instruct AIs with local code.
 
 Better samples can be found here: https://github.com/google/adk-samples
+
+## MCP
+
+To test MCP agents:
+
+* Nice locally running agent: `npx @modelcontextprotocol/inspector`
+* Use the `pip install mcp[cli]`. Never tried yet.
 
 # Install
 
