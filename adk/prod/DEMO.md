@@ -2,7 +2,7 @@ Self:
 
 # Demo  Prod Agents
 
-`$ cd adk-prod-agents`
+`$ cd adk/prod`
 
 There are many agents here, I'm providing some demo ideas
 
@@ -39,7 +39,7 @@ There's little wow factor. The system just googles.
 
 Trixie a bit harder to set up, as you need to set up a Service Account, and then add your trixes to the config json file.
 
-If you call it from `adk-prod-agents/`, you need to add ENV vars like these:
+If you call it from `adk/prod/`, you need to add ENV vars like these:
 
 ```bash
 # Note the "trixie/" part in these vars.

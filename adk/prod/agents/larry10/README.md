@@ -26,7 +26,7 @@ This agent has been migrated to ADK v1.0 and uses a dedicated `uv` virtual envir
 
 **Using the justfile target (Recommended):**
 
-From the `adk-prod-agents/` directory, run:
+From the `adk/prod/` directory, run:
 
 ```bash
 just run-larry10-web
@@ -38,7 +38,7 @@ This command will activate the virtual environment and start the agent using `uv
 
 1. Navigate to the agent directory:
    ```bash
-   cd adk-prod-agents/agents/larry10/
+   cd adk/prod/agents/larry10/
    ```
 2. Activate the virtual environment:
    ```bash

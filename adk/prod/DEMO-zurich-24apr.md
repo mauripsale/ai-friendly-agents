@@ -3,7 +3,7 @@
 Since no time, just go with UI.
 
 ```bash
-cd adk-prod-agents
+cd adk/prod
 just web
 ```
 

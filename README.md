@@ -13,8 +13,8 @@ A bunch of friendly agents ready to use with ADK, MCP, A2A et al.
 
 Dir structure:
 
-* `adk-prod-agents/`: agents built with ADK. Production ready, ready to use.
-* `adk-test-agents/`: agents built with ADK. More to learn how to do things. Could be cut and paste of public docs.
+* `adk/prod/`: agents built with ADK. Production ready, ready to use.
+* `adk/dev/`: agents built with ADK. More to learn how to do things. Could be cut and paste of public docs.
 * `samples/`: end-to-end samples by the author.
 * `mcp-prod-agents`: agents built with MCP. Production ready, ready to use.
 * `mcp-test-agents`: agents built with MCP. More to learn how to do things.
@@ -35,7 +35,7 @@ python -m venv .venv
 source .venv/bin/activate
 
 # 3.
-cd adk-prod-agents/
+cd adk/prod/
 pip install -r requirements.txt
 ```
 

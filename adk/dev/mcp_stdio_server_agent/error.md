@@ -41,8 +41,8 @@ Traceback (most recent call last):
   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk-test-agents/mcp_stdio_server_agent/__init__.py", line 1, in <module>
+  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk/dev/mcp_stdio_server_agent/__init__.py", line 1, in <module>
     from . import agent
-  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk-test-agents/mcp_stdio_server_agent/agent.py", line 33, in <module>
+  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk/dev/mcp_stdio_server_agent/agent.py", line 33, in <module>
     MCPToolset(
 TypeError: MCPToolset.__init__() got an unexpected keyword argument 'tool_filter'

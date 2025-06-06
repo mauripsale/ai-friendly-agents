@@ -6,8 +6,8 @@ Note that ADK v1.0 (documented in: [https://github.com/google/adk/tree/main/adk]
 ## fixing dupes
 
  the code in `crudo10/lib/` has plenty of duplication (under ). can u help me find what we're         │
-calling and what not? *Im pretty sure adk-prod-agents/agents/crudo10/lib/ricc_cloud_run_v1.py and
-adk-prod-agents/agents/crudo10/lib/ricc_cloud_run_v2.py are nearly identical and my main code is calling only one. Please:
+calling and what not? *Im pretty sure adk/prod/agents/crudo10/lib/ricc_cloud_run_v1.py and
+adk/prod/agents/crudo10/lib/ricc_cloud_run_v2.py are nearly identical and my main code is calling only one. Please:
 1. tell me what's the difference between the 2 and help me dedupe them
 2. lets delete the one we dont use (after having migrated some code which possibly might be useful another time).
 3. I'm sure the diff is very small.
@@ -63,9 +63,9 @@ Traceback (most recent call last):
   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk-prod-agents/agents/crudo10/__init__.py", line 1, in <module>
+  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk/prod/agents/crudo10/__init__.py", line 1, in <module>
     from . import agent
-  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk-prod-agents/agents/crudo10/agent.py", line 8, in <module>
+  File "/usr/local/google/home/ricc/git/ai-friendly-agents/adk/prod/agents/crudo10/agent.py", line 8, in <module>
     from constants import (
 ModuleNotFoundError: No module named 'constants'
 ```

@@ -1,0 +1,9 @@
+# justfile for serper-mcp-wrapper_v10
+
+# List available commands
+list:
+	@just -l
+
+# Test the ilyazub serpapi-mcp-server
+test-ilyazub:
+	SERPAPI_API_KEY="${SERPAPI_API_KEY}" python test/ilyazub-serpapi-mcp-server.py

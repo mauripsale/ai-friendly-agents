@@ -4,7 +4,7 @@ Salvatore Siculo is a `sqlite3` DB inspector.
 
 ![Salvatore Siculo](image-3.png)
 
-Self: https://github.com/palladius/ai-friendly-agents/tree/main/adk-prod-agents/siculo
+Self: https://github.com/palladius/ai-friendly-agents/tree/main/adk/prod/siculo
 
 
 ## INSTALL
