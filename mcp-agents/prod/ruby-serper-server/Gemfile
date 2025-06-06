@@ -1,0 +1,12 @@
+
+source "https://rubygems.org"
+
+gem "fast-mcp", "~> 1.4"
+
+#gem 'rack' # rack/handler/puma
+#gem 'puma'
+# remove me
+#gem 'sinatra'
+# gem 'sinatra-activerecord'
+# gem 'sinatra-contrib'
+# gem 'sinatra-static-assets'
