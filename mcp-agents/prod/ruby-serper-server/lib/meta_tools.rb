@@ -14,6 +14,8 @@ module MetaTools
         name: 'serper-travel-agent',
         description: 'MCP server for Serper API travel searches',
         version: version,
+        github_repo: "https://github.com/palladius/ai-friendly-agents/",
+        author: "Riccardo Carlesso",
         # Add any other relevant metadata here
       }.to_json
     end
