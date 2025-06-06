@@ -2,8 +2,14 @@
 
 This is a simple Ruby MCP server that uses the Serper API to search Google Flights and Google Hotels.
 
-* Type: **SSE**
+* This MCP server supports both **SSE** (Server-Sent Events) via the `/mcp/sse` endpoint and JSON-RPC via the `/mcp/messages` endpoint. I presume
 * Tech: Ruby Sinatra + Puma. Runs on port **9292**.
+
+Commands:
+
+* ✅ `just rack-server`  launches ruby MCP server (SSE) on port 9292. supports both SSE and JSON-RPC.
+* ❌ `just stdio-server`  launches ruby MCP server over STDIO - currently broken. It starts but breaks when you ask tool list.
+
 
 ## Available Tools
 
