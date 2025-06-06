@@ -1,8 +1,16 @@
 Help me create a simple Ruby MCP server that uses the Serper API to search Google Flights and Google Hotels.
 
+## Initial Implementation (Ignore this if it's already done!)
+
 * take implementation details from the working `../ruby-sse-fastmcp-hello-server`. Use `fast_mcp` gem as in there, its the best for the job.
-* Create a set of FlightTools in a file `lib/flight_tools.rb`. As in https://mcpmarket.com/server/google-flights , make sure it has a search_one_way (single date) and a search_two_ways (2 dates).
+* Create/maintain a set of FlightTools in a file `lib/flight_tools.rb`. As in https://mcpmarket.com/server/google-flights , make sure it has a search_one_way (single date) and a search_two_ways (2 dates).
 * Create an empty set of HotelTools in a file `lib/flight_tools.rb` (just scaffold the file and import, maybe add a sample function)
+* More stuff might be added later, do NOT remove it!
+
+## MCP
+
+We will primarily implement a network SSE server under `server.rb`
+Then we create a `stdio_sever.rb` to implement the same mechanism in STDIO mode.
 
 ## Documentation
 

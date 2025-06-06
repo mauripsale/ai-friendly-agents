@@ -1,3 +1,8 @@
+## 0.1.2
+
+* Added `HotelTools` with `search_hotels` tool.
+* Removed duplicate tool registrations in `server.rb`.
+
 ## 0.1.1
 
 * Added Meta Tool to return server metadata.

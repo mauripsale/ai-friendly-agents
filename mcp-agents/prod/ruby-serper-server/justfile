@@ -1,4 +1,3 @@
-
 #source .envrc  # Loads your environment variables
 set export
 set dotenv-load
@@ -19,8 +18,19 @@ list:
 rack-server:
     env SERP_API_KEY="${SERP_API_KEY}" bundle exec ruby server.rb
 
-# tests it if STDIO
+# launches ruby MCP server over STDIO
+[group('stdio')]
+stdio-server:
+    env SERP_API_KEY="${SERP_API_KEY}" bundle exec ruby stdio_server.rb
+
+# tests it if SSE STDIO
 [group('mcp')]
-test-server:
-    echo '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }'  |  nc localhost 9292  | tee response.json
-    cat response.json | jq -r '.result.tools[] | "\(.name) ➡️➡️ \(.description)"'
+test-sse-server:
+    echo '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }'  |  nc localhost 9292  | tee response-sse.json
+    cat response-sse.json | jq -r '.result.tools[] | "\(.name) ➡️➡️ \(.description)"'
+
+# tests it if STDIO
+[group('stdio')]
+test-stdio-server:
+    echo '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }'  |  just stdio-server  | tee response-stdio.json
+    cat response-stdio.json | jq -r '.result.tools[] | "\(.name) ➡️➡️ \(.description)"'

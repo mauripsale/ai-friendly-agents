@@ -2,6 +2,9 @@
 
 This is a simple Ruby MCP server that uses the Serper API to search Google Flights and Google Hotels.
 
+* Type: **SSE**
+* Tech: Ruby Sinatra + Puma. Runs on port **9292**.
+
 ## Available Tools
 
 *   ✈️ [FlightTools](lib/flight_tools.rb)
@@ -12,7 +15,7 @@ This is a simple Ruby MCP server that uses the Serper API to search Google Fligh
     *   **SearchHotels**(`q`, `check_in_date`, `check_out_date`, *`adults`*, *`children`*, *`rooms`*, *`currency`*, *`hl`*): Search for hotels using Serper API.
 
 *   ℹ️ [MetaTools](lib/meta_tools.rb)
-    *   **MetaTool**(): Returns metadata about the server. ()
+    *   **MetaTool**(): Returns metadata about the server.
 
 
 ![alt text](image.png)

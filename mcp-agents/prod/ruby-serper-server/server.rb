@@ -25,8 +25,6 @@ mcp_app = FastMcp.rack_middleware(
   # Register the tools defined in lib/
   server.register_tool(FlightTools::SearchOneWay)
   server.register_tool(FlightTools::SearchTwoWays)
-  server.register_tool(FlightTools::SearchOneWay)
-  server.register_tool(FlightTools::SearchTwoWays)
   server.register_tool(HotelTools::SearchHotels)
   server.register_tool(MetaTools::MetaTool)
 
