@@ -1,9 +1,9 @@
 
 # copied from readme
 
-require 'mcp_on_ruby'
+require 'ruby_mcp'
 
-server = MCP::Server.new do |s|
+server = RubyMCP::Server.new do |s|
   # Define a tool
   s.tool "weather.get_forecast" do |params|
     location = params[:location]

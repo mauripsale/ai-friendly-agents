@@ -2,10 +2,10 @@
 
 * 🔴 `mcp-rb`: don't use.
 * 🟡 `mcp` (156): only supports STDIO. But will probably be the most used since it seems to be supported by Anthropic.
-* ✅ `fast-mcp` (619). Works!
+* ✅ `fast-mcp` (619). Works both STDIO and SSE. I'm also using it in https://github.com/palladius/rails8-turbo-chat
 * ❓ [`rails-mcp-server`](https://github.com/maquina-app/rails-mcp-server) (160): I think this is a gem to MCPify an existing Rails application, like a TODO app.
     * Ricc, attach to Septober or create a new TODO app.
-* ❓ [`mcp_on_ruby`](https://github.com/nagstler/mcp_on_ruby)  (70):
+* 🔴 [`mcp_on_ruby`](https://github.com/nagstler/mcp_on_ruby)  (70): seems broken too.
 
 ## Ruby MCP experiments
 
