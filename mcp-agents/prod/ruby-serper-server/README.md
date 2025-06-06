@@ -14,23 +14,16 @@ This is a simple Ruby MCP server that uses the Serper API to search Google Fligh
 *   ℹ️ [MetaTools](lib/meta_tools.rb)
     *   **MetaTool**(): Returns metadata about the server. ()
 
+
+![alt text](image.png)
+
 ## How to Invoke
 
-1.  Make sure you have the `SERP_API_KEY` environment variable set with your Serper API key.
-2.  Run the server using the `justfile` command:
-
-    ```bash
-    just rack-server
-    ```
-
-    This will start the server on port 9292.
+1.  Copy `.env.dist` to `.env` and fill in your `SERP_API_KEY`.
+2.  Run the server using the `justfile` command: `just rack-server`. This will start the server on **port 9292**.
 
 ## How to Test
 
-You can test the server using the `justfile` command:
-
-```bash
-just test-server
-```
+You can test the server using the `justfile` command: `just test-server`
 
 This command sends a `tools/list` request to the server and prints the available tools.
