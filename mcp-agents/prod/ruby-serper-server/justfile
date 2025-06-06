@@ -14,13 +14,13 @@ list:
     @just -l
 
 
-# launches ruby MCP server (stdio or SSE?)
+# launches ruby MCP server (stdio or SSE?) on port 9292
 [group('mcp')]
-server:
+rack-server:
     env SERP_API_KEY="${SERP_API_KEY}" bundle exec ruby server.rb
 
 # tests it if STDIO
 [group('mcp')]
 test-server:
-    echo '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }'  | just server | tee response.json
+    echo '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }'  |  nc localhost 9292  | tee response.json
     cat response.json | jq -r '.result.tools[] | "\(.name) ➡️➡️ \(.description)"'

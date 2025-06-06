@@ -1,5 +1,13 @@
 # lib/flight_tools.rb
 
+###
+
+# type (optional):  Parameter defines the type of the flights.
+# Available options:
+# 1 - Round trip (default)
+# 2 - One way
+# 3 - Multi-city
+
 require 'fast_mcp'
 require 'google_search_results'
 
@@ -16,18 +24,20 @@ module FlightTools
       optional(:hl).filled(:string).description("Language and country (e.g., en)")
     end
 
-    def call(departure_id:, arrival_id:, outbound_date:, adults: 1, currency: "USD", hl: "en")
+    def call(departure_id: 'ZRH', arrival_id:, outbound_date:, adults: 1, currency: "USD", hl: "en")
       params = {
         api_key: ENV.fetch('SERP_API_KEY', nil),
         engine: "google_flights",
+        type: 2, # One-way flight
         departure_id: departure_id,
         arrival_id: arrival_id,
         outbound_date: outbound_date,
         adults: adults,
         currency: currency,
         hl: hl,
+        q: "flights from #{departure_id} to #{arrival_id} on #{outbound_date}"
       }
-      raise('Missing ENV["SERP_API_KEY"].. failing.') unless params[:api_key]
+      raise('Missing ENV[\"SERP_API_KEY\"].. failing.') unless params[:api_key]
 
       search = GoogleSearch.new(params)
       hash_results = search.get_hash
@@ -54,14 +64,16 @@ module FlightTools
         api_key: ENV.fetch('SERP_API_KEY', nil),
         engine: "google_flights",
         departure_id: departure_id,
+        type: 1, # Round trip flight
         arrival_id: arrival_id,
         outbound_date: outbound_date,
         return_date: return_date,
         adults: adults,
         currency: currency,
         hl: hl,
+        q: "flights from #{departure_id} to #{arrival_id} on #{outbound_date}" + (defined?(return_date) && return_date ? " returning on #{return_date}" : "")
       }
-      raise('Missing ENV["SERP_API_KEY"].. failing.') unless params[:api_key]
+      raise('Missing ENV[\"SERP_API_KEY\"].. failing.') unless params[:api_key]
 
       search = GoogleSearch.new(params)
       hash_results = search.get_hash
