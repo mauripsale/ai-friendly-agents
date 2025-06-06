@@ -24,9 +24,10 @@ stdio-server:
     env SERP_API_KEY="${SERP_API_KEY}" bundle exec ruby stdio_server.rb
 
 # tests it if SSE STDIO
+# curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }' http://localhost:9292/mcp/messages
 [group('mcp')]
 test-sse-server:
-    echo '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }'  |  nc localhost 9292  | tee response-sse.json
+    ./test-sse-and-messages-via-rpc.sh
     cat response-sse.json | jq -r '.result.tools[] | "\(.name) ➡️➡️ \(.description)"'
 
 # tests it if STDIO
