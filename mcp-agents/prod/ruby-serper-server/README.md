@@ -6,37 +6,16 @@ This is a simple Ruby MCP server that uses the Serper API to search Google Fligh
 
 ### FlightTools
 
-*   **SearchOneWay**: Search for one-way flights using Serper API.
-    *   Arguments:
-        *   `departure_id` (**required**, string): Departure airport ID (e.g., ZRH)
-        *   **`arrival_id`** (string): Arrival airport ID (e.g., AMS)
-        *   `outbound_date` (**required**, string): Outbound date (YYYY-MM-DD)
-        *   `adults` (optional, integer): Number of adults
-        *   `currency` (optional, string): Currency (e.g., USD)
-        *   `hl` (optional, string): Language and country (e.g., en)
-
-*   **SearchTwoWays**: Search for two-way flights using Serper API.
-    *   Arguments:
-        *   `departure_id` (required, string): Departure airport ID (e.g., ZRH)
-        *   `arrival_id` (required, string): Arrival airport ID (e.g., AMS)
-        *   `outbound_date` (required, string): Outbound date (YYYY-MM-DD)
-        *   `return_date` (required, string): Return date (YYYY-MM-DD)
-        *   `adults` (optional, integer): Number of adults
-        *   `currency` (optional, string): Currency (e.g., USD)
-        *   `hl` (optional, string): Language and country (e.g., en)
+*   **SearchOneWay**: Search for one-way flights using Serper API. (`departure_id`, `arrival_id`, `outbound_date`, *`adults`*, *`currency`*, *`hl`*)
+*   **SearchTwoWays**: Search for two-way flights using Serper API. (`departure_id`, `arrival_id`, `outbound_date`, `return_date`, *`adults`*, *`currency`*, *`hl`*)
 
 ### HotelTools
 
-*   **SearchHotels**: Search for hotels using Serper API.
-    *   Arguments:
-        *   `q` (required, string): Hotel search query (e.g., 'hotels in London')
-        *   `check_in_date` (required, string): Check-in date (YYYY-MM-DD)
-        *   `check_out_date` (**required**): Check-out date (YYYY-MM-DD)
-        *   `adults` (optional, integer): Number of adults
-        *   `children` (*optional*): Number of children
-        *   `rooms` (*optional*): Number of rooms
-        *   `currency` (optional, string): Currency (e.g., USD)
-        *   `hl` (optional, string): Language and country (e.g., en)
+*   **SearchHotels**: Search for hotels using Serper API. (`q`, `check_in_date`, `check_out_date`, *`adults`*, *`children`*, *`rooms`*, *`currency`*, *`hl`*)
+
+### MetaTools
+
+*   **MetaTool**: Returns metadata about the server. ()
 
 ## How to Invoke
 
