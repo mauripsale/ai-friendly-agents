@@ -24,6 +24,8 @@ I would like to do this:
    4. Note this codebase uses a mix of 0.5 and 1.1 and 1.2 just came out.
    5. MCP for ADK is documented here: https://google.github.io/adk-docs/tools/mcp-tools/
 
+A sample, working MCP agent code is in `../../rag/adk_agent_samples/mcp_agent/agent.py`
+
 Remember we're under `git`. I'm  doing everything under `main` but if you need to try something risky, please work in a feature branch.
 ## Artifacts
 

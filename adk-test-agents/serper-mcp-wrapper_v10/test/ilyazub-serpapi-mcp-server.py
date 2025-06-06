@@ -2,7 +2,8 @@ import os
 import json
 import hashlib
 from dotenv import load_dotenv
-from mcp.client import Client
+from mcp.client.stdio import stdio_client, StdioServerParameters
+from mcp.client.session import ClientSession
 
 # Load environment variables
 load_dotenv()
@@ -30,7 +31,7 @@ def cache_response(cache_key, response):
     with open(cache_file, 'w') as f:
         f.write(response)
 
-async def test_search(client: Client, params: dict):
+async def test_search(client: ClientSession, params: dict):
     """Tests the search tool with given parameters and caching."""
     cache_key = get_cache_key(params)
     cached_response = get_cached_response(cache_key)
@@ -42,7 +43,7 @@ async def test_search(client: Client, params: dict):
 
     print(f"Making request for params: {params}")
     try:
-        response = await client.search(**params)
+        response = await client.call_tool(name="search", arguments=params)
         print("Response:")
         print(response)
         cache_response(cache_key, response)
@@ -53,29 +54,34 @@ async def main():
     # Initialize MCP client
     # The path should be relative to where the script is run from, or absolute.
     # Assuming the script is run from the project root.
-    client = Client("third-party/serpapi-mcp-server/src/serpapi-mcp-server/server.py")
+    server_params = StdioServerParameters(
+        command=".venv_py313/bin/python",
+        args=["third-party/serpapi-mcp-server/src/serpapi-mcp-server/server.py"]
+    )
+    async with stdio_client(server_params) as (read_stream, write_stream):
+        client_session = ClientSession(read_stream, write_stream)
 
-    # Test Google Flights
-    flights_params = {
-        "engine": "google_flights",
-        "q": "direct flights from Zurich to Berlin",
-        "date": "2025-07-09", # evening
-        "return_date": "2025-07-12", # Saturday
-        "hl": "en",
-        "gl": "us"
-    }
-    await test_search(client, flights_params)
+        # Test Google Flights
+        flights_params = {
+            "engine": "google_flights",
+            "q": "direct flights from Zurich to Berlin",
+            "date": "2025-07-09", # evening
+            "return_date": "2025-07-12", # Saturday
+            "hl": "en",
+            "gl": "us"
+        }
+        await test_search(client_session, flights_params)
 
-    # Test Google Hotels
-    hotels_params = {
-        "engine": "google_hotels",
-        "q": "hotels in Paris",
-        "check_in_date": "2025-12-10", # Example date
-        "check_out_date": "2025-12-12", # Example date
-        "hl": "en",
-        "gl": "us"
-    }
-    await test_search(client, hotels_params)
+        # Test Google Hotels
+        hotels_params = {
+            "engine": "google_hotels",
+            "q": "hotels in Paris",
+            "check_in_date": "2025-12-10", # Example date
+            "check_out_date": "2025-12-12", # Example date
+            "hl": "en",
+            "gl": "us"
+        }
+        await test_search(client_session, hotels_params)
 
 if __name__ == "__main__":
     import asyncio
