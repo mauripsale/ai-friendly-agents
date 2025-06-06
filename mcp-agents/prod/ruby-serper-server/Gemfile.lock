@@ -42,14 +42,20 @@ GEM
       json (~> 2.0)
       mime-types (~> 3.4)
       rack (~> 3.1)
+    google_search_results (2.2.0)
     json (2.12.2)
     logger (1.7.0)
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
     mime-types-data (3.2025.0603)
+    nio4r (2.7.4)
     public_suffix (6.0.2)
+    puma (6.6.0)
+      nio4r (~> 2.0)
     rack (3.1.16)
+    rackup (2.2.1)
+      rack (>= 3)
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -58,6 +64,10 @@ PLATFORMS
 
 DEPENDENCIES
   fast-mcp (~> 1.4)
+  google_search_results
+  puma
+  rack
+  rackup
 
 BUNDLED WITH
    2.6.2
