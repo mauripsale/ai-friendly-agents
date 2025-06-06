@@ -26,7 +26,7 @@ Testing suite (awesome): `npx @modelcontextprotocol/inspector`
 
 ## Working SSE/HTTP servers
 
-See on `../mcp-prod-agents/`.
+See on `../prod/`.
 
 ### Python
 
