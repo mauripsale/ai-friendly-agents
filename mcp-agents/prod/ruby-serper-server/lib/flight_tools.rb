@@ -34,8 +34,7 @@ module FlightTools
         outbound_date: outbound_date,
         adults: adults,
         currency: currency,
-        hl: hl,
-        q: "flights from #{departure_id} to #{arrival_id} on #{outbound_date}"
+        hl: hl
       }
       raise('Missing ENV[\"SERP_API_KEY\"].. failing.') unless params[:api_key]
 
