@@ -1,20 +1,28 @@
 
 Ruby MCP experiments.
 
+Here's a quick overview of the different Ruby MCP implementations found in this repo and elsewhere:
 
-1. 🟡 [ruby-sdk](https://github.com/modelcontextprotocol/ruby-sdk).(48 🌟) :yellow: The official gem only supports **STDIO**. the gem is not pushed anywhere, so I took the code and pushed it to
-  [model_context_protocol_riccardo](https://rubygems.org/gems/model_context_protocol_riccardo), and apologizing here.
-    * 🟡 Please see an example server in `ruby-sdk-example-stdio-server/`
-1. 🟡 [mcp-rb](https://github.com/funwarioisii/mcp-rb) (178 🌟). :yellow: Very simple gem, oriented to Sinatra. Only supports **stdio** and ping.
-    * 🟡 Please see an example server in `mcp-ruby-hello/`
-1. ✅ [fast-mcp](https://github.com/yjacquin/fast-mcp) (619 🌟). Sull of emojis. ✅ Seems to support ALL transports! STDIO, HTTP, and SSE.
-    * ✅ Was able to get an SSE server up and running: http://localhost:9292/mcp/sse in `ruby/fast-mcp-hello-server$ bundle exec ruby rack_middleware.rb`
-    * ✅ [Nice & *working* integration article](https://learnitnow.medium.com/bridging-the-gap-connecting-python-ai-agents-to-ruby-apps-with-mcp-614977012399) Ruby/python
-1. ? [mcp_on_ruby](https://github.com/nagstler/mcp_on_ruby) (65 🌟). Seems to support  HTTP and STDIO transports.
-    * havent tried it yet.
-1. https://github.com/maquina-app/rails-mcp-server (integrates with Rails, and Claude Desktop). Havent tried yet
+*   🔴 `mcp-rb-hello`: This directory contains an example based on the `mcp-rb` gem. The gem's README indicates it should **NOT** be used and is likely broken or deprecated. Avoid using this one.
+*   ✅ `ruby-sdk-copy`: This directory holds a copy of the official Ruby SDK code ([https://github.com/modelcontextprotocol/ruby-sdk](https://github.com/modelcontextprotocol/ruby-sdk)). It seems to be the working SDK.
+    *   🟡 The SDK supports **STDIO** and **SSE** transports, demonstrated by the examples in `ruby-sdk-example-stdio-server/`.
+    *   🔌 The SSE example server likely runs on port **8931**.
+    *   **How to use the examples:**
+        *   **STDIO:** `cd ruby-sdk-example-stdio-server/ && bundle exec ruby stdio_server.rb`. Send JSON-RPC 2.0 messages to standard input.
+        *   **SSE:** `cd ruby-sdk-example-stdio-server/ && bundle exec ruby sse_server.rb &`. Connect to `http://localhost:8931` (likely).
+*   ✅ `fast-mcp` ([https://github.com/yjacquin/fast-mcp](https://github.com/yjacquin/fast-mcp), 619 🌟): This gem seems fully functional and supports **STDIO**, **HTTP**, and **SSE** transports. Full of emojis! ✨
+    *   Example SSE server runs on port **9292**: `cd ruby/fast-mcp-hello-server && bundle exec ruby rack_middleware.rb`. Connect to `http://localhost:9292/mcp/sse`.
+    *   There's a great and *working* integration article ([https://learnitnow.medium.com/bridging-the-gap-connecting-python-ai-agents-to-ruby-apps-with-mcp-614977012399](https://learnitnow.medium.com/bridging-the-gap-connecting-python-ai-agents-to-ruby-apps-with-mcp-614977012399)) covering Ruby/Python integration.
+*   ❓ `mcp_on_ruby` ([https://github.com/nagstler/mcp_on_ruby](https://github.com/nagstler/mcp_on_ruby), 65 🌟): Seems to support HTTP and STDIO transports. Haven't tried it yet.
+*   ❓ `rails-mcp-server` ([https://github.com/maquina-app/rails-mcp-server](https://github.com/maquina-app/rails-mcp-server)): Integrates with Rails and Claude Desktop. Haven't tried yet.
 
+---
 
-🟡: works but with some limitations (usually only STDIO transport supported).
-✅: fully functional
-🔴: broken
+**Emoji Key:**
+
+🔴: Broken/Deprecated
+🟡: Works but with some limitations (e.g., transport support)
+✅: Fully functional
+❓: Status unknown / Haven't tried yet
+🔌: Port information
+✨: Added because the user likes emojis and fast-mcp is "full of emojis".

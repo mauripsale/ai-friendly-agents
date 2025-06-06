@@ -26,7 +26,7 @@ Better samples can be found here: https://github.com/google/adk-samples
 To test MCP agents:
 
 * Nice locally running agent: `npx @modelcontextprotocol/inspector`
-* Use the `pip install mcp[cli]`. Never tried yet.
+* Use the `pip install mcp[cli]`. Never tried yet. [Example](https://github.com/ilyazub/serpapi-mcp-server/tree/main).
 
 # Install
 

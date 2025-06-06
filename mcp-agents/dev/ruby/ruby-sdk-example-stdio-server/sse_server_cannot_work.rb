@@ -94,5 +94,9 @@ end
 
 # Create and start the transport
 #transport = MCP::Transports::StdioTransport.new(server)
-transport = MCP::Transports::SseServer.new(server)
-transport.open
+#transport = MCP::Transports::SseServer.new(server)
+#transport.open
+
+puts("Riccardo, SSE cannot work since its NOT implemented yet in the MCP Ruby SDK. " \
+     "Please use the StdioTransport instead. " \
+     "See this online if u dont believe me: https://github.com/modelcontextprotocol/ruby-sdk/tree/main/lib/mcp/server/transports")

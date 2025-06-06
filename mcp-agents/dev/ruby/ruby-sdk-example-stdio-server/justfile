@@ -13,3 +13,8 @@ run-stdio:
 
 run-sse:
     bundle exec ruby sse_server.rb
+
+# Tests the stdio server with a gemini-crafted JSONRPC request
+test-list-tools:
+    echo '{"jsonrpc": "2.0", "id": "1", "method": "tools/list", "params": {} }'  | just run-stdio | tee stdio-response.json
+    cat stdio-response.json | jq -r '.result.tools[] | "\(.name) ➡️➡️ \(.description)"'

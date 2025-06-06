@@ -1,3 +1,6 @@
+#set dotenv-load := true
+set dotenv-load
+
 # justfile for serper-mcp-wrapper_v10
 
 # List available commands
@@ -5,5 +8,15 @@ list:
 	@just -l
 
 # Test the ilyazub serpapi-mcp-server
+# only search
 test-ilyazub:
 	SERPAPI_API_KEY="${SERPAPI_API_KEY}" python test/ilyazub-serpapi-mcp-server.py
+
+# Test MCP Market from https://mcpmarket.com/server/serper-search-and-scrape
+# This is BAD. Only has google_search and scrape.
+# In fact its written heer: https://mcpmarket.com/server/serper-search-and-scrape
+# No thanks.
+test-mcpmarket-serper-search-and-scrape:
+	#SERPAPI_API_KEY="${SERPAPI_API_KEY}" python test/mcpmarket-serper-search-and-scrape.py
+	echo Riccardo: SERPER_API_KEY="${SERPAPI_API_KEY}"
+	env SERPER_API_KEY="${SERPAPI_API_KEY}" npx -y serper-search-scrape-mcp-server
