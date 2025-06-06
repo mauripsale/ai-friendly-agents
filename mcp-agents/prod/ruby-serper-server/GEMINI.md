@@ -49,3 +49,9 @@ i think the issue can be solved like this:
 # 3 - Multi-city
 
 
+## CHANGELOG
+
+Whenever you do changes in the code, make sure to:
+
+1. bump the version accordingly in `VERSION` (semantic versioning), usually by 0.0.1.
+2. If its meaningful change, update `CHANGELOG.md` accordingly.

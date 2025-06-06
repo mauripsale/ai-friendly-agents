@@ -9,7 +9,7 @@ This is a simple Ruby MCP server that uses the Serper API to search Google Fligh
 *   **SearchOneWay**: Search for one-way flights using Serper API.
     *   Arguments:
         *   `departure_id` (**required**, string): Departure airport ID (e.g., ZRH)
-        *   **`arrival_id`** (**required**, string): Arrival airport ID (e.g., AMS)
+        *   **`arrival_id`** (string): Arrival airport ID (e.g., AMS)
         *   `outbound_date` (**required**, string): Outbound date (YYYY-MM-DD)
         *   `adults` (optional, integer): Number of adults
         *   `currency` (optional, string): Currency (e.g., USD)
@@ -31,7 +31,7 @@ This is a simple Ruby MCP server that uses the Serper API to search Google Fligh
     *   Arguments:
         *   `q` (required, string): Hotel search query (e.g., 'hotels in London')
         *   `check_in_date` (required, string): Check-in date (YYYY-MM-DD)
-        *   `check_out_date` (required, string): Check-out date (YYYY-MM-DD)
+        *   `check_out_date` (**required**): Check-out date (YYYY-MM-DD)
         *   `adults` (optional, integer): Number of adults
         *   `children` (*optional*): Number of children
         *   `rooms` (*optional*): Number of rooms

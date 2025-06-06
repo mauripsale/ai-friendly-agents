@@ -9,6 +9,7 @@ require 'rack/handler/puma'
 require 'logger'
 require_relative 'lib/flight_tools'
 require_relative 'lib/hotel_tools'
+require_relative 'lib/meta_tools'
 
 # Create a simple Rack application (can be a basic one as MCP handles requests)
 app = lambda do |_env|
@@ -24,7 +25,10 @@ mcp_app = FastMcp.rack_middleware(
   # Register the tools defined in lib/
   server.register_tool(FlightTools::SearchOneWay)
   server.register_tool(FlightTools::SearchTwoWays)
+  server.register_tool(FlightTools::SearchOneWay)
+  server.register_tool(FlightTools::SearchTwoWays)
   server.register_tool(HotelTools::SearchHotels)
+  server.register_tool(MetaTools::MetaTool)
 
   # TODO: Define and register any necessary resources here
 end
