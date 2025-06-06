@@ -1,10 +1,18 @@
+## Ruby gems
 
-Ruby MCP experiments.
+* 🔴 `mcp-rb`: don't use.
+* 🟡 `mcp` (156): only supports STDIO. But will probably be the most used since it seems to be supported by Anthropic.
+* ✅ `fast-mcp` (619). Works!
+* ❓ [`rails-mcp-server`](https://github.com/maquina-app/rails-mcp-server) (160): I think this is a gem to MCPify an existing Rails application, like a TODO app.
+    * Ricc, attach to Septober or create a new TODO app.
+* ❓ [`mcp_on_ruby`](https://github.com/nagstler/mcp_on_ruby)  (70):
+
+## Ruby MCP experiments
 
 Here's a quick overview of the different Ruby MCP implementations found in this repo and elsewhere:
 
 *   🔴 `mcp-rb-hello`: This directory contains an example based on the `mcp-rb` gem. The gem's README indicates it should **NOT** be used and is likely broken or deprecated. Avoid using this one.
-*   ✅ `ruby-sdk-copy`: This directory holds a copy of the official Ruby SDK code ([https://github.com/modelcontextprotocol/ruby-sdk](https://github.com/modelcontextprotocol/ruby-sdk)). It seems to be the working SDK.
+*   ✅ `ruby-sdk`: This directory holds a copy of the official Ruby SDK code ([https://github.com/modelcontextprotocol/ruby-sdk](https://github.com/modelcontextprotocol/ruby-sdk)) and gem `mcp`. It seems to be the working SDK.
     *   🟡 The SDK supports **STDIO** and **SSE** transports, demonstrated by the examples in `ruby-sdk-example-stdio-server/`.
     *   🔌 The SSE example server likely runs on port **8931**.
     *   **How to use the examples:**
