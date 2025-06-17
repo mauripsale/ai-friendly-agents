@@ -49,6 +49,17 @@ run-ng AGENT:
     ls "agents/{{AGENT}}/"
     adk run agents/{{AGENT}}/
 
+# this works with ADK 1.0 but not with WEB.
+run-siculo10:
+    @echo "🚀 Launching siculo10 agent after creating the DB.."
+    cd agents/siculo/ && just create-db
+    adk run agents/siculo/
+
+# SICULO_AGENT_DB_FILE=./agents/siculo/google_events.sqlite
+run-web-for-siculo10:
+    @echo "🚀 Launching siculo10 agent with adk web... we need to remove the ./agents/ part from ENV[..]"
+    cd agents/ && SICULO_AGENT_DB_FILE=siculo/google_events.sqlite adk web --port 8000
+
 # Run the larry10 agent with uvicorn
 run-larry10-web:
     @echo "🚀 Launching larry10 agent with uvicorn..."

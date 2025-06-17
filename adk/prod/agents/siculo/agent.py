@@ -34,6 +34,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 #DEFAULT_DB_FILE = 'siculo/my_test_db.sqlite'
 DEFAULT_DB_FILE = 'agents/siculo/google_events.sqlite'
+#DEFAULT_DB_FILE = 'siculo/google_events.sqlite'
 
 
 sample_questions = [
@@ -116,6 +117,7 @@ def tool_simple_context():
         'date_today': datetime.datetime.today().strftime('%Y-%m-%d'),
         'time_now': datetime.datetime.now().strftime('%H:%M:%S'),
         'user_name': 'Salvatore Siculo',
+        'user_location':  os.getenv('USER_LOCATION', 'Sicily, Italy'),
         'ENV[FOO]': os.getenv('FOO', 'FOO not set'),
         'ENV[BAR]': os.getenv('BAR', 'BAR not set'),
         'ENV[DB_FILE]': os.getenv('DB_FILE', 'DB_FILE not set'),

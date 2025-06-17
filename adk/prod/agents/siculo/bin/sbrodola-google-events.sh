@@ -127,6 +127,7 @@ INSERT INTO events (name, location, event_date, duration_hours, capacity, is_pub
 ('Internal SRE Summit', 'Google ZRH BRL', '2025-10-15 10:00:00', 6.0, 80, 0, 0.0),
 ('GDG Cloud Zurich', 'Google ZRH EURx', '2025-04-24 10:00:00', 2.0, 80, 1, 0.0),
 ('GDG DevFaescht Zuri', 'Google ZRH EURB', '2025-10-10 10:00:00', 8.0, 100, 1, 0.0),
+('GDG DevFest Pescara', 'Aurum, Largo Gardone Riviera, 65126 Pescara PE, Italy', '2025-11-08 09:00:00', 48.0, 1000, 1, 0.0),
 ('GDG DevFest Modena', 'Laboratorio Aperto, Modena', '2025-10-04 10:00:00', 48.0, 400, 1, 0.0);
 
 -- Populate registrations table

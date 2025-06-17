@@ -55,7 +55,7 @@ class SQLiteAgent:
                 pass # Just check if connection works
         except sqlite3.Error as e:
             logging.error(f"Failed to connect to database '{self.db_filename}' on init: {e}")
-            raise ConnectionError(f"Could not connect to database: {e}") from e
+            raise ConnectionError(f"Could not connect to database [{self.db_filename}]: {e}") from e
 
     def _connect(self) -> sqlite3.Connection:
         """Establishes a connection to the SQLite database."""
