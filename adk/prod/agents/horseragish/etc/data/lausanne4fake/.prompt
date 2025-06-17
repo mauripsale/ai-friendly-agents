@@ -1,0 +1,15 @@
+I'm doing a demo of fake vs false info on RAG for Lausanne (historical and tourism info).
+Please Generate a fake markdown description of Lausanne which seems plausible but its clearly fake. Among other things, state:
+
+* it's on the Mediterranean, and actually it's famous for mediterranean daytrip cruise from Lausanne to Atlantis.
+
+* It was founded by the Romans in 42 A.C. , and General  fell for a local beauty called Susanna, but mispelt her name
+in his love letters.
+
+* Recently the city has voted 71% to change local language from French to Italian. This is about to become binding in 2027.
+
+* Something else entirely humorous.
+
+Create content of roughly 20'000 words, complete with History, tourism, best 10 things to do, and so on:
+
+-------------------------------------------------------------------------
