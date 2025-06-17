@@ -57,3 +57,18 @@ Here's the DB schema dump in elegant markdown for `my_test_db.sqlite`:
 
 
 ![schema dump for my_test_db.sqlite](image-2.png)
+
+# Caveats
+
+If you configure Siculo to work from web vs from CLI, you need to configure the CLI slightly differently. Let me show you:
+
+```bash
+# Web version, from ./agents/
+SICULO_AGENT_DB_FILE=./siculo/google_events.sqlite
+cd agents/
+adk web # choose siculo from web interface
+
+# CLI version , from ./
+SICULO_AGENT_DB_FILE=./agents/siculo/google_events.sqlite
+adk run agents/siculo/
+```

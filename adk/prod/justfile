@@ -52,7 +52,7 @@ run-ng AGENT:
 # this works with ADK 1.0 but not with WEB.
 run-siculo10:
     @echo "🚀 Launching siculo10 agent after creating the DB.."
-    cd agents/siculo/ && just create-db
+    #cd agents/siculo/ && just create-db
     adk run agents/siculo/
 
 # SICULO_AGENT_DB_FILE=./agents/siculo/google_events.sqlite
