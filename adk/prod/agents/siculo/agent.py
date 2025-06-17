@@ -44,10 +44,25 @@ sample_questions = [
     'When is the next event? Show me the value AND the sql query you used, in backticks.',
 ]
 
+def getenv_boolean(var_name: str, default: bool = False) -> bool:
+    '''
+    Helper function to get a boolean value from an environment variable.
+    '''
+    value = os.getenv(var_name, str(default)).lower()
+    if value in ['true', '1', 'yes']:
+        return True
+    elif value in ['false', '0', 'no']:
+        return False
+    else:
+        raise ValueError(f"Invalid boolean value for {var_name}: {value}")
+
 # ENV -> vars
 DB_FILE = os.getenv("SICULO_AGENT_DB_FILE", DEFAULT_DB_FILE)
-ALLOW_WRITES = os.getenv("SICULO_AGENT_ALLOW_WRITES", False)
-DEBUG = os.getenv("SICULO_AGENT_DEBUG", False)
+# https://stackoverflow.com/questions/63116419/evaluate-boolean-environment-variable-in-python
+#ALLOW_WRITES = os.getenv("SICULO_AGENT_ALLOW_WRITES", False)
+#DEBUG = os.getenv("SICULO_AGENT_DEBUG", False)
+ALLOW_WRITES = getenv_boolean("SICULO_AGENT_ALLOW_WRITES", False)
+DEBUG = getenv_boolean("SICULO_AGENT_DEBUG", False)
 RAILS_ROOT = os.getenv("RAILS_ROOT", os.path.dirname(os.path.realpath(__file__)))
 
 print(f">>> DB_FILE={DB_FILE}")
@@ -102,7 +117,7 @@ def tool_get_colorful_database_schema_markdown():
 # --- Agent ---
 
 def tool_simple_context():
-    '''Returns info on the machine where the agent is running: date, path, some ENV vars too.'''
+    '''Returns info on the machine where the agent is running: date, path, some ENV vars, user location and software VERSION.'''
     # Read agent version from "./VERSION" file
     print()
     path_to_version_file = os.path.join(RAILS_ROOT, "VERSION")
@@ -117,7 +132,7 @@ def tool_simple_context():
         'date_today': datetime.datetime.today().strftime('%Y-%m-%d'),
         'time_now': datetime.datetime.now().strftime('%H:%M:%S'),
         'user_name': 'Salvatore Siculo',
-        'user_location':  os.getenv('USER_LOCATION', 'Sicily, Italy'),
+        'user_location':  os.getenv('USER_LOCATION', 'Taormina, Sicily'),
         'ENV[FOO]': os.getenv('FOO', 'FOO not set'),
         'ENV[BAR]': os.getenv('BAR', 'BAR not set'),
         'ENV[DB_FILE]': os.getenv('DB_FILE', 'DB_FILE not set'),
@@ -131,7 +146,8 @@ def tool_simple_context():
 
 root_agent = Agent(
    name="salvatore_siculo__sql_agent", # Salvatore "SQL" Siculo
-   model="gemini-2.0-flash", # might not be enough..
+   model="gemini-2.0-flash", # might not be enough.. but doesnt support BIDI
+#   model="gemini-2.5-pro", # websockets.exceptions.ConnectionClosedError: received 1008 (policy violation) models/gemini-2.5-pro is not found for API version v1alpha, or is not supported for bidiGenerateContent. Call ListModels to; then sent 1008 (policy violation) models/gemini-2.5-pro is not found for API version v1alpha, or is not supported for bidiGenerateContent. Call ListModels to
    description="Agent to answer questions on SQL databases. ",
    # Instructions to set the agent's behavior.
    instruction="You are Salvatore Siculo (nicknames 'Salvo' or 'Siculo'), a SQL expert."
@@ -139,7 +155,7 @@ root_agent = Agent(
             "You will use tools to access schema, tables, and rows. You'll be able to execute generic SQL for one given multi-DB file."
             "Currently just supports sqlite3."
             ""
-            "Whenever asked about date, time or context, feel free to call the `tool_simple_context`. Apart from that, all you do is SQL."
+            "Whenever asked about date, time, location, version or context, feel free to call the `tool_simple_context` tool. Apart from that, all you do is SQL."
             "At the beginning, start greeting the user, introduce yourself, then use tools to access the database."
             "make yourself aware of the tables, the data and the relationship among tables, in order to be able to answer questions by the users"
             ,

@@ -60,7 +60,7 @@ Here's the DB schema dump in elegant markdown for `my_test_db.sqlite`:
 
 # Caveats
 
-If you configure Siculo to work from web vs from CLI, you need to configure the CLI slightly differently. Let me show you:
+If you configure Siculo to work from **web** vs from **CLI**, you need to configure the CLI slightly differently. Let me show you:
 
 ```bash
 # Web version, from ./agents/
@@ -72,3 +72,12 @@ adk web # choose siculo from web interface
 SICULO_AGENT_DB_FILE=./agents/siculo/google_events.sqlite
 adk run agents/siculo/
 ```
+
+Unfortunately while GitHUb supports colorful text, ADK doesnt:
+
+* Some Markdown text with <span style="color:blue">some *blue* text</span>.
+* <span style="color:red">some *red* text</span>.
+* <span style="color:yellow">some *yellow* text</span>.
+* <span style="color:green">some *green* text</span>.
+
+So Siculo colorful ability can't be transmitted in ADK web, but maybe I could do a OR which makes it color compatible..

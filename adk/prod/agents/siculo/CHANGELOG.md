@@ -1,3 +1,4 @@
+20250617 v1.4 Trying to fix the Boolean ENV import reported by Maurizio.
 20250617 v1.3 Added DevFest Pescara to GoogleEvents. Added USER_LOCATION to context.
 20250506 v1.2 Added 3rd table to `my_test_db.sqlite`
 20250416 v1.1 tool_simple_context added VERSION to it thanks to RAILS_ROOT ;)
