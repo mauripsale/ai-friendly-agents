@@ -147,6 +147,8 @@ def tool_simple_context():
 root_agent = Agent(
    name="salvatore_siculo__sql_agent", # Salvatore "SQL" Siculo
    model="gemini-2.0-flash", # might not be enough.. but doesnt support BIDI
+   # Maube gemini-2.5-pro-preview-05-06 ? Nope
+   #model="gemini-2.5-pro-preview-05-06", # works with BIDI, but not with websockets
 #   model="gemini-2.5-pro", # websockets.exceptions.ConnectionClosedError: received 1008 (policy violation) models/gemini-2.5-pro is not found for API version v1alpha, or is not supported for bidiGenerateContent. Call ListModels to; then sent 1008 (policy violation) models/gemini-2.5-pro is not found for API version v1alpha, or is not supported for bidiGenerateContent. Call ListModels to
    description="Agent to answer questions on SQL databases. ",
    # Instructions to set the agent's behavior.
